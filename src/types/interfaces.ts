@@ -5,6 +5,8 @@ export interface IConfig {
 }
 
 export interface IProduct {
+  id: number;
+  sku: string;
   name: string;
   platform: Platform;
   url: string;
@@ -36,6 +38,7 @@ export interface IScrapeOptions {
 
 export interface ISelectors {
   product: string;
+  sku: string;
   name: string;
   url: string;
   imageUrl: string;

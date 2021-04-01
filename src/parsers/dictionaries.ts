@@ -3,9 +3,10 @@ import { ISelectors } from 'src/types/interfaces';
 
 export const selectors: ISelectors = {
   product: '.ProdBox146',
+  sku: '.ProdBox146_ImageGroup > .ProdBox146_Image > a > img',
   name: '.ProdBox146_Descripcion > a',
   url: '.ProdBox146_Descripcion > a',
-  imageUrl: '.ProdBox146_Image > a > img',
+  imageUrl: '.ProdBox146_ImageGroup > .ProdBox146_Image > a > img',
   availability: '.ProdBox146_Precios > .ProdBox146_Disponibilidad',
   estimatedArrivalDate: '.ProdBox146_Precios > .ProdBox146_Disponibilidad',
   price: '.ProdBox146_Precios > .ProdBox146_Precio',

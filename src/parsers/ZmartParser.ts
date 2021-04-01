@@ -1,7 +1,7 @@
 import cheerio from 'cheerio';
 import { IParser, IPrices, IProduct } from 'src/types/interfaces';
 import { Availability, Platform } from 'src/types/enums';
-import { extractClass } from 'src/helpers/scraperHelper';
+import { extractClass } from 'src/helpers/domHelper';
 import { sanitizeNumber, parseDate, splitByLineBreaks } from 'src/utils';
 import {
   selectors,
@@ -14,13 +14,15 @@ const baseUrl = 'https://www.zmart.cl';
 
 export default class ZmartParser implements IParser {
   async parse(html: string): Promise<IProduct[]> {
-    const $ = cheerio.load(html);
+    const $: cheerio.Root = cheerio.load(html);
     const products: IProduct[] = [];
 
-    $(selectors.product).each((_, el) => {
-      const productEl = $(el);
+    $(selectors.product).each((_, el: cheerio.Element): void => {
+      const productEl: cheerio.Cheerio = $(el);
 
       products.push({
+        id: this.extractId(productEl),
+        sku: this.extractSKU(productEl),
         name: this.extractName(productEl),
         platform: this.extractPlatform(productEl),
         url: this.extractUrl(productEl),
@@ -32,6 +34,17 @@ export default class ZmartParser implements IParser {
     });
 
     return products;
+  }
+
+  private extractId(el: cheerio.Cheerio): number {
+    return sanitizeNumber(el.attr('id'));
+  }
+
+  private extractSKU(el: cheerio.Cheerio): string {
+    const src: string = el.find(selectors.sku).attr('src');
+    const filename: string = src.split('/').pop();
+
+    return filename.split('_')[0];
   }
 
   private extractName(el: cheerio.Cheerio): string {
@@ -88,6 +101,7 @@ export default class ZmartParser implements IParser {
   }
 
   private extractImageUrl(el: cheerio.Cheerio): string {
+    // TODO: try to read the fallback url when the normal url is incomplete
     return el.find(selectors.imageUrl).attr('src');
   }
 }
