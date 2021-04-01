@@ -9,8 +9,8 @@ const baseUrl = 'https://www.zmart.cl';
 const scraper: Scraper = new Scraper();
 const zmartParser: ZmartParser = new ZmartParser();
 
-export default class ScrapController {
-  async scrap(req: Request, res: Response): Promise<void> {
+export default class ScraperController {
+  async scrape(req: Request, res: Response): Promise<void> {
     const { name } = req.query;
     const url = `${baseUrl}/Scripts/prodSearch.asp?strSearch=${name}`;
     const products: IProduct[] = await scraper.scrape({

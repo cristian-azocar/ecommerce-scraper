@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import ScrapController from '../../controllers/ScrapController';
+import ScraperController from '../../controllers/ScraperController';
 // import ValidatorMiddleware, {
 //   RequestProperty,
 // } from '../../middlewares/ValidatorMiddleware';
@@ -7,15 +7,15 @@ import ScrapController from '../../controllers/ScrapController';
 // import weatherSchema from '../../schemas/weather';
 
 const router: Router = express.Router();
-const scrapController: ScrapController = new ScrapController();
+const scraperController: ScraperController = new ScraperController();
 // const validatorMiddleware: ValidatorMiddleware = new ValidatorMiddleware();
 // const cacheMiddleware: WeatherCacheMiddleware = new WeatherCacheMiddleware();
 
 router.get(
-  '/scrap',
+  '/scrape',
   // validatorMiddleware.validate(weatherSchema, RequestProperty.Query),
   // cacheMiddleware.cache,
-  scrapController.scrap
+  scraperController.scrape
 );
 
 export default router;

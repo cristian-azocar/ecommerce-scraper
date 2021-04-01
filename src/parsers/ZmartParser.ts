@@ -1,23 +1,32 @@
+import cheerio from 'cheerio';
 import { IParser, IPrices, IProduct } from 'src/types/interfaces';
 import { Availability, Platform } from 'src/types/enums';
 import { extractClass } from 'src/helpers/scraperHelper';
-import { sanitizeNumber } from 'src/utils';
+import { sanitizeNumber, parseDate, splitByLineBreaks } from 'src/utils';
+import {
+  selectors,
+  platformDictionary,
+  availabilityDictionary,
+} from './dictionaries';
 
 // TODO: save this URL in a config file
 const baseUrl = 'https://www.zmart.cl';
 
 export default class ZmartParser implements IParser {
-  async parse($: cheerio.Root): Promise<IProduct[]> {
+  async parse(html: string): Promise<IProduct[]> {
+    const $ = cheerio.load(html);
     const products: IProduct[] = [];
 
-    $('.ProdBox146').each((_, el) => {
+    $(selectors.product).each((_, el) => {
       const productEl = $(el);
 
       products.push({
         name: this.extractName(productEl),
         platform: this.extractPlatform(productEl),
         url: this.extractUrl(productEl),
+        imageUrl: this.extractImageUrl(productEl),
         availability: this.extractAvailability(productEl),
+        estimatedArrivalDate: this.extractEstimatedArrivalDate(productEl),
         ...this.extractPrices(productEl),
       });
     });
@@ -26,95 +35,59 @@ export default class ZmartParser implements IParser {
   }
 
   private extractName(el: cheerio.Cheerio): string {
-    const descriptionEl = el.find('.ProdBox146_Descripcion');
-    const linkEl = descriptionEl.find('a');
-
-    return linkEl.text().trim();
+    return el.find(selectors.name).text().trim();
   }
 
   private extractUrl(el: cheerio.Cheerio): string {
-    const descriptionEl = el.find('.ProdBox146_Descripcion');
-    const linkEl = descriptionEl.find('a');
-
-    return `${baseUrl}${linkEl.attr('href')}`;
+    return `${baseUrl}${el.find(selectors.url).attr('href')}`;
   }
 
   private extractPlatform(el: cheerio.Cheerio): Platform {
-    const classPosition = 1;
-    const platformClass = extractClass(el, classPosition);
-
-    return this.parsePlatform(platformClass);
-  }
-
-  private extractPrices(el: cheerio.Cheerio): IPrices {
-    const pricesEl = el.find('.ProdBox146_Precios');
-    const price = pricesEl.find('.ProdBox146_Precio').text();
-    const listPrice = pricesEl.find('.ProdBox146_PrecioNormal').text();
-    const discount = pricesEl.find('.ProdBox146_PrecioDescto').text();
-
-    return {
-      price: sanitizeNumber(price),
-      listPrice: sanitizeNumber(listPrice),
-      discount: sanitizeNumber(discount),
-    };
-  }
-
-  private extractAvailability(el: cheerio.Cheerio): Availability {
-    const pricesEl = el.find('.ProdBox146_Precios');
-    const availability = pricesEl.find('.ProdBox146_Disponibilidad').text();
-
-    return this.parseAvailability(availability.trim());
-  }
-
-  // TODO: make a dictionary instead of a switch
-  private parsePlatform(s: string): Platform {
-    const cleanStr = s.startsWith('BorderPlat')
-      ? s.replace('BorderPlat', '')
-      : s;
+    const classIndex = 1;
+    const platformClass: string = extractClass(el, classIndex);
+    const cleanStr: string = platformClass.replace('BorderPlat', '');
 
     if (cleanStr in Platform) {
       return Platform[cleanStr as keyof typeof Platform];
     }
 
-    switch (cleanStr) {
-      case 'BLR':
-        return Platform.BluRay;
-      case 'PSV':
-        return Platform.PSVita;
-      case 'WII':
-        return Platform.Wii;
-      case 'WIIU':
-        return Platform.WiiU;
-      case 'NDS':
-        return Platform.DS;
-      case 'NSW':
-        return Platform.Switch;
-      case 'XBONE':
-        return Platform.XboxOne;
-      case 'XB360':
-        return Platform.Xbox360;
-      default:
-        return Platform.Unknown;
-    }
+    return platformDictionary[cleanStr] || Platform.Unknown;
   }
 
-  // TODO: make a dictionary instead of a switch
-  private parseAvailability(s: string): Availability {
-    if (s.includes('Preventa')) {
-      return Availability.Presale;
+  private extractPrices(el: cheerio.Cheerio): IPrices {
+    const price = el.find(selectors.price).text();
+    const listPrice = el.find(selectors.listPrice).text();
+    const discount = el.find(selectors.discount).text();
+    const discountPercentage = el.find(selectors.discountPercentage).text();
+
+    return {
+      price: sanitizeNumber(price),
+      listPrice: sanitizeNumber(listPrice),
+      discount: sanitizeNumber(discount),
+      discountPercentage: sanitizeNumber(discountPercentage),
+    };
+  }
+
+  private extractAvailability(el: cheerio.Cheerio): Availability {
+    const availability: string = el.find(selectors.availability).text();
+    const texts: string[] = availability.trim().split(/\r\n|\r|\n/);
+
+    return availabilityDictionary[texts[0]] || Availability.Unknown;
+  }
+
+  // "Próximo Lanzamiento<br>Llegada Estimada: 17/06/21" => 2021-06-17T04:00:00.000Z
+  private extractEstimatedArrivalDate(el: cheerio.Cheerio): Date {
+    const estimatedArrival = el.find(selectors.estimatedArrivalDate).text();
+    const texts: string[] = splitByLineBreaks(estimatedArrival);
+
+    if (texts[1] === undefined) {
+      return undefined;
     }
 
-    if (s.includes('Próximo Lanzamiento')) {
-      return Availability.UpcomingRelease;
-    }
+    return parseDate(texts[1].split(':')[1], 'dd/M/yy');
+  }
 
-    switch (s) {
-      case 'Disponible':
-        return Availability.Available;
-      case 'Agotado':
-        return Availability.OutOfStock;
-      default:
-        return Availability.Unknown;
-    }
+  private extractImageUrl(el: cheerio.Cheerio): string {
+    return el.find(selectors.imageUrl).attr('src');
   }
 }

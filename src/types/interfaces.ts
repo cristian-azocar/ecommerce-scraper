@@ -8,16 +8,24 @@ export interface IProduct {
   name: string;
   platform: Platform;
   url: string;
+  imageUrl: string;
   price: number;
   listPrice: number;
   discount: number;
+  discountPercentage: number;
   availability: Availability;
+  estimatedArrivalDate: Date;
+}
+
+export interface IPrices {
+  price: number;
+  listPrice: number;
+  discount: number;
+  discountPercentage: number;
 }
 
 export interface IParser {
-  parse($: cheerio.Root): Promise<IProduct[]>;
-  // extractProducts($: cheerio.Root): Promise<IProduct[]>;
-  // extractPrices(el: cheerio.Cheerio): Partial<IProduct>;
+  parse(html: string): Promise<IProduct[]>;
 }
 
 export interface IScrapeOptions {
@@ -26,8 +34,15 @@ export interface IScrapeOptions {
   parser: IParser;
 }
 
-export interface IPrices {
-  price: number;
-  listPrice: number;
-  discount: number;
+export interface ISelectors {
+  product: string;
+  name: string;
+  url: string;
+  imageUrl: string;
+  availability: string;
+  estimatedArrivalDate: string;
+  price: string;
+  listPrice: string;
+  discount: string;
+  discountPercentage: string;
 }
