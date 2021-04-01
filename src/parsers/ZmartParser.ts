@@ -64,6 +64,7 @@ export default class ZmartParser implements IParser {
       return Platform[cleanStr as keyof typeof Platform];
     }
 
+    // TODO: detect non-game platforms (books, toys, etc)
     return platformDictionary[cleanStr] || Platform.Unknown;
   }
 
