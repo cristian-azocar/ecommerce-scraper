@@ -1,3 +1,7 @@
+export enum Website {
+  Zmart = 'Zmart',
+}
+
 export enum Availability {
   Unknown = 'unknown',
   Available = 'available',
@@ -29,4 +33,9 @@ export enum Platform {
 export enum Condition {
   New = 'new',
   Used = 'used',
+}
+
+export enum HTTPMethod {
+  Post = 'post',
+  Get = 'get',
 }

@@ -1,29 +1,41 @@
+/* eslint-disable no-await-in-loop */
 import { Request, Response } from 'express';
-import { IProduct } from 'src/types/interfaces';
+import { IScrapeOptions, IScrapeResult } from 'src/types/interfaces';
 import Scraper from 'src/helpers/Scraper';
-import ZmartParser from 'src/parsers/ZmartParser';
+import { Website } from 'src/types/enums';
+import { sleep } from 'src/utils';
+import ScraperFactory from 'src/helpers/ScraperFactory';
+import PaginationBuilder from 'src/helpers/PaginationBuilder';
 // import redisStorage from '../../storage/RedisStorage';
 
-// TODO: save this URL in a config file
-const baseUrl = 'https://www.zmart.cl';
-const scraper: Scraper = new Scraper();
-const zmartParser: ZmartParser = new ZmartParser(baseUrl);
-
 export default class ScraperController {
+  constructor() {
+    this.scrape = this.scrape.bind(this);
+  }
+
   async scrape(req: Request, res: Response): Promise<void> {
-    const { name, platform } = req.query;
     // const url = `${baseUrl}/Scripts/prodSearch.asp?strSearch=${name}&chkOptionSearch=${platform}`;
     // TODO: scrape each platform
     // TODO: scrape "Próximamente" catalog
     // TODO: scrape "Usados" catalog
-    const url = `${baseUrl}/scripts/proddisplay_page.asp`;
-    const products: IProduct[] = await scraper.scrape({
-      url,
-      parser: zmartParser,
-    });
+    let page = 1;
+    let result: IScrapeResult;
+    const scraper = ScraperFactory.getScraper(Website.Zmart);
+    const paginationBuilder = new PaginationBuilder(Website.Zmart);
+    const scrapeOptions: IScrapeOptions = {
+      data: paginationBuilder.build(page),
+    };
+
+    do {
+      result = await scraper.scrape(scrapeOptions);
+      page += 1;
+      scrapeOptions.data = paginationBuilder.build(page);
+
+      await sleep(500);
+    } while (result.morePages);
 
     // await redisStorage.set(`COORDINATES:${lat},${lng}`, weather);
 
-    res.json(products);
+    res.json(result.products);
   }
 }

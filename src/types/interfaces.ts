@@ -1,4 +1,4 @@
-import { Availability, Condition, Platform } from './enums';
+import { Availability, Condition, HTTPMethod, Platform } from './enums';
 
 export interface IConfig {
   port: number;
@@ -36,9 +36,14 @@ export interface IParser {
   parse(html: string): IScrapeResult;
 }
 
-export interface IScrapeOptions {
+export interface IScraperConfig {
   url: string;
   parser: IParser;
+  httpMethod?: HTTPMethod;
+}
+
+export interface IScrapeOptions {
+  data: string;
 }
 
 export interface ISelectors {
