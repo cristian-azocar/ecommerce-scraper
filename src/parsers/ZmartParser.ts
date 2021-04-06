@@ -52,7 +52,8 @@ export default class ZmartParser implements IParser {
   }
 
   private hasMorePagesLeft(script: string): boolean {
-    return script.includes(`$("${selectors.nextPage}").show();`);
+    // TODO: improve this validation (maybe use Regex?)
+    return script.includes(selectors.nextPage) && script.includes('show()');
   }
 
   private extractId(el: cheerio.Cheerio): number {

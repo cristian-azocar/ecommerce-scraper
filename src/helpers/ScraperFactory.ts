@@ -6,6 +6,7 @@ import Scraper from './Scraper';
 const scrapers: Record<Website, Scraper> = {
   [Website.Zmart]: new Scraper({
     url: 'https://www.zmart.cl/scripts/proddisplay_page.asp',
+    // queryString: 'id=321&idRowVar=32641&idRow=2997',
     parser: new ZmartParser('https://www.zmart.cl'),
     httpMethod: HTTPMethod.Post,
   }),

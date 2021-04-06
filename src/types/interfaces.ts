@@ -38,12 +38,13 @@ export interface IParser {
 
 export interface IScraperConfig {
   url: string;
+  queryString?: string;
   parser: IParser;
   httpMethod?: HTTPMethod;
 }
 
 export interface IScrapeOptions {
-  data: string;
+  pagination: { queryString: string };
 }
 
 export interface ISelectors {

@@ -17,7 +17,7 @@ export const selectors: ISelectors = {
   listPrice: '.BoxProductoS2_Precios > .BoxProductoS2_PrecioNormal',
   discount: '.BoxProductoS2_Precios > .BoxProductoS2_PrecioDescto',
   discountPercentage: '.zmart_discount > .boxDesctoPor1 > .boxDesctoPor2',
-  nextPage: '#ProdDisplayType5_MasProductos_32641',
+  nextPage: '#ProdDisplayType5_MasProductos',
 };
 
 export const platformDictionary: Record<string, Platform> = {
