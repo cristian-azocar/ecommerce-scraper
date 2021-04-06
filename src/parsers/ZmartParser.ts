@@ -1,4 +1,3 @@
-import fs from 'fs';
 import cheerio from 'cheerio';
 import {
   IParser,
@@ -6,7 +5,7 @@ import {
   IProduct,
   IScrapeResult,
 } from 'src/types/interfaces';
-import { Availability, Platform } from 'src/types/enums';
+import { Availability, Condition, Platform } from 'src/types/enums';
 import { extractClass } from 'src/helpers/dom-helper';
 import { sanitizeNumber, parseDate, splitByLineBreaks } from 'src/utils';
 import {
@@ -44,6 +43,7 @@ export default class ZmartParser implements IParser {
         imageUrl: this.extractImageUrl(productEl),
         availability: this.extractAvailability(productEl),
         estimatedArrivalDate: this.extractEstimatedArrivalDate(productEl),
+        condition: this.extractCondition(productEl),
         ...this.extractPrices(productEl),
       });
     });
@@ -123,5 +123,10 @@ export default class ZmartParser implements IParser {
   private extractImageUrl(el: cheerio.Cheerio): string {
     // TODO: try to read the fallback url when the normal url is incomplete
     return el.find(selectors.imageUrl).attr('src');
+  }
+
+  private extractCondition(el: cheerio.Cheerio): Condition {
+    const productName: string = this.extractName(el);
+    return productName.includes('Usado') ? Condition.Used : Condition.New;
   }
 }

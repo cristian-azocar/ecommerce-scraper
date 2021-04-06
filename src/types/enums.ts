@@ -25,3 +25,8 @@ export enum Platform {
   Xbox360 = 'Xbox 360',
   XboxOne = 'Xbox One',
 }
+
+export enum Condition {
+  New = 'new',
+  Used = 'used',
+}

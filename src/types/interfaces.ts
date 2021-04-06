@@ -1,4 +1,4 @@
-import { Availability, Platform } from './enums';
+import { Availability, Condition, Platform } from './enums';
 
 export interface IConfig {
   port: number;
@@ -17,6 +17,7 @@ export interface IProduct {
   discountPercentage: number;
   availability: Availability;
   estimatedArrivalDate: Date;
+  condition: Condition;
 }
 
 export interface IPrices {

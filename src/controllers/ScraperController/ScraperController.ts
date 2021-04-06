@@ -13,6 +13,9 @@ export default class ScraperController {
   async scrape(req: Request, res: Response): Promise<void> {
     const { name, platform } = req.query;
     // const url = `${baseUrl}/Scripts/prodSearch.asp?strSearch=${name}&chkOptionSearch=${platform}`;
+    // TODO: scrape each platform
+    // TODO: scrape "Próximamente" catalog
+    // TODO: scrape "Usados" catalog
     const url = `${baseUrl}/scripts/proddisplay_page.asp`;
     const products: IProduct[] = await scraper.scrape({
       url,
