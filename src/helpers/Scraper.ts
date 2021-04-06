@@ -1,4 +1,3 @@
-/* eslint-disable no-await-in-loop */
 import axios, { AxiosResponse } from 'axios';
 import { HTTPMethod } from 'src/types/enums';
 import {
@@ -6,6 +5,7 @@ import {
   IScrapeOptions,
   IScrapeResult,
 } from 'src/types/interfaces';
+import logger from 'src/utils/logger';
 
 export default class Scraper {
   private config: IScraperConfig;
@@ -20,7 +20,7 @@ export default class Scraper {
     const { url, parser, httpMethod = HTTPMethod.Get } = this.config;
     const { data } = options;
 
-    console.log(`Scraping ${url}?${data}`);
+    logger.info(`Scraping ${url}?${data}`);
 
     const response: AxiosResponse = await axios[httpMethod](url, data);
     const result: IScrapeResult = parser.parse(response.data);

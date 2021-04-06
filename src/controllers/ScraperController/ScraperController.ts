@@ -1,11 +1,12 @@
 /* eslint-disable no-await-in-loop */
+import { performance } from 'perf_hooks';
 import { Request, Response } from 'express';
 import { IScrapeOptions, IScrapeResult } from 'src/types/interfaces';
-import Scraper from 'src/helpers/Scraper';
 import { Website } from 'src/types/enums';
 import { sleep } from 'src/utils';
 import ScraperFactory from 'src/helpers/ScraperFactory';
 import PaginationBuilder from 'src/helpers/PaginationBuilder';
+import logger from 'src/utils/logger';
 // import redisStorage from '../../storage/RedisStorage';
 
 export default class ScraperController {
@@ -25,6 +26,7 @@ export default class ScraperController {
     const scrapeOptions: IScrapeOptions = {
       data: paginationBuilder.build(page),
     };
+    const t0: number = performance.now();
 
     do {
       result = await scraper.scrape(scrapeOptions);
@@ -34,7 +36,8 @@ export default class ScraperController {
       await sleep(500);
     } while (result.morePages);
 
-    // await redisStorage.set(`COORDINATES:${lat},${lng}`, weather);
+    const t1: number = performance.now();
+    logger.info(`Scraping finished in ${t1 - t0} milliseconds`);
 
     res.json(result.products);
   }
