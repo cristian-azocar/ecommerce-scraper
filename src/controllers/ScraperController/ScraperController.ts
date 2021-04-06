@@ -7,7 +7,6 @@ import { sleep } from 'src/utils';
 import ScraperFactory from 'src/helpers/ScraperFactory';
 import PaginationBuilder from 'src/helpers/PaginationBuilder';
 import logger from 'src/utils/logger';
-// import redisStorage from '../../storage/RedisStorage';
 
 export default class ScraperController {
   constructor() {
@@ -16,6 +15,7 @@ export default class ScraperController {
 
   async scrape(req: Request, res: Response): Promise<void> {
     // const url = `${baseUrl}/Scripts/prodSearch.asp?strSearch=${name}&chkOptionSearch=${platform}`;
+    // TODO: should we use Redis for something?
     // TODO: scrape each platform
     // TODO: scrape "Próximamente" catalog
     // TODO: scrape "Usados" catalog
