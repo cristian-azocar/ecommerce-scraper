@@ -1,7 +1,13 @@
+import fs from 'fs';
 import cheerio from 'cheerio';
-import { IParser, IPrices, IProduct } from 'src/types/interfaces';
+import {
+  IParser,
+  IPrices,
+  IProduct,
+  IScrapeResult,
+} from 'src/types/interfaces';
 import { Availability, Platform } from 'src/types/enums';
-import { extractClass } from 'src/helpers/domHelper';
+import { extractClass } from 'src/helpers/dom-helper';
 import { sanitizeNumber, parseDate, splitByLineBreaks } from 'src/utils';
 import {
   selectors,
@@ -9,13 +15,22 @@ import {
   availabilityDictionary,
 } from './dictionaries';
 
-// TODO: save this URL in a config file
-const baseUrl = 'https://www.zmart.cl';
-
 export default class ZmartParser implements IParser {
-  async parse(html: string): Promise<IProduct[]> {
+  private baseUrl: string;
+
+  constructor(baseUrl: string) {
+    this.baseUrl = baseUrl;
+  }
+
+  parse(html: string): IScrapeResult {
     const $: cheerio.Root = cheerio.load(html);
     const products: IProduct[] = [];
+    let morePages: boolean;
+
+    $('script').each((_, el: cheerio.Element): boolean => {
+      morePages = this.hasMorePagesLeft($(el).html());
+      return !morePages;
+    });
 
     $(selectors.product).each((_, el: cheerio.Element): void => {
       const productEl: cheerio.Cheerio = $(el);
@@ -33,7 +48,11 @@ export default class ZmartParser implements IParser {
       });
     });
 
-    return products;
+    return { products, morePages };
+  }
+
+  private hasMorePagesLeft(script: string): boolean {
+    return script.includes(`$("${selectors.nextPage}").show();`);
   }
 
   private extractId(el: cheerio.Cheerio): number {
@@ -52,7 +71,7 @@ export default class ZmartParser implements IParser {
   }
 
   private extractUrl(el: cheerio.Cheerio): string {
-    return `${baseUrl}${el.find(selectors.url).attr('href')}`;
+    return `${this.baseUrl}${el.find(selectors.url).attr('href')}`;
   }
 
   private extractPlatform(el: cheerio.Cheerio): Platform {

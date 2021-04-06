@@ -26,13 +26,17 @@ export interface IPrices {
   discountPercentage: number;
 }
 
+export interface IScrapeResult {
+  products: IProduct[];
+  morePages: boolean;
+}
+
 export interface IParser {
-  parse(html: string): Promise<IProduct[]>;
+  parse(html: string): IScrapeResult;
 }
 
 export interface IScrapeOptions {
-  baseUrl: string;
-  scrapeUrl: string;
+  url: string;
   parser: IParser;
 }
 
@@ -48,4 +52,5 @@ export interface ISelectors {
   listPrice: string;
   discount: string;
   discountPercentage: string;
+  nextPage: string;
 }

@@ -7,15 +7,15 @@ import ZmartParser from 'src/parsers/ZmartParser';
 // TODO: save this URL in a config file
 const baseUrl = 'https://www.zmart.cl';
 const scraper: Scraper = new Scraper();
-const zmartParser: ZmartParser = new ZmartParser();
+const zmartParser: ZmartParser = new ZmartParser(baseUrl);
 
 export default class ScraperController {
   async scrape(req: Request, res: Response): Promise<void> {
     const { name, platform } = req.query;
-    const url = `${baseUrl}/Scripts/prodSearch.asp?strSearch=${name}&chkOptionSearch=${platform}`;
+    // const url = `${baseUrl}/Scripts/prodSearch.asp?strSearch=${name}&chkOptionSearch=${platform}`;
+    const url = `${baseUrl}/scripts/proddisplay_page.asp`;
     const products: IProduct[] = await scraper.scrape({
-      baseUrl,
-      scrapeUrl: url,
+      url,
       parser: zmartParser,
     });
 

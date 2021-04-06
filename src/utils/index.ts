@@ -9,5 +9,12 @@ export function parseDate(s: string, format: string): Date {
 }
 
 export function splitByLineBreaks(s: string): string[] {
-  return s.trim().split(/\r\n|\r|\n/);
+  return s
+    .trim()
+    .replace(/\t/g, '')
+    .split(/\r\n|\r|\n/);
+}
+
+export async function sleep(millisecondsTimeout: number): Promise<void> {
+  await new Promise((resolve) => setTimeout(resolve, millisecondsTimeout));
 }

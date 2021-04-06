@@ -1,18 +1,23 @@
 import { Availability, Platform } from 'src/types/enums';
 import { ISelectors } from 'src/types/interfaces';
 
+// ProdBox146 = when searching for a specific game
+// BoxProductoS2 = when browsing a catalog
+
 export const selectors: ISelectors = {
-  product: '.ProdBox146',
-  sku: '.ProdBox146_ImageGroup > .ProdBox146_Image > a > img',
-  name: '.ProdBox146_Descripcion > a',
-  url: '.ProdBox146_Descripcion > a',
-  imageUrl: '.ProdBox146_ImageGroup > .ProdBox146_Image > a > img',
-  availability: '.ProdBox146_Precios > .ProdBox146_Disponibilidad',
-  estimatedArrivalDate: '.ProdBox146_Precios > .ProdBox146_Disponibilidad',
-  price: '.ProdBox146_Precios > .ProdBox146_Precio',
-  listPrice: '.ProdBox146_Precios > .ProdBox146_PrecioNormal',
-  discount: '.ProdBox146_Precios > .ProdBox146_PrecioDescto',
+  product: '.BoxProductoS2',
+  sku: '.BoxProductoS2_ImageGroup > .BoxProductoS2_Image > a > img',
+  name: '.BoxProductoS2_Descripcion > a',
+  url: '.BoxProductoS2_Descripcion > a',
+  imageUrl: '.BoxProductoS2_ImageGroup > .BoxProductoS2_Image > a > img',
+  availability: '.BoxProductoS2_Precios > .BoxProductoS2_Disponibilidad',
+  estimatedArrivalDate:
+    '.BoxProductoS2_Precios > .BoxProductoS2_Disponibilidad',
+  price: '.BoxProductoS2_Precios > .BoxProductoS2_Precio',
+  listPrice: '.BoxProductoS2_Precios > .BoxProductoS2_PrecioNormal',
+  discount: '.BoxProductoS2_Precios > .BoxProductoS2_PrecioDescto',
   discountPercentage: '.zmart_discount > .boxDesctoPor1 > .boxDesctoPor2',
+  nextPage: '#ProdDisplayType5_MasProductos_32641',
 };
 
 export const platformDictionary: Record<string, Platform> = {

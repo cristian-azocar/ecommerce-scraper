@@ -6,23 +6,23 @@ import puppeteer, { Browser } from 'puppeteer';
   await page.goto(
     'https://www.zmart.cl/Scripts/prodSearch.asp?strSearch=final+fantasy+vii'
   );
-  await page.waitForSelector('.ProdBox146');
-  const products = await page.$$eval('.ProdBox146', (elements) =>
+  await page.waitForSelector('.BoxProductoS2');
+  const products = await page.$$eval('.BoxProductoS2', (elements) =>
     elements.map((el) => {
-      const descriptionDiv = el.querySelector('.ProdBox146_Descripcion');
-      const pricesDiv = el.querySelector('.ProdBox146_Precios');
+      const descriptionDiv = el.querySelector('.BoxProductoS2_Descripcion');
+      const pricesDiv = el.querySelector('.BoxProductoS2_Precios');
 
       const link = descriptionDiv.querySelector('a');
-      const price = (pricesDiv.querySelector('.ProdBox146_Precio') || {})
+      const price = (pricesDiv.querySelector('.BoxProductoS2_Precio') || {})
         .textContent;
       const normalPrice = (
-        pricesDiv.querySelector('.ProdBox146_PrecioNormal') || {}
+        pricesDiv.querySelector('.BoxProductoS2_PrecioNormal') || {}
       ).textContent;
       const discount = (
-        pricesDiv.querySelector('.ProdBox146_PrecioDescto') || {}
+        pricesDiv.querySelector('.BoxProductoS2_PrecioDescto') || {}
       ).textContent;
       const availability = (
-        pricesDiv.querySelector('.ProdBox146_Disponibilidad') || {}
+        pricesDiv.querySelector('.BoxProductoS2_Disponibilidad') || {}
       ).textContent;
 
       return {
