@@ -27,23 +27,19 @@ export interface IPrices {
   discountPercentage: number;
 }
 
-export interface IScrapeResult {
+export interface IParseResult {
   products: IProduct[];
   morePages: boolean;
 }
 
 export interface IParser {
-  parse(html: string): IScrapeResult;
+  parse(html: string): IParseResult;
 }
 
 export interface IScraperConfig {
   url: string;
-  queryString?: string;
   parser: IParser;
   httpMethod?: HTTPMethod;
-}
-
-export interface IScrapeOptions {
   pagination: { queryString: string };
 }
 

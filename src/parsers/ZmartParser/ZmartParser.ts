@@ -1,10 +1,5 @@
 import cheerio from 'cheerio';
-import {
-  IParser,
-  IPrices,
-  IProduct,
-  IScrapeResult,
-} from 'src/types/interfaces';
+import { IParser, IPrices, IProduct, IParseResult } from 'src/types/interfaces';
 import { Availability, Condition, Platform } from 'src/types/enums';
 import { extractClass } from 'src/helpers/dom-helper';
 import { sanitizeNumber, parseDate, splitByLineBreaks } from 'src/utils';
@@ -12,7 +7,7 @@ import {
   selectors,
   platformDictionary,
   availabilityDictionary,
-} from './dictionaries';
+} from './constants';
 
 export default class ZmartParser implements IParser {
   private baseUrl: string;
@@ -21,7 +16,7 @@ export default class ZmartParser implements IParser {
     this.baseUrl = baseUrl;
   }
 
-  parse(html: string): IScrapeResult {
+  parse(html: string): IParseResult {
     const $: cheerio.Root = cheerio.load(html);
     const products: IProduct[] = [];
     let morePages: boolean;
@@ -76,8 +71,7 @@ export default class ZmartParser implements IParser {
   }
 
   private extractPlatform(el: cheerio.Cheerio): Platform {
-    const classIndex = 1;
-    const platformClass: string = extractClass(el, classIndex);
+    const platformClass: string = extractClass(el, 1);
     const cleanStr: string = platformClass.replace('BorderPlat', '');
 
     if (cleanStr in Platform) {

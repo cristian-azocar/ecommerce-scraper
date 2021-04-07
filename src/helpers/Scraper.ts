@@ -2,12 +2,7 @@
 /* eslint-disable no-await-in-loop */
 import axios from 'axios';
 import { HTTPMethod } from 'src/types/enums';
-import {
-  IScraperConfig,
-  IScrapeOptions,
-  IScrapeResult,
-  IProduct,
-} from 'src/types/interfaces';
+import { IScraperConfig, IParseResult, IProduct } from 'src/types/interfaces';
 import logger from 'src/utils/logger';
 
 export default class Scraper {
@@ -17,32 +12,35 @@ export default class Scraper {
     this.config = config;
   }
 
-  // TODO: save the html on Redis for X minutes to speed up the process
-  // It's unlikely that the pages will update very often
-  async scrape(options?: IScrapeOptions): Promise<IProduct[]> {
-    const {
-      url,
-      parser,
-      queryString,
-      httpMethod = HTTPMethod.Get,
-    } = this.config;
-    const { pagination } = options;
+  // TODO: maybe move the "pagination" as an option, because at some point we may need to scrape only a single page
+  // TODO: invoke an event called "onPageScraped" to send data as soon as the page is scraped
+  async scrape(): Promise<IProduct[]> {
+    const { url, parser, httpMethod = HTTPMethod.Get } = this.config;
+    const products: IProduct[] = [];
+    const urlObj: URL = new URL(url);
 
     let page = 1;
-    let result: IScrapeResult;
-    let qs = `${queryString}&${pagination.queryString}=${page}`;
-    const products: IProduct[] = [];
+    let result: IParseResult;
+    let fullUrl: string = this.buildUrl(urlObj, page);
 
     do {
-      logger.info(`Scraping ${url}?${qs}`);
+      logger.info(`Scraping ${fullUrl}`);
 
-      const { data } = await axios[httpMethod](url, qs);
+      const { data } = await axios[httpMethod](fullUrl);
       result = parser.parse(data);
 
       products.push(...result.products);
-      qs = `${queryString}&${pagination.queryString}=${++page}`;
+      fullUrl = this.buildUrl(urlObj, ++page);
     } while (result.morePages);
 
     return products;
+  }
+
+  private buildUrl(url: URL, page: number): string {
+    const { pagination } = this.config;
+
+    url.searchParams.set(pagination.queryString, page.toString());
+
+    return url.href;
   }
 }

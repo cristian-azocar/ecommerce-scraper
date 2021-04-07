@@ -18,3 +18,7 @@ export function splitByLineBreaks(s: string): string[] {
 export async function sleep(millisecondsTimeout: number): Promise<void> {
   await new Promise((resolve) => setTimeout(resolve, millisecondsTimeout));
 }
+
+export function sanitizeUrl(url: string): string {
+  return url.endsWith('?') ? url.substring(0, url.length - 1) : url;
+}
