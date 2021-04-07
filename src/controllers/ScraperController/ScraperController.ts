@@ -2,10 +2,10 @@ import { performance } from 'perf_hooks';
 import { Request, Response } from 'express';
 import { IProduct } from 'src/types/interfaces';
 import { Website } from 'src/types/enums';
-import ScraperFactory from 'src/helpers/ScraperFactory';
-import logger from 'src/utils/logger';
 import { asyncForEachParallel } from 'src/utils';
+import ScraperFactory from 'src/helpers/ScraperFactory';
 import WebsiteConfigFactory from 'src/helpers/WebsiteConfigFactory';
+import logger from 'src/utils/logger';
 
 // TODO: read from a config the websites enabled to scrape
 const websites: Website[] = [Website.Zmart];
