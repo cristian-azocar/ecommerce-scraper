@@ -1,21 +1,15 @@
 import cheerio from 'cheerio';
-import { IParser, IPrices, IProduct, IParseResult } from 'src/types/interfaces';
-import { Availability, Condition, Platform } from 'src/types/enums';
 import { extractClass } from 'src/helpers/dom-helper';
+import WebsiteConfigFactory from 'src/helpers/WebsiteConfigFactory';
+import { IParser, IPrices, IProduct, IParseResult } from 'src/types/interfaces';
+import { Availability, Condition, Platform, Website } from 'src/types/enums';
 import { sanitizeNumber, parseDate, splitByLineBreaks } from 'src/utils';
-import {
-  selectors,
-  platformDictionary,
-  availabilityDictionary,
-} from './constants';
+import { platformDictionary, availabilityDictionary } from './dictionaries';
+
+const config = WebsiteConfigFactory.getConfig(Website.Zmart);
+const { selectors, baseUrl } = config;
 
 export default class ZmartParser implements IParser {
-  private baseUrl: string;
-
-  constructor(baseUrl: string) {
-    this.baseUrl = baseUrl;
-  }
-
   parse(html: string): IParseResult {
     const $: cheerio.Root = cheerio.load(html);
     const products: IProduct[] = [];
@@ -67,7 +61,7 @@ export default class ZmartParser implements IParser {
   }
 
   private extractUrl(el: cheerio.Cheerio): string {
-    return `${this.baseUrl}${el.find(selectors.url).attr('href')}`;
+    return `${baseUrl}${el.find(selectors.url).attr('href')}`;
   }
 
   private extractPlatform(el: cheerio.Cheerio): Platform {

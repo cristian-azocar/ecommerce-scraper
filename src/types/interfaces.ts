@@ -57,3 +57,10 @@ export interface ISelectors {
   discountPercentage: string;
   nextPage: string;
 }
+
+export interface IWebsiteConfig {
+  baseUrl: string;
+  enabled: boolean;
+  urls: string[];
+  selectors: ISelectors;
+}

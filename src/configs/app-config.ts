@@ -1,4 +1,4 @@
-import { IConfig } from './types/interfaces';
+import { IConfig } from '../types/interfaces';
 
 const config: IConfig = {
   port: +process.env.PORT || 3001,
