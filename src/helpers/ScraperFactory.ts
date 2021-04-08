@@ -1,4 +1,4 @@
-import scraperInstances from 'src/configs/scraper-instances';
+import scraperInstances from 'src/config/scraper-instances';
 import { Website } from 'src/types/enums';
 import Scraper from './Scraper';
 

@@ -1,4 +1,4 @@
-import websiteConfigs from 'src/configs/website-configs';
+import websiteConfigs from 'src/config/website-configs';
 import { Website } from 'src/types/enums';
 import { IWebsiteConfig } from 'src/types/interfaces';
 

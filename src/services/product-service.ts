@@ -1,22 +1,30 @@
-import { Pool } from 'pg';
-import config from 'src/configs/app-config';
 import { IProduct } from 'src/types/interfaces';
+import db from 'src/db/client';
+import schema from 'src/db/schema';
 
-const pool: Pool = new Pool(config.database);
+const { tables } = schema;
 
 class ProductService {
-  async findAll(): Promise<IProduct[]> {
-    const { rows } = await pool.query('SELECT * FROM products');
-    console.log(rows);
-
-    return [];
+  async find(query?: Partial<IProduct>): Promise<IProduct[]> {
+    return db
+      .select('*')
+      .from(tables.product)
+      .where(query || {});
   }
 
-  async create(product: IProduct): Promise<void> {
-    await pool.query(
-      'INSERT INTO products (id, sku, name, platform) VALUES $1, $2, $3, $4',
-      [product.id, product.sku, product.name, product.platform]
-    );
+  async findOne(query?: Partial<IProduct>): Promise<IProduct> {
+    return db
+      .first('*')
+      .from(tables.product)
+      .where(query || {});
+  }
+
+  async create(products: IProduct | IProduct[]): Promise<void> {
+    await db.insert(products).into(tables.product);
+  }
+
+  async createOrUpdate(products: IProduct | IProduct[]): Promise<void> {
+    await db.insert(products).into(tables.product).onConflict('id').merge();
   }
 }
 

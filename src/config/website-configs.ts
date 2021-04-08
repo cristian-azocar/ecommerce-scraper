@@ -8,7 +8,7 @@ const websiteConfigs: Record<Website, IWebsiteConfig> = {
     enabled: true,
     urls: [
       'https://www.zmart.cl/scripts/proddisplay_page.asp?id=321&idRowVar=32641&idRow=2997',
-      'https://www.zmart.cl/scripts/proddisplay_page.asp?id=361&idRowVar=34809&idRow=3155',
+      // 'https://www.zmart.cl/scripts/proddisplay_page.asp?id=361&idRowVar=34809&idRow=3155',
     ],
     // ProdBox146 = when searching for a specific game
     // BoxProductoS2 = when browsing a catalog

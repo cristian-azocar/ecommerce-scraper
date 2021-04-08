@@ -6,6 +6,7 @@ import { asyncForEachParallel } from 'src/utils';
 import ScraperFactory from 'src/helpers/ScraperFactory';
 import WebsiteConfigFactory from 'src/helpers/WebsiteConfigFactory';
 import logger from 'src/utils/logger';
+import productService from 'src/services/product-service';
 
 // TODO: read from a config the websites enabled to scrape
 const websites: Website[] = [Website.Zmart];
@@ -35,6 +36,9 @@ export default class ScraperController {
         logger.info(`Scraping finished in ${t1 - t0} milliseconds`);
       });
     });
+
+    logger.info(`${allProducts.length} products detected`);
+    productService.createOrUpdate(allProducts);
 
     res.json(allProducts);
   }

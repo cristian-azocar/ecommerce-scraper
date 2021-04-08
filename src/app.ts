@@ -2,6 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import cors, { CorsOptions } from 'cors';
 import routes from './routes';
+import productService from './services/product-service';
 // import ErrorHandlerMiddleware from './middlewares/ErrorHandlerMiddleware';
 // import redisStorage from './storage/RedisStorage';
 
@@ -9,6 +10,13 @@ const app: express.Application = express();
 // const errorHandler: ErrorHandlerMiddleware = new ErrorHandlerMiddleware();
 
 // redisStorage.connect();
+(async function test() {
+  const product = await productService.findOne();
+  console.log('Product:', product);
+
+  // const products = await productService.find();
+  // console.log('Product:', products[0]);
+})();
 
 if (process.env.NODE_ENV === 'production') {
   const corsOptions: CorsOptions = {
