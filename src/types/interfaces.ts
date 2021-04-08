@@ -2,6 +2,13 @@ import { Availability, Condition, HTTPMethod, Platform } from './enums';
 
 export interface IConfig {
   port: number;
+  database: {
+    user: string;
+    password: string;
+    host: string;
+    port: number;
+    database: string;
+  };
 }
 
 export interface IProduct {

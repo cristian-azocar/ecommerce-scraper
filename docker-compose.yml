@@ -1,18 +1,20 @@
 version: '3.8'
 
 services:
-  mongodb:
-    image: mongo:latest
-    container_name: mongodb
+  database:
+    image: postgres:latest
     ports:
-      - 27017:27017
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=videogames_scraper_db
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
     volumes:
-      - ~/mongodb/data/db:/data/db
-    restart: unless-stopped
+      - ~/postgresql/data:/var/lib/postgresql/data
 
   api:
     depends_on:
-      - mongodb
+      - database
     build: .
     ports:
       - 3001:3001
