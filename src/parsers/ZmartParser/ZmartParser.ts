@@ -1,15 +1,27 @@
 import cheerio from 'cheerio';
 import { extractClass } from 'src/helpers/dom-helper';
-import WebsiteConfigFactory from 'src/helpers/WebsiteConfigFactory';
-import { IParser, IPrices, IProduct, IParseResult } from 'src/types/interfaces';
-import { Availability, Condition, Platform, Website } from 'src/types/enums';
+import {
+  IParser,
+  IPrices,
+  IProduct,
+  IParseResult,
+  ISelectors,
+} from 'src/types/interfaces';
+import { Availability, Condition, Platform } from 'src/types/enums';
 import { sanitizeNumber, parseDate, splitByLineBreaks } from 'src/utils';
 import { platformDictionary, availabilityDictionary } from './dictionaries';
 
-const config = WebsiteConfigFactory.getConfig(Website.Zmart);
-const { selectors, baseUrl } = config;
-
 export default class ZmartParser implements IParser {
+  readonly websiteId: number;
+  readonly baseUrl: string;
+  readonly selectors: ISelectors;
+
+  constructor(websiteId: number, baseUrl: string, selectors: ISelectors) {
+    this.websiteId = websiteId;
+    this.baseUrl = baseUrl;
+    this.selectors = selectors;
+  }
+
   parse(html: string): IParseResult {
     const $: cheerio.Root = cheerio.load(html);
     const products: IProduct[] = [];
@@ -20,11 +32,12 @@ export default class ZmartParser implements IParser {
       return !morePages;
     });
 
-    $(selectors.product).each((_, el: cheerio.Element): void => {
+    $(this.selectors.product).each((_, el: cheerio.Element): void => {
       const productEl: cheerio.Cheerio = $(el);
 
       products.push({
         id: this.extractId(productEl),
+        websiteId: this.websiteId,
         sku: this.extractSKU(productEl),
         name: this.extractName(productEl),
         platform: this.extractPlatform(productEl),
@@ -42,7 +55,9 @@ export default class ZmartParser implements IParser {
 
   private hasMorePagesLeft(script: string): boolean {
     // TODO: improve this validation (maybe use Regex?)
-    return script.includes(selectors.nextPage) && script.includes('show()');
+    return (
+      script.includes(this.selectors.nextPage) && script.includes('show()')
+    );
   }
 
   private extractId(el: cheerio.Cheerio): number {
@@ -50,18 +65,18 @@ export default class ZmartParser implements IParser {
   }
 
   private extractSKU(el: cheerio.Cheerio): string {
-    const src: string = el.find(selectors.sku).attr('src');
+    const src: string = el.find(this.selectors.sku).attr('src');
     const filename: string = src.split('/').pop();
 
     return filename.split('_')[0];
   }
 
   private extractName(el: cheerio.Cheerio): string {
-    return el.find(selectors.name).text().trim();
+    return el.find(this.selectors.name).text().trim();
   }
 
   private extractUrl(el: cheerio.Cheerio): string {
-    return `${baseUrl}${el.find(selectors.url).attr('href')}`;
+    return `${this.baseUrl}${el.find(this.selectors.url).attr('href')}`;
   }
 
   private extractPlatform(el: cheerio.Cheerio): Platform {
@@ -77,21 +92,23 @@ export default class ZmartParser implements IParser {
   }
 
   private extractPrices(el: cheerio.Cheerio): IPrices {
-    const price = el.find(selectors.price).text();
-    const listPrice = el.find(selectors.listPrice).text();
-    const discount = el.find(selectors.discount).text();
-    const discountPercentage = el.find(selectors.discountPercentage).text();
+    const price = sanitizeNumber(el.find(this.selectors.price).text());
+    const listPrice = sanitizeNumber(el.find(this.selectors.listPrice).text());
+    const discount = sanitizeNumber(el.find(this.selectors.discount).text());
+    const discountPercentage = sanitizeNumber(
+      el.find(this.selectors.discountPercentage).text()
+    );
 
     return {
-      price: sanitizeNumber(price),
-      listPrice: sanitizeNumber(listPrice),
-      discount: sanitizeNumber(discount),
-      discountPercentage: sanitizeNumber(discountPercentage),
+      price,
+      listPrice: listPrice || price,
+      discount,
+      discountPercentage,
     };
   }
 
   private extractAvailability(el: cheerio.Cheerio): Availability {
-    const availability: string = el.find(selectors.availability).text();
+    const availability: string = el.find(this.selectors.availability).text();
     const texts: string[] = availability.trim().split(/\r\n|\r|\n/);
 
     return availabilityDictionary[texts[0]] || Availability.Unknown;
@@ -99,7 +116,9 @@ export default class ZmartParser implements IParser {
 
   // "Próximo Lanzamiento<br>Llegada Estimada: 17/06/21" => 2021-06-17T04:00:00.000Z
   private extractEstimatedArrivalDate(el: cheerio.Cheerio): Date {
-    const estimatedArrival = el.find(selectors.estimatedArrivalDate).text();
+    const estimatedArrival = el
+      .find(this.selectors.estimatedArrivalDate)
+      .text();
     const texts: string[] = splitByLineBreaks(estimatedArrival);
 
     if (texts[1] === undefined) {
@@ -111,7 +130,7 @@ export default class ZmartParser implements IParser {
 
   private extractImageUrl(el: cheerio.Cheerio): string {
     // TODO: try to read the fallback url when the normal url is incomplete
-    return el.find(selectors.imageUrl).attr('src');
+    return el.find(this.selectors.imageUrl).attr('src');
   }
 
   private extractCondition(el: cheerio.Cheerio): Condition {

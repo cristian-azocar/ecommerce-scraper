@@ -1,6 +1,16 @@
+// TODO: complete the schema
 const schema = {
   tables: {
-    product: 'product',
+    product: {
+      tableName: 'product',
+      columns: {
+        id: 'id',
+        websiteId: 'website_id',
+      },
+    },
+    website: {
+      tableName: 'website',
+    },
   },
 };
 

@@ -1,7 +1,3 @@
-export enum Website {
-  Zmart = 'Zmart',
-}
-
 export enum Availability {
   Unknown = 'unknown',
   Available = 'available',

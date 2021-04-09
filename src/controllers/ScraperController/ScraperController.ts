@@ -1,15 +1,13 @@
 import { performance } from 'perf_hooks';
 import { Request, Response } from 'express';
-import { IProduct } from 'src/types/interfaces';
-import { Website } from 'src/types/enums';
+import { IProduct, IWebsite } from 'src/types/interfaces';
 import { asyncForEachParallel } from 'src/utils';
 import ScraperFactory from 'src/helpers/ScraperFactory';
-import WebsiteConfigFactory from 'src/helpers/WebsiteConfigFactory';
 import logger from 'src/utils/logger';
 import productService from 'src/services/product-service';
+import config from 'src/config/app-config';
+import Scraper from 'src/helpers/Scraper';
 
-// TODO: read from a config the websites enabled to scrape
-const websites: Website[] = [Website.Zmart];
 export default class ScraperController {
   constructor() {
     this.scrape = this.scrape.bind(this);
@@ -18,28 +16,30 @@ export default class ScraperController {
   async scrape(req: Request, res: Response): Promise<void> {
     // TODO: should we use Redis for something?
     // TODO: scrape all catalogs ("Próximamente", "Usados", etc)
-    const allProducts: IProduct[] = [];
+    const websites = config.websites.filter((website) => website.isEnabled);
 
-    await asyncForEachParallel(websites, async (website: Website) => {
-      const scraper = ScraperFactory.getScraper(website);
-      const websiteConfig = WebsiteConfigFactory.getConfig(website);
-      logger.info(`Scraping website ${website}`);
+    await asyncForEachParallel(websites, async (website: IWebsite) => {
+      const scraper: Scraper = ScraperFactory.getScraper(website);
+      logger.info(`Scraping website ${website.name}`);
 
-      await asyncForEachParallel(websiteConfig.urls, async (url: string) => {
+      await asyncForEachParallel(website.urls, async (url: string) => {
         scraper.config.url = url;
 
         const t0: number = performance.now();
         const products: IProduct[] = await scraper.scrape();
         const t1: number = performance.now();
 
-        allProducts.push(...products);
+        this.saveToDatabase(products);
         logger.info(`Scraping finished in ${t1 - t0} milliseconds`);
       });
     });
 
-    logger.info(`${allProducts.length} products detected`);
-    productService.createOrUpdate(allProducts);
+    res.json({ message: 'Scraping finished successfully' });
+  }
 
-    res.json(allProducts);
+  private async saveToDatabase(products: IProduct[]): Promise<void> {
+    logger.info(`Saving ${products.length} products into database...`);
+    await productService.createOrUpdate(products);
+    logger.info('Products saved successfully');
   }
 }
