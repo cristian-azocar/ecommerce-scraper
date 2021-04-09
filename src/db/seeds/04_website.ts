@@ -1,4 +1,5 @@
-import { Knex } from 'knex';
+import { IWebsite } from 'src/types/interfaces';
+import db from '../client';
 import schema from '../schema';
 
 const {
@@ -6,16 +7,13 @@ const {
 } = schema;
 
 // eslint-disable-next-line import/prefer-default-export
-export async function seed(knex: Knex): Promise<void> {
-  // Deletes ALL existing entries
-  await knex(website.tableName).del();
-
-  // Inserts seed entries
-  await knex(website.tableName).insert([
+export async function seed(): Promise<void> {
+  await db(website.tableName).del();
+  await db<IWebsite>(website.tableName).insert([
     {
       id: 1,
       name: 'Zmart',
-      base_url: 'https://www.zmart.cl',
+      baseUrl: 'https://www.zmart.cl',
       urls: [
         'https://www.zmart.cl/scripts/proddisplay_page.asp?id=321&idRowVar=32641&idRow=2997',
         'https://www.zmart.cl/scripts/proddisplay_page.asp?id=361&idRowVar=34809&idRow=3155',
@@ -35,7 +33,7 @@ export async function seed(knex: Knex): Promise<void> {
         discountPercentage: '.zmart_discount > .boxDesctoPor1 > .boxDesctoPor2',
         nextPage: '#ProdDisplayType5_MasProductos',
       },
-      is_enabled: true,
+      isEnabled: true,
     },
   ]);
 }

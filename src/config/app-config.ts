@@ -11,6 +11,8 @@ const config: IConfig = {
   },
   websites: [],
   platforms: [],
+  availabilities: [],
+  conditions: [],
 };
 
 export default config;

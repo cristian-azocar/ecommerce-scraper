@@ -6,6 +6,29 @@ const schema = {
       columns: {
         id: 'id',
         name: 'name',
+        lookup: 'lookup',
+      },
+    },
+    availability: {
+      tableName: 'availability',
+      columns: {
+        id: 'id',
+        name: 'name',
+        lookup: 'lookup',
+      },
+    },
+    condition: {
+      tableName: 'condition',
+      columns: {
+        id: 'id',
+        name: 'name',
+        lookup: 'lookup',
+      },
+    },
+    website: {
+      tableName: 'website',
+      columns: {
+        id: 'id',
       },
     },
     product: {
@@ -14,12 +37,8 @@ const schema = {
         id: 'id',
         websiteId: 'website_id',
         platformId: 'platform_id',
-      },
-    },
-    website: {
-      tableName: 'website',
-      columns: {
-        id: 'id',
+        availabilityId: 'availability_id',
+        conditionId: 'condition_id',
       },
     },
   },

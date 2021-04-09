@@ -1,4 +1,4 @@
-import { Availability, Condition, HTTPMethod } from './enums';
+import { Condition, HTTPMethod } from './enums';
 
 export interface ISelectors {
   product: string;
@@ -30,6 +30,18 @@ export interface IPlatform {
   lookup: Array<string>;
 }
 
+export interface IAvailability {
+  id: number;
+  name: string;
+  lookup: Array<string>;
+}
+
+export interface ICondition {
+  id: number;
+  name: string;
+  lookup: Array<string>;
+}
+
 export interface IConfig {
   port: number;
   database: {
@@ -41,6 +53,8 @@ export interface IConfig {
   };
   websites: Array<IWebsite>;
   platforms: Array<IPlatform>;
+  availabilities: Array<IAvailability>;
+  conditions: Array<ICondition>;
 }
 
 export interface IProduct {
@@ -55,9 +69,9 @@ export interface IProduct {
   listPrice: number;
   discount: number;
   discountPercentage: number;
-  availability: Availability;
+  availabilityId: number; // TODO: use Availability enum?
   estimatedArrivalDate: Date;
-  condition: Condition;
+  conditionId: number; // TODO: use Condition enum?
 }
 
 export interface IPrices {
@@ -81,11 +95,4 @@ export interface IScraperConfig {
   parser: IParser;
   httpMethod?: HTTPMethod;
   pagination: { queryString: string };
-}
-
-export interface IWebsiteConfig {
-  baseUrl: string;
-  enabled: boolean;
-  urls: string[];
-  selectors: ISelectors;
 }

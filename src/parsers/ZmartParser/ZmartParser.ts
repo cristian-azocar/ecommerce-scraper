@@ -6,11 +6,12 @@ import {
   IProduct,
   IParseResult,
   ISelectors,
+  IPlatform,
+  ICondition,
 } from 'src/types/interfaces';
-import { Availability, Condition } from 'src/types/enums';
 import { sanitizeNumber, parseDate, splitByLineBreaks } from 'src/utils';
 import config from 'src/config/app-config';
-import { availabilityDictionary } from './dictionaries';
+import logger from 'src/utils/logger';
 
 export default class ZmartParser implements IParser {
   readonly websiteId: number;
@@ -44,9 +45,9 @@ export default class ZmartParser implements IParser {
         platformId: this.extractPlatform(productEl),
         url: this.extractUrl(productEl),
         imageUrl: this.extractImageUrl(productEl),
-        availability: this.extractAvailability(productEl),
+        availabilityId: this.extractAvailability(productEl),
         estimatedArrivalDate: this.extractEstimatedArrivalDate(productEl),
-        condition: this.extractCondition(productEl),
+        conditionId: this.extractCondition(productEl),
         ...this.extractPrices(productEl),
       });
     });
@@ -83,7 +84,7 @@ export default class ZmartParser implements IParser {
   private extractPlatform(el: cheerio.Cheerio): number {
     const platformClass: string = extractClass(el, 1);
     const cleanStr: string = platformClass.replace('BorderPlat', '');
-    const platform = config.platforms.find(
+    const platform: IPlatform = config.platforms.find(
       (item) => item.name === cleanStr || item.lookup?.includes(cleanStr)
     );
 
@@ -107,11 +108,18 @@ export default class ZmartParser implements IParser {
     };
   }
 
-  private extractAvailability(el: cheerio.Cheerio): Availability {
-    const availability: string = el.find(this.selectors.availability).text();
-    const texts: string[] = availability.trim().split(/\r\n|\r|\n/);
+  private extractAvailability(el: cheerio.Cheerio): number {
+    const str: string = el.find(this.selectors.availability).text();
+    const texts: string[] = str.trim().split(' ');
+    const availability = config.availabilities.find(
+      (item) => item.name === texts[0] || item.lookup?.includes(texts[0])
+    );
 
-    return availabilityDictionary[texts[0]] || Availability.Unknown;
+    if (!availability) {
+      logger.debug(`The text "${texts[0]}" is not a known availability`);
+    }
+
+    return availability?.id;
   }
 
   // "Próximo Lanzamiento<br>Llegada Estimada: 17/06/21" => 2021-06-17T04:00:00.000Z
@@ -133,8 +141,13 @@ export default class ZmartParser implements IParser {
     return el.find(this.selectors.imageUrl).attr('src');
   }
 
-  private extractCondition(el: cheerio.Cheerio): Condition {
+  private extractCondition(el: cheerio.Cheerio): number {
     const productName: string = this.extractName(el);
-    return productName.includes('Usado') ? Condition.Used : Condition.New;
+    const defaultCondition: ICondition = config.conditions[0];
+    const condition: ICondition = config.conditions.find((item) =>
+      item.lookup?.find((lookupItem) => productName.includes(lookupItem))
+    );
+
+    return condition?.id || defaultCondition.id;
   }
 }

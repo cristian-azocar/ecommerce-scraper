@@ -1,4 +1,5 @@
-import { Knex } from 'knex';
+import { IPlatform } from 'src/types/interfaces';
+import db from '../client';
 import schema from '../schema';
 
 const {
@@ -6,12 +7,9 @@ const {
 } = schema;
 
 // eslint-disable-next-line import/prefer-default-export
-export async function seed(knex: Knex): Promise<void> {
-  // Deletes ALL existing entries
-  await knex(platform.tableName).del();
-
-  // Inserts seed entries
-  await knex(platform.tableName).insert([
+export async function seed(): Promise<void> {
+  await db(platform.tableName).del();
+  await db<IPlatform>(platform.tableName).insert([
     { name: 'Blu-Ray', lookup: ['BLR'] },
     { name: 'Book' },
     { name: 'PC' },

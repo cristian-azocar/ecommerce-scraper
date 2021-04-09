@@ -2,14 +2,26 @@ import { Knex } from 'knex';
 import schema from '../schema';
 
 const {
-  tables: { platform, website, product },
+  tables: { platform, availability, condition, website, product },
 } = schema;
 
 export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable(platform.tableName, (table) => {
     table.increments(platform.columns.id).primary();
     table.string(platform.columns.name, 32).notNullable();
-    table.specificType('lookup', 'varchar(32)[]');
+    table.specificType(platform.columns.lookup, 'varchar(32)[]');
+  });
+
+  await knex.schema.createTable(availability.tableName, (table) => {
+    table.increments(availability.columns.id).primary();
+    table.string(availability.columns.name, 32).notNullable();
+    table.specificType(availability.columns.lookup, 'varchar(32)[]');
+  });
+
+  await knex.schema.createTable(condition.tableName, (table) => {
+    table.increments(condition.columns.id).primary();
+    table.string(condition.columns.name, 32).notNullable();
+    table.specificType(condition.columns.lookup, 'varchar(32)[]');
   });
 
   await knex.schema.createTable(website.tableName, (table) => {
@@ -40,9 +52,15 @@ export async function up(knex: Knex): Promise<void> {
     table.integer('list_price').notNullable();
     table.integer('discount');
     table.integer('discount_percentage');
-    table.string('availability', 32).notNullable();
+    table
+      .integer(product.columns.availabilityId)
+      .references(availability.columns.id)
+      .inTable(availability.tableName);
     table.timestamp('estimated_arrival_date');
-    table.string('condition', 16).notNullable();
+    table
+      .integer(product.columns.conditionId)
+      .references(condition.columns.id)
+      .inTable(condition.tableName);
 
     table.primary([product.columns.id, product.columns.websiteId]);
     table.timestamps(true, true);
@@ -53,4 +71,5 @@ export async function down(knex: Knex): Promise<void> {
   await knex.schema.dropTableIfExists(product.tableName);
   await knex.schema.dropTableIfExists(website.tableName);
   await knex.schema.dropTableIfExists(platform.tableName);
+  await knex.schema.dropTableIfExists(availability.tableName);
 }

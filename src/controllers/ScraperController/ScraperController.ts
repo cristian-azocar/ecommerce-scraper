@@ -19,7 +19,7 @@ export default class ScraperController {
     const websites = config.websites.filter((website) => website.isEnabled);
 
     if (!websites.length) {
-      logger.warn('No website is enabled. Cannot scrape');
+      logger.warn('No website is enabled. Will not scrape.');
       res.json({ message: 'No website is enabled' });
       return;
     }
