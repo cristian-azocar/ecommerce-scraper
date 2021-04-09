@@ -1,15 +1,17 @@
 import { Knex } from 'knex';
 import schema from '../schema';
 
-const { tables } = schema;
+const {
+  tables: { website },
+} = schema;
 
 // eslint-disable-next-line import/prefer-default-export
 export async function seed(knex: Knex): Promise<void> {
   // Deletes ALL existing entries
-  await knex(tables.website).del();
+  await knex(website.tableName).del();
 
   // Inserts seed entries
-  await knex(tables.website).insert([
+  await knex(website.tableName).insert([
     {
       id: 1,
       name: 'Zmart',

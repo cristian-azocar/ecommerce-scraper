@@ -10,6 +10,7 @@ const config: IConfig = {
     port: +process.env.DB_PORT || 5432,
   },
   websites: [],
+  platforms: [],
 };
 
 export default config;

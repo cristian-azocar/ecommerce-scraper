@@ -18,6 +18,12 @@ export default class ScraperController {
     // TODO: scrape all catalogs ("Próximamente", "Usados", etc)
     const websites = config.websites.filter((website) => website.isEnabled);
 
+    if (!websites.length) {
+      logger.warn('No website is enabled. Cannot scrape');
+      res.json({ message: 'No website is enabled' });
+      return;
+    }
+
     await asyncForEachParallel(websites, async (website: IWebsite) => {
       const scraper: Scraper = ScraperFactory.getScraper(website);
       logger.info(`Scraping website ${website.name}`);

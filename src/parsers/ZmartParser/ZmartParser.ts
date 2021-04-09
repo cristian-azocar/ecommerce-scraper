@@ -7,9 +7,10 @@ import {
   IParseResult,
   ISelectors,
 } from 'src/types/interfaces';
-import { Availability, Condition, Platform } from 'src/types/enums';
+import { Availability, Condition } from 'src/types/enums';
 import { sanitizeNumber, parseDate, splitByLineBreaks } from 'src/utils';
-import { platformDictionary, availabilityDictionary } from './dictionaries';
+import config from 'src/config/app-config';
+import { availabilityDictionary } from './dictionaries';
 
 export default class ZmartParser implements IParser {
   readonly websiteId: number;
@@ -40,7 +41,7 @@ export default class ZmartParser implements IParser {
         websiteId: this.websiteId,
         sku: this.extractSKU(productEl),
         name: this.extractName(productEl),
-        platform: this.extractPlatform(productEl),
+        platformId: this.extractPlatform(productEl),
         url: this.extractUrl(productEl),
         imageUrl: this.extractImageUrl(productEl),
         availability: this.extractAvailability(productEl),
@@ -79,16 +80,15 @@ export default class ZmartParser implements IParser {
     return `${this.baseUrl}${el.find(this.selectors.url).attr('href')}`;
   }
 
-  private extractPlatform(el: cheerio.Cheerio): Platform {
+  private extractPlatform(el: cheerio.Cheerio): number {
     const platformClass: string = extractClass(el, 1);
     const cleanStr: string = platformClass.replace('BorderPlat', '');
-
-    if (cleanStr in Platform) {
-      return Platform[cleanStr as keyof typeof Platform];
-    }
+    const platform = config.platforms.find(
+      (item) => item.name === cleanStr || item.lookup?.includes(cleanStr)
+    );
 
     // TODO: detect non-game platforms (books, toys, etc)
-    return platformDictionary[cleanStr] || Platform.Unknown;
+    return platform?.id;
   }
 
   private extractPrices(el: cheerio.Cheerio): IPrices {

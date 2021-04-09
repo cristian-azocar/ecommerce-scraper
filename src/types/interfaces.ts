@@ -1,4 +1,4 @@
-import { Availability, Condition, HTTPMethod, Platform } from './enums';
+import { Availability, Condition, HTTPMethod } from './enums';
 
 export interface ISelectors {
   product: string;
@@ -24,6 +24,12 @@ export interface IWebsite {
   isEnabled: boolean;
 }
 
+export interface IPlatform {
+  id: number;
+  name: string;
+  lookup: Array<string>;
+}
+
 export interface IConfig {
   port: number;
   database: {
@@ -34,15 +40,15 @@ export interface IConfig {
     database: string;
   };
   websites: Array<IWebsite>;
+  platforms: Array<IPlatform>;
 }
 
 export interface IProduct {
   id: number;
-  // websiteId: Website;
-  websiteId: number;
+  websiteId: number; // TODO: use Website enum?
   sku: string;
   name: string;
-  platform: Platform;
+  platformId: number; // TODO: use Platform enum?
   url: string;
   imageUrl: string;
   price: number;

@@ -4,6 +4,7 @@ import cors, { CorsOptions } from 'cors';
 import routes from './routes';
 import websiteService from './services/website-service';
 import config from './config/app-config';
+import platformService from './services/platform-service';
 // import ErrorHandlerMiddleware from './middlewares/ErrorHandlerMiddleware';
 // import redisStorage from './storage/RedisStorage';
 
@@ -11,8 +12,9 @@ const app: express.Application = express();
 // const errorHandler: ErrorHandlerMiddleware = new ErrorHandlerMiddleware();
 
 // redisStorage.connect();
-(async function loadWebsiteConfig() {
+(async function loadConfigFromDatabase() {
   config.websites = await websiteService.find();
+  config.platforms = await platformService.find();
   // console.log(config.websites);
 })();
 
