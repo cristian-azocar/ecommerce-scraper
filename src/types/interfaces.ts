@@ -50,7 +50,7 @@ export interface IParseResult {
 }
 
 export interface IParser {
-  parse(html: string): IParseResult;
+  parse(html: string, url: string): IParseResult;
 }
 
 export interface IScraperConfig {

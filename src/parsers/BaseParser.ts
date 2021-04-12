@@ -17,7 +17,7 @@ export default class BaseParser implements IParser {
     this.config = config;
   }
 
-  parse(html: string): IParseResult {
+  parse(html: string, url: string): IParseResult {
     const $: cheerio.Root = cheerio.load(html);
     const { selectors, websiteId } = this.config;
     const products: IProduct[] = [];
@@ -33,6 +33,7 @@ export default class BaseParser implements IParser {
         platformId: this.extractPlatformId(productEl),
         url: this.extractUrl(productEl),
         imageUrl: this.extractImageUrl(productEl),
+        catalogUrl: url,
         availabilityId: this.extractAvailability(productEl),
         estimatedArrivalDate: this.extractEstimatedArrivalDate(productEl),
         conditionId: this.extractConditionId(productEl),
@@ -65,6 +66,10 @@ export default class BaseParser implements IParser {
     }
 
     return new URL(url, this.config.baseUrl).href;
+  }
+
+  protected extractImageUrl(el: cheerio.Cheerio): string {
+    return el.find(this.config.selectors.imageUrl).attr('src');
   }
 
   protected extractPlatformId(el: cheerio.Cheerio): number {
@@ -108,10 +113,6 @@ export default class BaseParser implements IParser {
       .text();
 
     return parseDate(estimatedArrival, this.dateFormat);
-  }
-
-  protected extractImageUrl(el: cheerio.Cheerio): string {
-    return el.find(this.config.selectors.imageUrl).attr('src');
   }
 
   protected extractConditionId(el: cheerio.Cheerio): number {

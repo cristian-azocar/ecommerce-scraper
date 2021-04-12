@@ -50,6 +50,7 @@ export async function up(knex: Knex): Promise<void> {
       .inTable(platform.tableName);
     table.string('url', 512).notNullable();
     table.string('image_url', 512).notNullable();
+    table.string('catalog_url', 512).notNullable();
     table.integer('price').notNullable();
     table.integer('list_price').notNullable();
     table.integer('discount');

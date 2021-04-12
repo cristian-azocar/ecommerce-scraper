@@ -1,12 +1,13 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-await-in-loop */
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import { IScraperConfig, IParseResult } from 'src/types/interfaces';
 import IProduct from 'src/models/IProduct';
 import logger from 'src/utils/logger';
 
 export default class Scraper {
   config: IScraperConfig;
+  axiosConfig: AxiosRequestConfig = { responseType: 'arraybuffer' };
 
   constructor(config: IScraperConfig) {
     this.config = config;
@@ -27,8 +28,14 @@ export default class Scraper {
     do {
       logger.info(`Scraping ${fullUrl}`);
 
-      const { data } = await axios[httpMethod](fullUrl);
-      result = parser.parse(data);
+      const { data } = await axios[httpMethod](
+        fullUrl,
+        undefined,
+        this.axiosConfig
+      );
+      const html: string = data.toString('latin1');
+
+      result = parser.parse(html, fullUrl);
 
       products.push(...result.products);
       fullUrl = this.buildUrl(urlObj, ++page);

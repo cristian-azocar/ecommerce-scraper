@@ -6,6 +6,7 @@ export default interface IProduct {
   platformId: number; // TODO: use Platform enum?
   url: string;
   imageUrl: string;
+  catalogUrl: string;
   price: number;
   listPrice: number;
   discount: number;
