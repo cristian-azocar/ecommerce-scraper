@@ -1,0 +1,135 @@
+import cheerio from 'cheerio';
+import {
+  IParser,
+  IParseResult,
+  IProduct,
+  IPrices,
+  IParserConfig,
+  LookupTable,
+} from 'src/types/interfaces';
+import { sanitizeNumber, parseDate, isUrlAbsolute } from 'src/utils';
+
+export default class BaseParser implements IParser {
+  readonly config: IParserConfig;
+  protected dateFormat = 'dd/M/yyyy';
+
+  constructor(config: IParserConfig) {
+    this.config = config;
+  }
+
+  parse(html: string): IParseResult {
+    const $: cheerio.Root = cheerio.load(html);
+    const { selectors, websiteId } = this.config;
+    const products: IProduct[] = [];
+    const morePages: boolean = $(selectors.nextPage).length > 0;
+
+    $(selectors.product).each((_, el: cheerio.Element): void => {
+      const productEl: cheerio.Cheerio = $(el);
+      const product: IProduct = {
+        id: this.extractId(productEl),
+        websiteId,
+        sku: this.extractSKU(productEl),
+        name: this.extractName(productEl),
+        platformId: this.extractPlatformId(productEl),
+        url: this.extractUrl(productEl),
+        imageUrl: this.extractImageUrl(productEl),
+        availabilityId: this.extractAvailability(productEl),
+        estimatedArrivalDate: this.extractEstimatedArrivalDate(productEl),
+        conditionId: this.extractConditionId(productEl),
+        ...this.extractPrices(productEl),
+      };
+
+      products.push(product);
+    });
+
+    return { products, morePages };
+  }
+
+  protected extractId(el: cheerio.Cheerio): number {
+    return sanitizeNumber(el.find(this.config.selectors.id).text());
+  }
+
+  protected extractSKU(el: cheerio.Cheerio): string {
+    return el.find(this.config.selectors.sku).text().trim();
+  }
+
+  protected extractName(el: cheerio.Cheerio): string {
+    return el.find(this.config.selectors.name).text().trim();
+  }
+
+  protected extractUrl(el: cheerio.Cheerio): string {
+    const url: string = el.find(this.config.selectors.url).attr('href');
+
+    if (isUrlAbsolute(url)) {
+      return url;
+    }
+
+    return new URL(url, this.config.baseUrl).href;
+  }
+
+  protected extractPlatformId(el: cheerio.Cheerio): number {
+    const { selectors, platforms } = this.config;
+    const platform = this.extractByLookup(el, selectors.platform, platforms);
+
+    return platform?.id;
+  }
+
+  protected extractPrices(el: cheerio.Cheerio): IPrices {
+    const { selectors } = this.config;
+    const price = sanitizeNumber(el.find(selectors.price).text());
+    const listPrice = sanitizeNumber(el.find(selectors.listPrice).text());
+    const discount = sanitizeNumber(el.find(selectors.discount).text());
+    const discountPercentage = sanitizeNumber(
+      el.find(selectors.discountPercentage).text()
+    );
+
+    return {
+      price,
+      listPrice: listPrice || price,
+      discount,
+      discountPercentage,
+    };
+  }
+
+  protected extractAvailability(el: cheerio.Cheerio): number {
+    const { selectors, availabilities } = this.config;
+    const availability = this.extractByLookup(
+      el,
+      selectors.availability,
+      availabilities
+    );
+
+    return availability?.id;
+  }
+
+  protected extractEstimatedArrivalDate(el: cheerio.Cheerio): Date {
+    const estimatedArrival = el
+      .find(this.config.selectors.estimatedArrivalDate)
+      .text();
+
+    return parseDate(estimatedArrival, this.dateFormat);
+  }
+
+  protected extractImageUrl(el: cheerio.Cheerio): string {
+    return el.find(this.config.selectors.imageUrl).attr('src');
+  }
+
+  protected extractConditionId(el: cheerio.Cheerio): number {
+    const { selectors, conditions } = this.config;
+    const condition = this.extractByLookup(el, selectors.condition, conditions);
+
+    return condition?.id;
+  }
+
+  private extractByLookup(
+    el: cheerio.Cheerio,
+    selector: string,
+    lookupTable: Array<LookupTable>
+  ): LookupTable {
+    const str: string = el.find(selector).text().trim();
+
+    return lookupTable.find(
+      (item) => item.name === str || item.lookup?.includes(str)
+    );
+  }
+}

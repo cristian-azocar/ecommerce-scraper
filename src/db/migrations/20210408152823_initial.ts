@@ -25,12 +25,14 @@ export async function up(knex: Knex): Promise<void> {
   });
 
   await knex.schema.createTable(website.tableName, (table) => {
-    table.increments(product.columns.id).primary();
-    table.string('name', 64).notNullable();
-    table.string('base_url', 512).notNullable();
-    table.specificType('urls', 'varchar(512)[]');
-    table.boolean('is_enabled').notNullable();
-    table.json('selectors').notNullable();
+    table.increments(website.columns.id).primary();
+    table.string(website.columns.name, 64).notNullable();
+    table.string(website.columns.baseUrl, 512).notNullable();
+    table.specificType(website.columns.urls, 'varchar(512)[]');
+    table.boolean(website.columns.isEnabled).notNullable();
+    table.string(website.columns.httpMethod, 8).notNullable();
+    table.json(website.columns.pagination).notNullable();
+    table.json(website.columns.selectors).notNullable();
   });
 
   await knex.schema.createTable(product.tableName, (table) => {
@@ -40,7 +42,7 @@ export async function up(knex: Knex): Promise<void> {
       .notNullable()
       .references(website.columns.id)
       .inTable(website.tableName);
-    table.string('sku', 64).notNullable();
+    table.string('sku', 64);
     table.string('name', 512).notNullable();
     table
       .integer(product.columns.platformId)
@@ -72,4 +74,5 @@ export async function down(knex: Knex): Promise<void> {
   await knex.schema.dropTableIfExists(website.tableName);
   await knex.schema.dropTableIfExists(platform.tableName);
   await knex.schema.dropTableIfExists(availability.tableName);
+  await knex.schema.dropTableIfExists(condition.tableName);
 }

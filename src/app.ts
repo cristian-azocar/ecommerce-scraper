@@ -7,6 +7,7 @@ import config from './config/app-config';
 import platformService from './services/platform-service';
 import availabilityService from './services/availability-service';
 import conditionService from './services/condition-service';
+import logger from './utils/logger';
 // import ErrorHandlerMiddleware from './middlewares/ErrorHandlerMiddleware';
 // import redisStorage from './storage/RedisStorage';
 
@@ -15,11 +16,14 @@ const app: express.Application = express();
 
 // redisStorage.connect();
 (async function loadConfigFromDatabase() {
+  logger.info('Loading configuration from database...');
+
   config.websites = await websiteService.find();
   config.platforms = await platformService.find();
   config.availabilities = await availabilityService.find();
   config.conditions = await conditionService.find();
-  // console.log(config.websites);
+
+  logger.info('Configuration loaded successfully');
 })();
 
 if (process.env.NODE_ENV === 'production') {

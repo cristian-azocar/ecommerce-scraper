@@ -1,17 +1,18 @@
-import { Condition, HTTPMethod } from './enums';
-
 export interface ISelectors {
+  id: string;
   product: string;
   sku: string;
   name: string;
+  platform: string;
   url: string;
   imageUrl: string;
-  availability: string;
-  estimatedArrivalDate: string;
   price: string;
   listPrice: string;
   discount: string;
   discountPercentage: string;
+  availability: string;
+  estimatedArrivalDate: string;
+  condition: string;
   nextPage: string;
 }
 
@@ -20,8 +21,10 @@ export interface IWebsite {
   name: string;
   baseUrl: string;
   urls: Array<string>;
-  selectors: ISelectors;
   isEnabled: boolean;
+  httpMethod: 'get' | 'post';
+  pagination: { queryString: string };
+  selectors: ISelectors;
 }
 
 export interface IPlatform {
@@ -93,6 +96,21 @@ export interface IParser {
 export interface IScraperConfig {
   url: string;
   parser: IParser;
-  httpMethod?: HTTPMethod;
+  httpMethod?: 'get' | 'post';
   pagination: { queryString: string };
+}
+
+export interface IParserConfig {
+  websiteId: number;
+  baseUrl: string;
+  selectors: ISelectors;
+  availabilities: IAvailability[];
+  conditions: ICondition[];
+  platforms: IPlatform[];
+}
+
+export interface LookupTable {
+  id: number;
+  name: string;
+  lookup: Array<string>;
 }

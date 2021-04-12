@@ -19,10 +19,6 @@ export async function sleep(millisecondsTimeout: number): Promise<void> {
   await new Promise((resolve) => setTimeout(resolve, millisecondsTimeout));
 }
 
-export function sanitizeUrl(url: string): string {
-  return url.endsWith('?') ? url.substring(0, url.length - 1) : url;
-}
-
 export async function asyncForEach<T>(
   array: Array<T>,
   callback: (item: T, index: number) => void
@@ -38,4 +34,10 @@ export async function asyncForEachParallel<T>(
   callback: (item: T, index: number) => void
 ): Promise<void> {
   await Promise.all(array.map(callback));
+}
+
+export function isUrlAbsolute(url: string): boolean {
+  const regexp = new RegExp('^([a-z]+://|//)', 'i');
+
+  return regexp.test(url);
 }

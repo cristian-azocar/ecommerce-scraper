@@ -29,6 +29,13 @@ const schema = {
       tableName: 'website',
       columns: {
         id: 'id',
+        name: 'name',
+        baseUrl: 'base_url',
+        urls: 'urls',
+        isEnabled: 'is_enabled',
+        httpMethod: 'http_method',
+        pagination: 'pagination',
+        selectors: 'selectors',
       },
     },
     product: {
