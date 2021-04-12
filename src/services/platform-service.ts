@@ -1,4 +1,4 @@
-import { IPlatform } from 'src/types/interfaces';
+import IPlatform from 'src/models/IPlatform';
 import db from 'src/db/client';
 import schema from 'src/db/schema';
 

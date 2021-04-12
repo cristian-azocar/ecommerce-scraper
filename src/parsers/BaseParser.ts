@@ -2,11 +2,11 @@ import cheerio from 'cheerio';
 import {
   IParser,
   IParseResult,
-  IProduct,
   IPrices,
   IParserConfig,
-  LookupTable,
 } from 'src/types/interfaces';
+import IProduct from 'src/models/IProduct';
+import LookupTable from 'src/models/LookupTable';
 import { sanitizeNumber, parseDate, isUrlAbsolute } from 'src/utils';
 
 export default class BaseParser implements IParser {
@@ -119,6 +119,10 @@ export default class BaseParser implements IParser {
     const condition = this.extractByLookup(el, selectors.condition, conditions);
 
     return condition?.id;
+  }
+
+  protected extractClass(el: cheerio.Cheerio, index: number): string {
+    return el.attr('class').split(/\s+/)[index];
   }
 
   private extractByLookup(

@@ -1,7 +1,8 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-await-in-loop */
 import axios from 'axios';
-import { IScraperConfig, IParseResult, IProduct } from 'src/types/interfaces';
+import { IScraperConfig, IParseResult } from 'src/types/interfaces';
+import IProduct from 'src/models/IProduct';
 import logger from 'src/utils/logger';
 
 export default class Scraper {

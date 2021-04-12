@@ -1,4 +1,4 @@
-import { IAvailability } from 'src/types/interfaces';
+import IAvailability from 'src/models/IAvailability';
 import db from 'src/db/client';
 import schema from 'src/db/schema';
 

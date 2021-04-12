@@ -1,6 +1,7 @@
 import { performance } from 'perf_hooks';
 import { Request, Response } from 'express';
-import { IProduct, IWebsite } from 'src/types/interfaces';
+import IProduct from 'src/models/IProduct';
+import IWebsite from 'src/models/IWebsite';
 import { asyncForEachParallel } from 'src/utils';
 import ScraperFactory from 'src/helpers/ScraperFactory';
 import logger from 'src/utils/logger';

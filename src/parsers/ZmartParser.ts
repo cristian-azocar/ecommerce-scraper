@@ -1,6 +1,5 @@
-import cheerio from 'cheerio';
-import { extractClass } from 'src/helpers/dom-helper';
-import { IPlatform, ICondition } from 'src/types/interfaces';
+import IPlatform from 'src/models/IPlatform';
+import ICondition from 'src/models/ICondition';
 import { sanitizeNumber, parseDate, splitByLineBreaks } from 'src/utils';
 import logger from 'src/utils/logger';
 import BaseParser from './BaseParser';
@@ -28,7 +27,7 @@ export default class ZmartParser extends BaseParser {
 
   protected extractPlatformId(el: cheerio.Cheerio): number {
     const { platforms } = this.config;
-    const platformClass: string = extractClass(el, 1);
+    const platformClass: string = this.extractClass(el, 1);
     const cleanStr: string = platformClass.replace('BorderPlat', '');
     const platform: IPlatform = platforms.find(
       (item) => item.name === cleanStr || item.lookup?.includes(cleanStr)

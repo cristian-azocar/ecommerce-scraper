@@ -1,6 +1,7 @@
 import config from 'src/config/app-config';
 import ZmartParser from 'src/parsers/ZmartParser';
-import { IParserConfig, IWebsite } from 'src/types/interfaces';
+import { IParserConfig } from 'src/types/interfaces';
+import IWebsite from 'src/models/IWebsite';
 import Scraper from './Scraper';
 
 export default class ScraperFactory {

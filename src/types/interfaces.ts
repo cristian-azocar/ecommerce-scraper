@@ -1,3 +1,9 @@
+import IAvailability from 'src/models/IAvailability';
+import ICondition from 'src/models/ICondition';
+import IPlatform from 'src/models/IPlatform';
+import IProduct from 'src/models/IProduct';
+import IWebsite from 'src/models/IWebsite';
+
 export interface ISelectors {
   id: string;
   product: string;
@@ -16,35 +22,6 @@ export interface ISelectors {
   nextPage: string;
 }
 
-export interface IWebsite {
-  id: number;
-  name: string;
-  baseUrl: string;
-  urls: Array<string>;
-  isEnabled: boolean;
-  httpMethod: 'get' | 'post';
-  pagination: { queryString: string };
-  selectors: ISelectors;
-}
-
-export interface IPlatform {
-  id: number;
-  name: string;
-  lookup: Array<string>;
-}
-
-export interface IAvailability {
-  id: number;
-  name: string;
-  lookup: Array<string>;
-}
-
-export interface ICondition {
-  id: number;
-  name: string;
-  lookup: Array<string>;
-}
-
 export interface IConfig {
   port: number;
   database: {
@@ -58,23 +35,6 @@ export interface IConfig {
   platforms: Array<IPlatform>;
   availabilities: Array<IAvailability>;
   conditions: Array<ICondition>;
-}
-
-export interface IProduct {
-  id: number;
-  websiteId: number; // TODO: use Website enum?
-  sku: string;
-  name: string;
-  platformId: number; // TODO: use Platform enum?
-  url: string;
-  imageUrl: string;
-  price: number;
-  listPrice: number;
-  discount: number;
-  discountPercentage: number;
-  availabilityId: number; // TODO: use Availability enum?
-  estimatedArrivalDate: Date;
-  conditionId: number; // TODO: use Condition enum?
 }
 
 export interface IPrices {
@@ -107,10 +67,4 @@ export interface IParserConfig {
   availabilities: IAvailability[];
   conditions: ICondition[];
   platforms: IPlatform[];
-}
-
-export interface LookupTable {
-  id: number;
-  name: string;
-  lookup: Array<string>;
 }

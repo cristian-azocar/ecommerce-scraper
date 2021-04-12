@@ -1,4 +1,4 @@
-import { IWebsite } from 'src/types/interfaces';
+import IWebsite from 'src/models/IWebsite';
 import db from 'src/db/client';
 import schema from 'src/db/schema';
 

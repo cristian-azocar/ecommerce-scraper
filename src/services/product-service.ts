@@ -1,4 +1,4 @@
-import { IProduct } from 'src/types/interfaces';
+import IProduct from 'src/models/IProduct';
 import db from 'src/db/client';
 import schema from 'src/db/schema';
 
