@@ -6,7 +6,7 @@ import {
   IParserConfig,
 } from 'src/types/interfaces';
 import IProduct from 'src/models/IProduct';
-import LookupTable from 'src/models/LookupTable';
+import ILookupTable from 'src/models/ILookupTable';
 import { sanitizeNumber, parseDate, isUrlAbsolute } from 'src/utils';
 
 export default class BaseParser implements IParser {
@@ -128,8 +128,8 @@ export default class BaseParser implements IParser {
   private extractByLookup(
     el: cheerio.Cheerio,
     selector: string,
-    lookupTable: Array<LookupTable>
-  ): LookupTable {
+    lookupTable: Array<ILookupTable>
+  ): ILookupTable {
     const str: string = el.find(selector).text().trim();
 
     return lookupTable.find(

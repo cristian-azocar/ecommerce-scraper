@@ -1,15 +1,10 @@
 import { Knex } from 'knex';
+import config from './src/config/app-config';
 
 const knexConfig: Record<string, Knex.Config> = {
   development: {
     client: 'pg',
-    connection: {
-      host: process.env.DB_HOST || 'localhost',
-      port: +process.env.DB_PORT || 5432,
-      user: process.env.DB_USER || 'admin',
-      password: process.env.DB_PASSWORD || 'admin',
-      database: process.env.DB_NAME || 'videogames_scraper_db',
-    },
+    connection: config.database,
     pool: {
       min: 2,
       max: 10,

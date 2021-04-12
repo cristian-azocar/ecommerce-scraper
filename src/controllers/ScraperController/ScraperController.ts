@@ -45,6 +45,11 @@ export default class ScraperController {
   }
 
   private async saveToDatabase(products: IProduct[]): Promise<void> {
+    if (!products.length) {
+      logger.warn('The list of products is empty');
+      return;
+    }
+
     logger.info(`Saving ${products.length} products into database...`);
     await productService.createOrUpdate(products);
     logger.info('Products saved successfully');

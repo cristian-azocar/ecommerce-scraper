@@ -1,4 +1,4 @@
-import { ICondition } from 'src/types/interfaces';
+import ICondition from 'src/models/ICondition';
 import db from '../client';
 import schema from '../schema';
 
