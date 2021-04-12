@@ -41,6 +41,7 @@ export default class ScraperController {
       });
     });
 
+    logger.info('All pages scraped successfully');
     res.json({ message: 'Scraping finished successfully' });
   }
 
