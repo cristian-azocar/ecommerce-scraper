@@ -33,7 +33,7 @@ export default class BaseParser implements IParser {
         platformId: this.extractPlatformId(productEl),
         url: this.extractUrl(productEl),
         imageUrl: this.extractImageUrl(productEl),
-        catalogUrl: url,
+        scrapedUrl: url,
         availabilityId: this.extractAvailability(productEl),
         estimatedArrivalDate: this.extractEstimatedArrivalDate(productEl),
         conditionId: this.extractConditionId(productEl),

@@ -42,24 +42,24 @@ export async function up(knex: Knex): Promise<void> {
       .notNullable()
       .references(website.columns.id)
       .inTable(website.tableName);
-    table.string('sku', 64);
-    table.string('name', 512).notNullable();
+    table.string(product.columns.sku, 64);
+    table.string(product.columns.name, 512).notNullable();
     table
       .integer(product.columns.platformId)
       .references(platform.columns.id)
       .inTable(platform.tableName);
-    table.string('url', 512).notNullable();
-    table.string('image_url', 512).notNullable();
-    table.string('catalog_url', 512).notNullable();
-    table.integer('price').notNullable();
-    table.integer('list_price').notNullable();
-    table.integer('discount');
-    table.integer('discount_percentage');
+    table.string(product.columns.url, 512).notNullable();
+    table.string(product.columns.imageUrl, 512).notNullable();
+    table.string(product.columns.scrapedUrl, 512).notNullable();
+    table.integer(product.columns.price).notNullable();
+    table.integer(product.columns.listPrice).notNullable();
+    table.integer(product.columns.discount);
+    table.integer(product.columns.discountPercentage);
     table
       .integer(product.columns.availabilityId)
       .references(availability.columns.id)
       .inTable(availability.tableName);
-    table.timestamp('estimated_arrival_date');
+    table.timestamp(product.columns.estimatedArrivalDate);
     table
       .integer(product.columns.conditionId)
       .references(condition.columns.id)
