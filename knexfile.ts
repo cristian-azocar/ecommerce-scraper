@@ -1,5 +1,5 @@
 import { Knex } from 'knex';
-import config from './src/config/app-config';
+import config from './src/config/appConfig';
 
 const knexConfig: Record<string, Knex.Config> = {
   development: {

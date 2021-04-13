@@ -6,8 +6,8 @@ import IProduct from 'src/models/IProduct';
 import logger from 'src/utils/logger';
 
 export default class Scraper {
+  private axiosConfig: AxiosRequestConfig = { responseType: 'arraybuffer' };
   config: IScraperConfig;
-  axiosConfig: AxiosRequestConfig = { responseType: 'arraybuffer' };
 
   constructor(config: IScraperConfig) {
     this.config = config;
@@ -17,38 +17,31 @@ export default class Scraper {
   // TODO: invoke an event called "onPageScraped" to send data as soon as the page is scraped
   // TODO: implement a retry logic if an error occurs
   async scrape(): Promise<IProduct[]> {
-    const { url, parser, httpMethod = 'get' } = this.config;
+    const { parser, httpMethod } = this.config;
     const products: IProduct[] = [];
-    const urlObj: URL = new URL(url);
+    const url: URL = new URL(this.config.url);
 
     let page = 1;
     let result: IParseResult;
-    let fullUrl: string = this.buildUrl(urlObj, page);
+    let fullUrl: string = this.buildUrlWithPage(url, page);
 
     do {
       logger.info(`Scraping ${fullUrl}`);
 
-      const { data } = await axios[httpMethod](
-        fullUrl,
-        undefined,
-        this.axiosConfig
-      );
+      const { data } = await axios[httpMethod](fullUrl, null, this.axiosConfig);
       const html: string = data.toString('latin1');
 
       result = parser.parse(html, fullUrl);
 
       products.push(...result.products);
-      fullUrl = this.buildUrl(urlObj, ++page);
+      fullUrl = this.buildUrlWithPage(url, ++page);
     } while (result.morePages);
 
     return products;
   }
 
-  private buildUrl(url: URL, page: number): string {
-    const { pagination } = this.config;
-
-    url.searchParams.set(pagination.queryString, page.toString());
-
+  private buildUrlWithPage(url: URL, page: number): string {
+    url.searchParams.set(this.config.pagination.queryString, page.toString());
     return url.href;
   }
 }

@@ -1,4 +1,4 @@
-import config from 'src/config/app-config';
+import config from 'src/config/appConfig';
 import ZmartParser from 'src/parsers/ZmartParser';
 import { IParserConfig } from 'src/types/interfaces';
 import IWebsite from 'src/models/IWebsite';

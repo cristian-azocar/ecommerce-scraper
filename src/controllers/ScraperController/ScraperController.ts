@@ -2,11 +2,11 @@ import { performance } from 'perf_hooks';
 import { Request, Response } from 'express';
 import IProduct from 'src/models/IProduct';
 import IWebsite from 'src/models/IWebsite';
-import { asyncForEachParallel } from 'src/utils';
+import asyncForEachParallel from 'src/utils/asyncForEachParallel';
 import ScraperFactory from 'src/helpers/ScraperFactory';
 import logger from 'src/utils/logger';
 import productService from 'src/services/product-service';
-import config from 'src/config/app-config';
+import config from 'src/config/appConfig';
 import Scraper from 'src/helpers/Scraper';
 
 export default class ScraperController {
@@ -20,7 +20,7 @@ export default class ScraperController {
     const websites = config.websites.filter((website) => website.isEnabled);
 
     if (!websites.length) {
-      logger.warn('No website is enabled. Will not scrape.');
+      logger.info('No website is enabled. Will not scrape.');
       res.json({ message: 'No website is enabled' });
       return;
     }

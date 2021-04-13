@@ -53,11 +53,15 @@ export interface IParser {
   parse(html: string, url: string): IParseResult;
 }
 
+export interface IPagination {
+  queryString: string;
+}
+
 export interface IScraperConfig {
   url: string;
   parser: IParser;
-  httpMethod?: 'get' | 'post';
-  pagination: { queryString: string };
+  httpMethod: 'get' | 'post';
+  pagination: IPagination;
 }
 
 export interface IParserConfig {

@@ -1,43 +1,8 @@
-import parse from 'date-fns/parse';
-
-export function sanitizeNumber(s: string): number {
-  return Number(s.replace(/[^0-9]+/g, '')) || 0;
-}
-
-export function parseDate(s: string, format: string): Date {
-  return parse(s.trim(), format, new Date());
-}
-
-export function splitByLineBreaks(s: string): string[] {
-  return s
-    .trim()
-    .replace(/\t/g, '')
-    .split(/\r\n|\r|\n/);
-}
-
-export async function sleep(millisecondsTimeout: number): Promise<void> {
-  await new Promise((resolve) => setTimeout(resolve, millisecondsTimeout));
-}
-
-export async function asyncForEach<T>(
-  array: Array<T>,
-  callback: (item: T, index: number) => void
-): Promise<void> {
-  for (let index = 0; index < array.length; index++) {
-    // eslint-disable-next-line no-await-in-loop
-    await callback(array[index], index);
-  }
-}
-
-export async function asyncForEachParallel<T>(
-  array: Array<T>,
-  callback: (item: T, index: number) => void
-): Promise<void> {
-  await Promise.all(array.map(callback));
-}
-
-export function isUrlAbsolute(url: string): boolean {
-  const regexp = new RegExp('^([a-z]+://|//)', 'i');
-
-  return regexp.test(url);
-}
+export { default as asyncForEach } from './asyncForEach';
+export { default as asyncForEachParallel } from './asyncForEachParallel';
+export { default as isUrlAbsolute } from './isUrlAbsolute';
+export { default as parseDate } from './parseDate';
+export { default as sanitizeNumber } from './sanitizeNumber';
+export { default as sleep } from './sleep';
+export { default as splitByLineBreaks } from './splitByLineBreaks';
+export { default as logger } from './logger';

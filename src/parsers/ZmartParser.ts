@@ -16,12 +16,6 @@ export default class ZmartParser extends BaseParser {
     const filename: string = src.split('/').pop();
     const sku: string = filename.split('_')[0];
 
-    // TODO: use a blacklist of invalid SKUs
-    if (sku === 'File') {
-      logger.debug('Could not extract the SKU from the image URL');
-      return undefined;
-    }
-
     return sku;
   }
 

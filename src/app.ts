@@ -3,7 +3,7 @@ import 'express-async-errors';
 import cors, { CorsOptions } from 'cors';
 import routes from './routes';
 import websiteService from './services/website-service';
-import config from './config/app-config';
+import config from './config/appConfig';
 import platformService from './services/platform-service';
 import availabilityService from './services/availability-service';
 import conditionService from './services/condition-service';

@@ -1,4 +1,4 @@
-import { ISelectors } from 'src/types/interfaces';
+import { ISelectors, IPagination } from 'src/types/interfaces';
 
 export default interface IWebsite {
   id: number;
@@ -7,6 +7,6 @@ export default interface IWebsite {
   urls: Array<string>;
   isEnabled: boolean;
   httpMethod: 'get' | 'post';
-  pagination: { queryString: string };
+  pagination: IPagination;
   selectors: ISelectors;
 }
