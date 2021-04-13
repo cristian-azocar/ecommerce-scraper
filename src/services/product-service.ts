@@ -31,7 +31,7 @@ class ProductService {
     await db
       .insert(products)
       .into(tables.product.tableName)
-      .onConflict([columns.id, columns.websiteId])
+      .onConflict([columns.id, columns.retailId])
       .merge();
   }
 }

@@ -1,7 +1,7 @@
 import { performance } from 'perf_hooks';
 import { Request, Response } from 'express';
 import IProduct from 'src/models/IProduct';
-import IWebsite from 'src/models/IWebsite';
+import IRetail from 'src/models/IRetail';
 import asyncForEachParallel from 'src/utils/asyncForEachParallel';
 import ScraperFactory from 'src/helpers/ScraperFactory';
 import logger from 'src/utils/logger';
@@ -17,19 +17,19 @@ export default class ScraperController {
   async scrape(req: Request, res: Response): Promise<void> {
     // TODO: should we use Redis for something?
     // TODO: scrape all catalogs ("Próximamente", "Usados", etc)
-    const websites = config.websites.filter((website) => website.isEnabled);
+    const retails = config.retails.filter((retail) => retail.isEnabled);
 
-    if (!websites.length) {
-      logger.info('No website is enabled. Will not scrape.');
-      res.json({ message: 'No website is enabled' });
+    if (!retails.length) {
+      logger.info('No retail is enabled. Will not scrape.');
+      res.json({ message: 'No retail is enabled' });
       return;
     }
 
-    await asyncForEachParallel(websites, async (website: IWebsite) => {
-      const scraper: Scraper = ScraperFactory.getScraper(website);
-      logger.info(`Scraping website ${website.name}`);
+    await asyncForEachParallel(retails, async (retail: IRetail) => {
+      const scraper: Scraper = ScraperFactory.getScraper(retail);
+      logger.info(`Scraping retail ${retail.name}`);
 
-      await asyncForEachParallel(website.urls, async (url: string) => {
+      await asyncForEachParallel(retail.urls, async (url: string) => {
         scraper.config.url = url;
 
         const t0: number = performance.now();

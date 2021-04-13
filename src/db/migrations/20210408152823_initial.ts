@@ -2,7 +2,7 @@ import { Knex } from 'knex';
 import schema from '../schema';
 
 const {
-  tables: { platform, availability, condition, website, product },
+  tables: { platform, availability, condition, retail, product },
 } = schema;
 
 export async function up(knex: Knex): Promise<void> {
@@ -24,24 +24,24 @@ export async function up(knex: Knex): Promise<void> {
     table.specificType(condition.columns.lookup, 'varchar(32)[]');
   });
 
-  await knex.schema.createTable(website.tableName, (table) => {
-    table.increments(website.columns.id).primary();
-    table.string(website.columns.name, 64).notNullable();
-    table.string(website.columns.baseUrl, 512).notNullable();
-    table.specificType(website.columns.urls, 'varchar(512)[]');
-    table.boolean(website.columns.isEnabled).notNullable();
-    table.string(website.columns.httpMethod, 8).notNullable();
-    table.json(website.columns.pagination).notNullable();
-    table.json(website.columns.selectors).notNullable();
+  await knex.schema.createTable(retail.tableName, (table) => {
+    table.increments(retail.columns.id).primary();
+    table.string(retail.columns.name, 64).notNullable();
+    table.string(retail.columns.baseUrl, 512).notNullable();
+    table.specificType(retail.columns.urls, 'varchar(512)[]');
+    table.boolean(retail.columns.isEnabled).notNullable();
+    table.string(retail.columns.httpMethod, 8).notNullable();
+    table.json(retail.columns.pagination).notNullable();
+    table.json(retail.columns.selectors).notNullable();
   });
 
   await knex.schema.createTable(product.tableName, (table) => {
     table.integer(product.columns.id).notNullable();
     table
-      .integer(product.columns.websiteId)
+      .integer(product.columns.retailId)
       .notNullable()
-      .references(website.columns.id)
-      .inTable(website.tableName);
+      .references(retail.columns.id)
+      .inTable(retail.tableName);
     table.string(product.columns.sku, 64);
     table.string(product.columns.name, 512).notNullable();
     table
@@ -65,14 +65,14 @@ export async function up(knex: Knex): Promise<void> {
       .references(condition.columns.id)
       .inTable(condition.tableName);
 
-    table.primary([product.columns.id, product.columns.websiteId]);
+    table.primary([product.columns.id, product.columns.retailId]);
     table.timestamps(true, true);
   });
 }
 
 export async function down(knex: Knex): Promise<void> {
   await knex.schema.dropTableIfExists(product.tableName);
-  await knex.schema.dropTableIfExists(website.tableName);
+  await knex.schema.dropTableIfExists(retail.tableName);
   await knex.schema.dropTableIfExists(platform.tableName);
   await knex.schema.dropTableIfExists(availability.tableName);
   await knex.schema.dropTableIfExists(condition.tableName);

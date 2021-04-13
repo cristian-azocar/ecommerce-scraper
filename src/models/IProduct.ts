@@ -1,6 +1,6 @@
 export default interface IProduct {
   id: number;
-  websiteId: number; // TODO: use Website enum?
+  retailId: number; // TODO: use Retail enum?
   sku: string;
   name: string;
   platformId: number; // TODO: use Platform enum?

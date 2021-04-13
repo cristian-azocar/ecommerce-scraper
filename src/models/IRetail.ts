@@ -1,6 +1,6 @@
 import { ISelectors, IPagination } from 'src/types/interfaces';
 
-export default interface IWebsite {
+export default interface IRetail {
   id: number;
   name: string;
   baseUrl: string;

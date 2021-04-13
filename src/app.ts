@@ -2,7 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import cors, { CorsOptions } from 'cors';
 import routes from './routes';
-import websiteService from './services/website-service';
+import retailService from './services/retailService';
 import config from './config/appConfig';
 import platformService from './services/platform-service';
 import availabilityService from './services/availability-service';
@@ -18,7 +18,7 @@ const app: express.Application = express();
 (async function loadConfigFromDatabase() {
   logger.info('Loading configuration from database...');
 
-  config.websites = await websiteService.find();
+  config.retails = await retailService.find();
   config.platforms = await platformService.find();
   config.availabilities = await availabilityService.find();
   config.conditions = await conditionService.find();

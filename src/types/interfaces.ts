@@ -2,7 +2,7 @@ import IAvailability from 'src/models/IAvailability';
 import ICondition from 'src/models/ICondition';
 import IPlatform from 'src/models/IPlatform';
 import IProduct from 'src/models/IProduct';
-import IWebsite from 'src/models/IWebsite';
+import IRetail from 'src/models/IRetail';
 
 export interface ISelectors {
   id: string;
@@ -31,7 +31,7 @@ export interface IConfig {
     port: number;
     database: string;
   };
-  websites: Array<IWebsite>;
+  retails: Array<IRetail>;
   platforms: Array<IPlatform>;
   availabilities: Array<IAvailability>;
   conditions: Array<ICondition>;
@@ -65,7 +65,7 @@ export interface IScraperConfig {
 }
 
 export interface IParserConfig {
-  websiteId: number;
+  retailId: number;
   baseUrl: string;
   selectors: ISelectors;
   availabilities: IAvailability[];

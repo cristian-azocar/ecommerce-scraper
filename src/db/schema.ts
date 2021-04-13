@@ -25,8 +25,8 @@ const schema = {
         lookup: 'lookup',
       },
     },
-    website: {
-      tableName: 'website',
+    retail: {
+      tableName: 'retail',
       columns: {
         id: 'id',
         name: 'name',
@@ -42,7 +42,7 @@ const schema = {
       tableName: 'product',
       columns: {
         id: 'id',
-        websiteId: 'website_id',
+        retailId: 'retail_id',
         sku: 'sku',
         name: 'name',
         platformId: 'platform_id',

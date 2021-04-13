@@ -1,15 +1,15 @@
 import config from 'src/config/appConfig';
 import ZmartParser from 'src/parsers/ZmartParser';
 import { IParserConfig } from 'src/types/interfaces';
-import IWebsite from 'src/models/IWebsite';
+import IRetail from 'src/models/IRetail';
 import Scraper from './Scraper';
 
 export default class ScraperFactory {
-  static getScraper(website: IWebsite): Scraper {
-    const { name, id, baseUrl, selectors, httpMethod, pagination } = website;
+  static getScraper(retail: IRetail): Scraper {
+    const { name, id, baseUrl, selectors, httpMethod, pagination } = retail;
     const { availabilities, conditions, platforms } = config;
     const scraperConfig: IParserConfig = {
-      websiteId: id,
+      retailId: id,
       baseUrl,
       selectors,
       availabilities,
@@ -18,7 +18,7 @@ export default class ScraperFactory {
     };
 
     switch (name) {
-      case 'Zmart':
+      case 'zmart':
         return new Scraper({
           url: undefined,
           parser: new ZmartParser(scraperConfig),
@@ -26,7 +26,7 @@ export default class ScraperFactory {
           pagination,
         });
       default:
-        throw new Error(`Website "${website.name}" has no scraper implemented`);
+        throw new Error(`Retail "${retail.name}" has no scraper implemented`);
     }
   }
 }

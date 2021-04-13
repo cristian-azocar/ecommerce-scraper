@@ -19,7 +19,7 @@ export default class BaseParser implements IParser {
 
   parse(html: string, url: string): IParseResult {
     const $: cheerio.Root = cheerio.load(html);
-    const { selectors, websiteId } = this.config;
+    const { selectors, retailId } = this.config;
     const products: IProduct[] = [];
     const morePages: boolean = $(selectors.nextPage).length > 0;
 
@@ -27,7 +27,7 @@ export default class BaseParser implements IParser {
       const productEl: cheerio.Cheerio = $(el);
       const product: IProduct = {
         id: this.extractId(productEl),
-        websiteId,
+        retailId,
         sku: this.extractSKU(productEl),
         name: this.extractName(productEl),
         platformId: this.extractPlatformId(productEl),
