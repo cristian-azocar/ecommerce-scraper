@@ -33,8 +33,8 @@ export default class BaseParser implements IParser {
         platformId: this.extractPlatformId(productEl),
         url: this.extractUrl(productEl),
         imageUrl: this.extractImageUrl(productEl),
-        scrapedUrl: url,
-        availabilityId: this.extractAvailability(productEl),
+        sourceUrl: url,
+        availabilityId: this.extractAvailabilityId(productEl),
         estimatedArrivalDate: this.extractEstimatedArrivalDate(productEl),
         conditionId: this.extractConditionId(productEl),
         ...this.extractPrices(productEl),
@@ -96,7 +96,7 @@ export default class BaseParser implements IParser {
     };
   }
 
-  protected extractAvailability(el: cheerio.Cheerio): number {
+  protected extractAvailabilityId(el: cheerio.Cheerio): number {
     const { selectors, availabilities } = this.config;
     const availability = this.extractByLookup(
       el,

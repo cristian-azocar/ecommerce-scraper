@@ -48,7 +48,7 @@ const schema = {
         platformId: 'platform_id',
         url: 'url',
         imageUrl: 'image_url',
-        scrapedUrl: 'scraped_url',
+        sourceUrl: 'source_url',
         price: 'price',
         listPrice: 'list_price',
         discount: 'discount',

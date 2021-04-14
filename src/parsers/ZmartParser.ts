@@ -34,30 +34,35 @@ export default class ZmartParser extends BaseParser {
   protected extractAvailabilityId(el: cheerio.Cheerio): number {
     const { availabilities, selectors } = this.config;
     const str: string = el.find(selectors.availability).text();
-    const texts: string[] = str.trim().split(' ');
-    const availability = availabilities.find(
-      (item) => item.name === texts[0] || item.lookup?.includes(texts[0])
+    const texts: string[] = splitByLineBreaks(str);
+    const availability = availabilities.find((item) =>
+      item.lookup?.find((lookupItem) => texts[0].includes(lookupItem))
     );
 
     if (!availability) {
-      logger.debug(`The text "${texts[0]}" is not a known availability`);
+      logger.warn(`The text "${texts[0]}" is not a known availability`);
     }
 
     return availability?.id;
   }
 
   protected extractEstimatedArrivalDate(el: cheerio.Cheerio): Date {
-    // "Próximo Lanzamiento<br>Llegada Estimada: 17/06/21" => 2021-06-17T04:00:00.000Z
     const estimatedArrival = el
       .find(this.config.selectors.estimatedArrivalDate)
       .text();
-    const texts: string[] = splitByLineBreaks(estimatedArrival);
+    const lines: string[] = splitByLineBreaks(estimatedArrival);
 
-    if (texts[1] === undefined) {
-      return undefined;
+    if (lines.length === 1) {
+      // "Preventa 17/06/21" => 2021-06-17T04:00:00.000Z
+      return parseDate(lines[0].split(' ')[1], this.dateFormat);
     }
 
-    return parseDate(texts[1].split(':')[1], this.dateFormat);
+    if (lines[1]) {
+      // "Próximo Lanzamiento<br>Llegada Estimada: 17/06/21" => 2021-06-17T04:00:00.000Z
+      return parseDate(lines[1].split(':')[1], this.dateFormat);
+    }
+
+    return undefined;
   }
 
   protected extractConditionId(el: cheerio.Cheerio): number {

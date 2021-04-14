@@ -23,9 +23,11 @@ export async function seed(): Promise<void> {
       baseUrl: 'https://www.zmart.cl',
       urls: [
         'https://www.zmart.cl/scripts/proddisplay_page.asp?id=321&idRowVar=32641&idRow=2997', // PS4 nuevos
-        'https://www.zmart.cl/scripts/proddisplay_page.asp?id=361&idRowVar=34809&idRow=3155', // Switch nuevos
+        'https://www.zmart.cl/Scripts/proddisplay.asp?id=24', // PS4 próximamente
         'https://www.zmart.cl/Scripts/prodSearch.asp?strSearch=UPS4', // PS4 usados
+        'https://www.zmart.cl/scripts/proddisplay_page.asp?id=361&idRowVar=34809&idRow=3155', // Switch nuevos
         'https://www.zmart.cl/Scripts/prodSearch.asp?strSearch=UNSWG', // Switch usados
+        'https://www.zmart.cl/Scripts/proddisplay.asp?id=362', // Switch próximamente
       ],
       isEnabled: true,
       httpMethod: 'post',
