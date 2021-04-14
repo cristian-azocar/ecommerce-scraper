@@ -6,7 +6,7 @@ import Scraper from './Scraper';
 
 export default class ScraperFactory {
   static getScraper(retail: IRetail): Scraper {
-    const { name, id, baseUrl, selectors, httpMethod, pagination } = retail;
+    const { code, id, baseUrl, selectors, httpMethod, pagination } = retail;
     const { availabilities, conditions, platforms } = config;
     const scraperConfig: IParserConfig = {
       retailId: id,
@@ -17,7 +17,7 @@ export default class ScraperFactory {
       platforms,
     };
 
-    switch (name) {
+    switch (code) {
       case 'zmart':
         return new Scraper({
           url: undefined,

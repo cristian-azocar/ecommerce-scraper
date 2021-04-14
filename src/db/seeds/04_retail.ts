@@ -19,7 +19,8 @@ export async function seed(): Promise<void> {
   await db<IRetail>(retail.tableName).insert([
     {
       id: 1,
-      name: 'zmart',
+      code: 'zmart',
+      name: 'Zmart',
       baseUrl: 'https://www.zmart.cl',
       urls: [
         'https://www.zmart.cl/scripts/proddisplay_page.asp?id=321&idRowVar=32641&idRow=2997', // PS4 nuevos
