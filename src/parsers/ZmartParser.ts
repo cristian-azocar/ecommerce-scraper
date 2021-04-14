@@ -24,7 +24,7 @@ export default class ZmartParser extends BaseParser {
     const platformClass: string = this.extractClass(el, 1);
     const cleanStr: string = platformClass.replace('BorderPlat', '');
     const platform: IPlatform = platforms.find(
-      (item) => item.name === cleanStr || item.lookup?.includes(cleanStr)
+      (item) => item.name === cleanStr || item.codes?.includes(cleanStr)
     );
 
     // TODO: detect non-game platforms (books, toys, etc)
@@ -36,7 +36,7 @@ export default class ZmartParser extends BaseParser {
     const str: string = el.find(selectors.availability).text();
     const texts: string[] = splitByLineBreaks(str);
     const availability = availabilities.find((item) =>
-      item.lookup?.find((lookupItem) => texts[0].includes(lookupItem))
+      item.codes?.find((code) => texts[0].includes(code))
     );
 
     if (!availability) {
@@ -70,7 +70,7 @@ export default class ZmartParser extends BaseParser {
     const productName: string = this.extractName(el);
     const defaultCondition: ICondition = conditions[0];
     const condition: ICondition = conditions.find((item) =>
-      item.lookup?.find((lookupItem) => productName.includes(lookupItem))
+      item.codes?.find((code) => productName.includes(code))
     );
 
     return condition?.id || defaultCondition.id;

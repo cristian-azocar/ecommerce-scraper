@@ -10,21 +10,21 @@ const {
 export async function seed(): Promise<void> {
   await db(platform.tableName).del();
   await db<IPlatform>(platform.tableName).insert([
-    { name: 'Blu-Ray', lookup: ['BLR'] },
+    { name: 'Blu-Ray', codes: ['BLR'] },
     { name: 'Book' },
     { name: 'PC' },
-    { name: 'PS Vita', lookup: ['PSV'] },
+    { name: 'PS Vita', codes: ['PSV'] },
     { name: 'PSP' },
     { name: 'PS2' },
     { name: 'PS3' },
     { name: 'PS4' },
     { name: 'PS5' },
-    { name: 'Wii', lookup: ['WII'] },
-    { name: 'Wii U', lookup: ['WIIU'] },
-    { name: 'Switch', lookup: ['NSW'] },
-    { name: 'DS', lookup: ['NDS'] },
+    { name: 'Wii', codes: ['WII'] },
+    { name: 'Wii U', codes: ['WIIU'] },
+    { name: 'Switch', codes: ['NSW'] },
+    { name: 'DS', codes: ['NDS'] },
     { name: '3DS' },
-    { name: 'Xbox 360', lookup: ['XB360'] },
-    { name: 'Xbox One', lookup: ['XBONE'] },
+    { name: 'Xbox 360', codes: ['XB360'] },
+    { name: 'Xbox One', codes: ['XBONE'] },
   ]);
 }

@@ -9,19 +9,19 @@ export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable(platform.tableName, (table) => {
     table.increments(platform.columns.id).primary();
     table.string(platform.columns.name, 32).notNullable();
-    table.specificType(platform.columns.lookup, 'varchar(32)[]');
+    table.specificType(platform.columns.codes, 'varchar(32)[]');
   });
 
   await knex.schema.createTable(availability.tableName, (table) => {
     table.increments(availability.columns.id).primary();
     table.string(availability.columns.name, 32).notNullable();
-    table.specificType(availability.columns.lookup, 'varchar(32)[]');
+    table.specificType(availability.columns.codes, 'varchar(32)[]');
   });
 
   await knex.schema.createTable(condition.tableName, (table) => {
     table.increments(condition.columns.id).primary();
     table.string(condition.columns.name, 32).notNullable();
-    table.specificType(condition.columns.lookup, 'varchar(32)[]');
+    table.specificType(condition.columns.codes, 'varchar(32)[]');
   });
 
   await knex.schema.createTable(retail.tableName, (table) => {

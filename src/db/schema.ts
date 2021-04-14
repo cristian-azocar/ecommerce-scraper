@@ -6,7 +6,7 @@ const schema = {
       columns: {
         id: 'id',
         name: 'name',
-        lookup: 'lookup',
+        codes: 'codes',
       },
     },
     availability: {
@@ -14,7 +14,7 @@ const schema = {
       columns: {
         id: 'id',
         name: 'name',
-        lookup: 'lookup',
+        codes: 'codes',
       },
     },
     condition: {
@@ -22,7 +22,7 @@ const schema = {
       columns: {
         id: 'id',
         name: 'name',
-        lookup: 'lookup',
+        codes: 'codes',
       },
     },
     retail: {

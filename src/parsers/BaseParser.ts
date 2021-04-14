@@ -134,7 +134,7 @@ export default class BaseParser implements IParser {
     const str: string = el.find(selector).text().trim();
 
     return lookupTable.find(
-      (item) => item.name === str || item.lookup?.includes(str)
+      (item) => item.name === str || item.codes?.includes(str)
     );
   }
 }

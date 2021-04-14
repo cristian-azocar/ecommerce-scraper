@@ -10,7 +10,7 @@ const {
 export async function seed(): Promise<void> {
   await db(condition.tableName).del();
   await db<ICondition>(condition.tableName).insert([
-    { name: 'New', lookup: ['Nuevo'] },
-    { name: 'Used', lookup: ['Usado'] },
+    { name: 'New', codes: ['Nuevo'] },
+    { name: 'Used', codes: ['Usado'] },
   ]);
 }

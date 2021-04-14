@@ -1,5 +1,5 @@
 export default interface IPlatform {
   id: number;
   name: string;
-  lookup: Array<string>;
+  codes: Array<string>;
 }
