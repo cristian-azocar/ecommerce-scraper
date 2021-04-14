@@ -5,6 +5,7 @@ const schema = {
       tableName: 'platform',
       columns: {
         id: 'id',
+        categoryId: 'category_id',
         name: 'name',
         codes: 'codes',
       },
@@ -57,7 +58,6 @@ const schema = {
         categoryId: 'category_id',
         sku: 'sku',
         name: 'name',
-        platformId: 'platform_id',
         url: 'url',
         imageUrl: 'image_url',
         sourceUrl: 'source_url',
