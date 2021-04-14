@@ -35,7 +35,7 @@ export default class BaseParser implements IParser {
         imageUrl: this.extractImageUrl(productEl),
         sourceUrl: url,
         availabilityId: this.extractAvailabilityId(productEl),
-        estimatedArrivalDate: this.extractEstimatedArrivalDate(productEl),
+        arrivalDate: this.extractArrivalDate(productEl),
         conditionId: this.extractConditionId(productEl),
         ...this.extractPrices(productEl),
       };
@@ -107,12 +107,10 @@ export default class BaseParser implements IParser {
     return availability?.id;
   }
 
-  protected extractEstimatedArrivalDate(el: cheerio.Cheerio): Date {
-    const estimatedArrival = el
-      .find(this.config.selectors.estimatedArrivalDate)
-      .text();
+  protected extractArrivalDate(el: cheerio.Cheerio): Date {
+    const arrivalDate = el.find(this.config.selectors.arrivalDate).text();
 
-    return parseDate(estimatedArrival, this.dateFormat);
+    return parseDate(arrivalDate, this.dateFormat);
   }
 
   protected extractConditionId(el: cheerio.Cheerio): number {

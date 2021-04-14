@@ -17,7 +17,7 @@ export interface ISelectors {
   discount: string;
   discountPercentage: string;
   availability: string;
-  estimatedArrivalDate: string;
+  arrivalDate: string;
   condition: string;
   nextPage: string;
 }

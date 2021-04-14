@@ -12,6 +12,6 @@ export default interface IProduct {
   discount: number;
   discountPercentage: number;
   availabilityId: number; // TODO: use Availability enum?
-  estimatedArrivalDate: Date;
+  arrivalDate: Date;
   conditionId: number; // TODO: use Condition enum?
 }

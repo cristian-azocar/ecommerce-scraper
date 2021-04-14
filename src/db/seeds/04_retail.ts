@@ -41,9 +41,7 @@ export async function seed(): Promise<void> {
         url: buildSelector('$PARENT_Descripcion > a'),
         imageUrl: buildSelector('$PARENT_Image > a > img'),
         availability: buildSelector('$PARENT_Precios > $PARENT_Disponibilidad'),
-        estimatedArrivalDate: buildSelector(
-          '$PARENT_Precios > $PARENT_Disponibilidad'
-        ),
+        arrivalDate: buildSelector('$PARENT_Precios > $PARENT_Disponibilidad'),
         condition: undefined,
         price: buildSelector('$PARENT_Precios > $PARENT_Precio'),
         listPrice: buildSelector('$PARENT_Precios > $PARENT_PrecioNormal'),

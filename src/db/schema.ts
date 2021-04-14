@@ -54,7 +54,7 @@ const schema = {
         discount: 'discount',
         discountPercentage: 'discount_percentage',
         availabilityId: 'availability_id',
-        estimatedArrivalDate: 'estimated_arrival_date',
+        arrivalDate: 'arrival_date',
         conditionId: 'condition_id',
       },
     },

@@ -46,11 +46,9 @@ export default class ZmartParser extends BaseParser {
     return availability?.id;
   }
 
-  protected extractEstimatedArrivalDate(el: cheerio.Cheerio): Date {
-    const estimatedArrival = el
-      .find(this.config.selectors.estimatedArrivalDate)
-      .text();
-    const lines: string[] = splitByLineBreaks(estimatedArrival);
+  protected extractArrivalDate(el: cheerio.Cheerio): Date {
+    const arrivalDate = el.find(this.config.selectors.arrivalDate).text();
+    const lines: string[] = splitByLineBreaks(arrivalDate);
 
     if (lines.length === 1) {
       // "Preventa 17/06/21" => 2021-06-17T04:00:00.000Z

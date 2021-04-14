@@ -10,18 +10,21 @@ export async function up(knex: Knex): Promise<void> {
     table.increments(platform.columns.id).primary();
     table.string(platform.columns.name, 32).notNullable();
     table.specificType(platform.columns.codes, 'varchar(32)[]');
+    table.timestamps(true, true);
   });
 
   await knex.schema.createTable(availability.tableName, (table) => {
     table.increments(availability.columns.id).primary();
     table.string(availability.columns.name, 32).notNullable();
     table.specificType(availability.columns.codes, 'varchar(32)[]');
+    table.timestamps(true, true);
   });
 
   await knex.schema.createTable(condition.tableName, (table) => {
     table.increments(condition.columns.id).primary();
     table.string(condition.columns.name, 32).notNullable();
     table.specificType(condition.columns.codes, 'varchar(32)[]');
+    table.timestamps(true, true);
   });
 
   await knex.schema.createTable(retail.tableName, (table) => {
@@ -33,6 +36,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string(retail.columns.httpMethod, 8).notNullable();
     table.json(retail.columns.pagination).notNullable();
     table.json(retail.columns.selectors).notNullable();
+    table.timestamps(true, true);
   });
 
   await knex.schema.createTable(product.tableName, (table) => {
@@ -59,7 +63,7 @@ export async function up(knex: Knex): Promise<void> {
       .integer(product.columns.availabilityId)
       .references(availability.columns.id)
       .inTable(availability.tableName);
-    table.timestamp(product.columns.estimatedArrivalDate);
+    table.timestamp(product.columns.arrivalDate);
     table
       .integer(product.columns.conditionId)
       .references(condition.columns.id)
