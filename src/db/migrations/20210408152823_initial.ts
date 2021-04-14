@@ -33,7 +33,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string(retail.columns.name, 64).notNullable();
     table.string(retail.columns.baseUrl, 512).notNullable();
     table.specificType(retail.columns.urls, 'varchar(512)[]');
-    table.boolean(retail.columns.isEnabled).notNullable();
+    table.boolean(retail.columns.isActive).notNullable();
     table.string(retail.columns.httpMethod, 8).notNullable();
     table.json(retail.columns.pagination).notNullable();
     table.json(retail.columns.selectors).notNullable();

@@ -17,7 +17,7 @@ export default class ScraperController {
   async scrape(req: Request, res: Response): Promise<void> {
     // TODO: should we use Redis for something?
     // TODO: scrape all catalogs ("Próximamente", "Usados", etc)
-    const retails = config.retails.filter((retail) => retail.isEnabled);
+    const retails = config.retails.filter((retail) => retail.isActive);
 
     if (!retails.length) {
       logger.info('No retail is enabled. Will not scrape.');

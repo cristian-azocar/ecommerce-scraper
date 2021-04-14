@@ -30,7 +30,7 @@ export async function seed(): Promise<void> {
         'https://www.zmart.cl/Scripts/prodSearch.asp?strSearch=UNSWG', // Switch usados
         'https://www.zmart.cl/Scripts/proddisplay.asp?id=362', // Switch próximamente
       ],
-      isEnabled: true,
+      isActive: true,
       httpMethod: 'post',
       pagination: { queryString: 'curPage' },
       selectors: {

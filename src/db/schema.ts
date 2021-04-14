@@ -33,11 +33,17 @@ const schema = {
         name: 'name',
         baseUrl: 'base_url',
         urls: 'urls',
-        isEnabled: 'is_enabled',
+        isActive: 'is_active',
         httpMethod: 'http_method',
         pagination: 'pagination',
         selectors: 'selectors',
       },
+    },
+    category: {
+      id: 'id',
+      parentId: 'parent_id',
+      name: 'name',
+      isActive: 'is_active',
     },
     product: {
       tableName: 'product',
