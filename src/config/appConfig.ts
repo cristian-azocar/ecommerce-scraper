@@ -13,6 +13,7 @@ const config: IConfig = {
   platforms: [],
   availabilities: [],
   conditions: [],
+  categories: [],
 };
 
 export default config;

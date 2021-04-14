@@ -1,9 +1,10 @@
 export default interface IProduct {
   id: number;
-  retailId: number; // TODO: use Retail enum?
+  retailId: number;
+  categoryId: number;
   sku: string;
   name: string;
-  platformId: number; // TODO: use Platform enum?
+  platformId: number;
   url: string;
   imageUrl: string;
   sourceUrl: string;
@@ -11,7 +12,7 @@ export default interface IProduct {
   listPrice: number;
   discount: number;
   discountPercentage: number;
-  availabilityId: number; // TODO: use Availability enum?
+  availabilityId: number;
   arrivalDate: Date;
-  conditionId: number; // TODO: use Condition enum?
+  conditionId: number;
 }

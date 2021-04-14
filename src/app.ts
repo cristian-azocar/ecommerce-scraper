@@ -7,6 +7,7 @@ import config from './config/appConfig';
 import platformService from './services/platform-service';
 import availabilityService from './services/availability-service';
 import conditionService from './services/condition-service';
+import categoryService from './services/categoryService';
 import logger from './utils/logger';
 // import ErrorHandlerMiddleware from './middlewares/ErrorHandlerMiddleware';
 // import redisStorage from './storage/RedisStorage';
@@ -22,6 +23,7 @@ const app: express.Application = express();
   config.platforms = await platformService.find();
   config.availabilities = await availabilityService.find();
   config.conditions = await conditionService.find();
+  config.categories = await categoryService.find();
 
   logger.info('Configuration loaded successfully');
 })();

@@ -19,15 +19,17 @@ export default class BaseParser implements IParser {
 
   parse(html: string, url: string): IParseResult {
     const $: cheerio.Root = cheerio.load(html);
-    const { selectors, retailId } = this.config;
+    const { selectors, retailId, categories } = this.config;
     const products: IProduct[] = [];
     const morePages: boolean = $(selectors.nextPage).length > 0;
+    const category = categories.find(({ name }) => name === 'Videojuegos');
 
     $(selectors.product).each((_, el: cheerio.Element): void => {
       const productEl: cheerio.Cheerio = $(el);
       const product: IProduct = {
         id: this.extractId(productEl),
         retailId,
+        categoryId: category.id,
         sku: this.extractSKU(productEl),
         name: this.extractName(productEl),
         platformId: this.extractPlatformId(productEl),

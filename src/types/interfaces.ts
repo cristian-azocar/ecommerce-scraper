@@ -1,4 +1,5 @@
 import IAvailability from 'src/models/IAvailability';
+import ICategory from 'src/models/ICategory';
 import ICondition from 'src/models/ICondition';
 import IPlatform from 'src/models/IPlatform';
 import IProduct from 'src/models/IProduct';
@@ -35,6 +36,7 @@ export interface IConfig {
   platforms: Array<IPlatform>;
   availabilities: Array<IAvailability>;
   conditions: Array<ICondition>;
+  categories: Array<ICategory>;
 }
 
 export interface IPrices {
@@ -71,4 +73,5 @@ export interface IParserConfig {
   availabilities: IAvailability[];
   conditions: ICondition[];
   platforms: IPlatform[];
+  categories: ICategory[];
 }

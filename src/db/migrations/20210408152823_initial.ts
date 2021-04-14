@@ -2,7 +2,7 @@ import { Knex } from 'knex';
 import schema from '../schema';
 
 const {
-  tables: { platform, availability, condition, retail, product },
+  tables: { platform, availability, condition, retail, category, product },
 } = schema;
 
 export async function up(knex: Knex): Promise<void> {
@@ -40,6 +40,15 @@ export async function up(knex: Knex): Promise<void> {
     table.timestamps(true, true);
   });
 
+  await knex.schema.createTable(category.tableName, (table) => {
+    table.increments(category.columns.id).primary();
+    table.integer(category.columns.parentId);
+    table.string(category.columns.code, 32).notNullable();
+    table.string(category.columns.name, 128).notNullable();
+    table.boolean(category.columns.isActive).notNullable();
+    table.timestamps(true, true);
+  });
+
   await knex.schema.createTable(product.tableName, (table) => {
     table.integer(product.columns.id).notNullable();
     table
@@ -47,6 +56,11 @@ export async function up(knex: Knex): Promise<void> {
       .notNullable()
       .references(retail.columns.id)
       .inTable(retail.tableName);
+    table
+      .integer(product.columns.categoryId)
+      .notNullable()
+      .references(category.columns.id)
+      .inTable(category.tableName);
     table.string(product.columns.sku, 64);
     table.string(product.columns.name, 512).notNullable();
     table

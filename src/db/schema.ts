@@ -40,16 +40,21 @@ const schema = {
       },
     },
     category: {
-      id: 'id',
-      parentId: 'parent_id',
-      name: 'name',
-      isActive: 'is_active',
+      tableName: 'category',
+      columns: {
+        id: 'id',
+        parentId: 'parent_id',
+        code: 'code',
+        name: 'name',
+        isActive: 'is_active',
+      },
     },
     product: {
       tableName: 'product',
       columns: {
         id: 'id',
         retailId: 'retail_id',
+        categoryId: 'category_id',
         sku: 'sku',
         name: 'name',
         platformId: 'platform_id',
