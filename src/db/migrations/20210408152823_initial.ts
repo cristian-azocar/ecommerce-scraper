@@ -9,6 +9,7 @@ export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable(category.tableName, (table) => {
     table.increments(category.columns.id).primary();
     table.integer(category.columns.parentId);
+    table.string(category.columns.slug, 32).notNullable();
     table.string(category.columns.name, 128).notNullable();
     table.specificType(category.columns.codes, 'varchar(32)[]');
     table.boolean(category.columns.isActive).notNullable();

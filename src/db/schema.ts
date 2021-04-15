@@ -38,6 +38,7 @@ const schema = {
       columns: {
         id: 'id',
         parentId: 'parent_id',
+        slug: 'slug',
         name: 'name',
         codes: 'codes',
         isActive: 'is_active',
