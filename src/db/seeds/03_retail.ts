@@ -19,7 +19,7 @@ export async function seed(): Promise<void> {
   await db<IRetail>(retail.tableName).insert([
     {
       id: 1,
-      code: 'zmart',
+      slug: 'zmart',
       name: 'Zmart',
       baseUrl: 'https://www.zmart.cl',
       urls: [

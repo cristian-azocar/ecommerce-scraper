@@ -23,7 +23,7 @@ const schema = {
       tableName: 'retail',
       columns: {
         id: 'id',
-        code: 'code',
+        slug: 'slug',
         name: 'name',
         baseUrl: 'base_url',
         urls: 'urls',

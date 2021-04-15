@@ -33,7 +33,7 @@ export async function up(knex: Knex): Promise<void> {
 
   await knex.schema.createTable(retail.tableName, (table) => {
     table.increments(retail.columns.id).primary();
-    table.string(retail.columns.code, 64).notNullable();
+    table.string(retail.columns.slug, 64).notNullable();
     table.string(retail.columns.name, 64).notNullable();
     table.string(retail.columns.baseUrl, 512).notNullable();
     table.specificType(retail.columns.urls, 'varchar(512)[]');
