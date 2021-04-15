@@ -1,4 +1,5 @@
 import cheerio from 'cheerio';
+import slugify from 'slugify';
 import {
   IParser,
   IParseResult,
@@ -7,7 +8,7 @@ import {
 } from 'src/types/interfaces';
 import IProduct from 'src/models/IProduct';
 import ILookupTable from 'src/models/ILookupTable';
-import { sanitizeNumber, parseDate, isUrlAbsolute } from 'src/utils';
+import { sanitizeNumber, parseDate, isUrlAbsolute, logger } from 'src/utils';
 
 export default class BaseParser implements IParser {
   readonly config: IParserConfig;
@@ -19,20 +20,21 @@ export default class BaseParser implements IParser {
 
   parse(html: string, url: string): IParseResult {
     const $: cheerio.Root = cheerio.load(html);
-    const { selectors, retailId, categories } = this.config;
+    const { selectors, retailId } = this.config;
     const products: IProduct[] = [];
     const morePages: boolean = $(selectors.nextPage).length > 0;
-    const category = categories.find(({ name }) => name === 'Videojuegos');
 
     $(selectors.product).each((_, el: cheerio.Element): void => {
       const productEl: cheerio.Cheerio = $(el);
-      const product: IProduct = {
+      const productName: string = this.extractName(productEl);
+
+      products.push({
         id: this.extractId(productEl),
         retailId,
-        categoryId: category.id,
+        categoryId: this.extractCategoryId(productEl),
         sku: this.extractSKU(productEl),
-        name: this.extractName(productEl),
-        platformId: this.extractPlatformId(productEl),
+        name: productName,
+        slug: slugify(productName),
         url: this.extractUrl(productEl),
         imageUrl: this.extractImageUrl(productEl),
         sourceUrl: url,
@@ -40,9 +42,7 @@ export default class BaseParser implements IParser {
         arrivalDate: this.extractArrivalDate(productEl),
         conditionId: this.extractConditionId(productEl),
         ...this.extractPrices(productEl),
-      };
-
-      products.push(product);
+      });
     });
 
     return { products, morePages };
@@ -74,11 +74,11 @@ export default class BaseParser implements IParser {
     return el.find(this.config.selectors.imageUrl).attr('src');
   }
 
-  protected extractPlatformId(el: cheerio.Cheerio): number {
-    const { selectors, platforms } = this.config;
-    const platform = this.extractByLookup(el, selectors.platform, platforms);
+  protected extractCategoryId(el: cheerio.Cheerio): number {
+    const { selectors, categories } = this.config;
+    const category = this.extractByLookup(el, selectors.platform, categories);
 
-    return platform?.id;
+    return category?.id;
   }
 
   protected extractPrices(el: cheerio.Cheerio): IPrices {
@@ -129,12 +129,17 @@ export default class BaseParser implements IParser {
   private extractByLookup(
     el: cheerio.Cheerio,
     selector: string,
-    lookupTable: Array<ILookupTable>
+    lookupTables: ILookupTable[]
   ): ILookupTable {
     const str: string = el.find(selector).text().trim();
-
-    return lookupTable.find(
+    const result: ILookupTable = lookupTables.find(
       (item) => item.name === str || item.codes?.includes(str)
     );
+
+    if (!result) {
+      logger.warn(`Value "${str}" not found in the lookup tables`);
+    }
+
+    return result;
   }
 }

@@ -1,7 +1,8 @@
 export default interface ICategory {
   id: number;
   parentId?: number;
-  code: string;
   name: string;
+  slug: string;
+  codes?: string[];
   isActive: boolean;
 }

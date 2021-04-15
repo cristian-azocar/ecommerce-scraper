@@ -1,10 +1,13 @@
+import IAttribute from './IAttribute';
+
 export default interface IProduct {
   id: number;
   retailId: number;
-  categoryId: number;
+  categoryId?: number;
   sku: string;
   name: string;
-  platformId: number;
+  slug: string;
+  attributes?: IAttribute[];
   url: string;
   imageUrl: string;
   sourceUrl: string;
@@ -15,4 +18,6 @@ export default interface IProduct {
   availabilityId: number;
   arrivalDate: Date;
   conditionId: number;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

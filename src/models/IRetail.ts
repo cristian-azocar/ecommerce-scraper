@@ -5,7 +5,7 @@ export default interface IRetail {
   code: string;
   name: string;
   baseUrl: string;
-  urls: Array<string>;
+  urls: string[];
   isActive: boolean;
   httpMethod: 'get' | 'post';
   pagination: IPagination;

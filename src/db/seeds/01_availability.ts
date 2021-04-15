@@ -10,9 +10,13 @@ const {
 export async function seed(): Promise<void> {
   await db(availability.tableName).del();
   await db<IAvailability>(availability.tableName).insert([
-    { name: 'Available', codes: ['Disponible'] },
-    { name: 'Out of Stock', codes: ['Agotado'] },
-    { name: 'Upcoming Release', codes: ['Próximo Lanzamiento'] },
-    { name: 'Presale', codes: ['Preventa'] },
+    { name: 'Available', slug: 'available', codes: ['Disponible'] },
+    { name: 'Out of Stock', slug: 'out-of-stock', codes: ['Agotado'] },
+    {
+      name: 'Upcoming Release',
+      slug: 'upcoming-release',
+      codes: ['Próximo Lanzamiento'],
+    },
+    { name: 'Presale', slug: 'presale', codes: ['Preventa'] },
   ]);
 }

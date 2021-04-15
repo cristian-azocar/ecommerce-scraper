@@ -7,14 +7,14 @@ import Scraper from './Scraper';
 export default class ScraperFactory {
   static getScraper(retail: IRetail): Scraper {
     const { code, id, baseUrl, selectors, httpMethod, pagination } = retail;
-    const { availabilities, conditions, platforms } = config;
+    const { availabilities, conditions, categories } = config;
     const scraperConfig: IParserConfig = {
       retailId: id,
       baseUrl,
       selectors,
       availabilities,
       conditions,
-      platforms,
+      categories,
     };
 
     switch (code) {

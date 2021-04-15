@@ -1,20 +1,12 @@
 // TODO: complete the schema
 const schema = {
   tables: {
-    platform: {
-      tableName: 'platform',
-      columns: {
-        id: 'id',
-        categoryId: 'category_id',
-        name: 'name',
-        codes: 'codes',
-      },
-    },
     availability: {
       tableName: 'availability',
       columns: {
         id: 'id',
         name: 'name',
+        slug: 'slug',
         codes: 'codes',
       },
     },
@@ -23,6 +15,7 @@ const schema = {
       columns: {
         id: 'id',
         name: 'name',
+        slug: 'slug',
         codes: 'codes',
       },
     },
@@ -45,8 +38,8 @@ const schema = {
       columns: {
         id: 'id',
         parentId: 'parent_id',
-        code: 'code',
         name: 'name',
+        codes: 'codes',
         isActive: 'is_active',
       },
     },
@@ -58,6 +51,8 @@ const schema = {
         categoryId: 'category_id',
         sku: 'sku',
         name: 'name',
+        slug: 'slug',
+        attributes: 'attributes',
         url: 'url',
         imageUrl: 'image_url',
         sourceUrl: 'source_url',

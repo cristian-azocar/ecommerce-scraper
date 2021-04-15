@@ -1,4 +1,4 @@
-import IPlatform from 'src/models/IPlatform';
+import ICategory from 'src/models/ICategory';
 import ICondition from 'src/models/ICondition';
 import { sanitizeNumber, parseDate, splitByLineBreaks } from 'src/utils';
 import logger from 'src/utils/logger';
@@ -19,16 +19,20 @@ export default class ZmartParser extends BaseParser {
     return sku;
   }
 
-  protected extractPlatformId(el: cheerio.Cheerio): number {
-    const { platforms } = this.config;
+  protected extractCategoryId(el: cheerio.Cheerio): number {
+    const { categories } = this.config;
     const platformClass: string = this.extractClass(el, 1);
     const cleanStr: string = platformClass.replace('BorderPlat', '');
-    const platform: IPlatform = platforms.find(
+    const category: ICategory = categories.find(
       (item) => item.name === cleanStr || item.codes?.includes(cleanStr)
     );
 
-    // TODO: detect non-game platforms (books, toys, etc)
-    return platform?.id;
+    if (!category) {
+      logger.warn(`The text "${cleanStr}" is not a known category`);
+    }
+
+    // TODO: detect non-game categories (books, toys, etc)
+    return category?.id;
   }
 
   protected extractAvailabilityId(el: cheerio.Cheerio): number {

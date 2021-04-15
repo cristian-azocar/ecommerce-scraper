@@ -10,7 +10,6 @@ const config: IConfig = {
     port: +process.env.DB_PORT || 5432,
   },
   retails: [],
-  platforms: [],
   availabilities: [],
   conditions: [],
   categories: [],

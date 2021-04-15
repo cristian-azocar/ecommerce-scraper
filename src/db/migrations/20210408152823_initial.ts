@@ -2,34 +2,23 @@ import { Knex } from 'knex';
 import schema from '../schema';
 
 const {
-  tables: { platform, availability, condition, retail, category, product },
+  tables: { availability, condition, retail, category, product },
 } = schema;
 
 export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable(category.tableName, (table) => {
     table.increments(category.columns.id).primary();
     table.integer(category.columns.parentId);
-    table.string(category.columns.code, 32).notNullable();
     table.string(category.columns.name, 128).notNullable();
+    table.specificType(category.columns.codes, 'varchar(32)[]');
     table.boolean(category.columns.isActive).notNullable();
-    table.timestamps(true, true);
-  });
-
-  await knex.schema.createTable(platform.tableName, (table) => {
-    table.increments(platform.columns.id).primary();
-    table
-      .integer(platform.columns.categoryId)
-      .notNullable()
-      .references(category.columns.id)
-      .inTable(category.tableName);
-    table.string(platform.columns.name, 32).notNullable();
-    table.specificType(platform.columns.codes, 'varchar(32)[]');
     table.timestamps(true, true);
   });
 
   await knex.schema.createTable(availability.tableName, (table) => {
     table.increments(availability.columns.id).primary();
     table.string(availability.columns.name, 32).notNullable();
+    table.string(availability.columns.slug, 32).notNullable();
     table.specificType(availability.columns.codes, 'varchar(32)[]');
     table.timestamps(true, true);
   });
@@ -37,6 +26,7 @@ export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable(condition.tableName, (table) => {
     table.increments(condition.columns.id).primary();
     table.string(condition.columns.name, 32).notNullable();
+    table.string(condition.columns.slug, 32).notNullable();
     table.specificType(condition.columns.codes, 'varchar(32)[]');
     table.timestamps(true, true);
   });
@@ -63,11 +53,12 @@ export async function up(knex: Knex): Promise<void> {
       .inTable(retail.tableName);
     table
       .integer(product.columns.categoryId)
-      .notNullable()
       .references(category.columns.id)
       .inTable(category.tableName);
     table.string(product.columns.sku, 64);
     table.string(product.columns.name, 512).notNullable();
+    table.string(product.columns.slug, 512).notNullable();
+    table.json(product.columns.attributes);
     table.string(product.columns.url, 512).notNullable();
     table.string(product.columns.imageUrl, 512).notNullable();
     table.string(product.columns.sourceUrl, 512).notNullable();
@@ -93,7 +84,6 @@ export async function up(knex: Knex): Promise<void> {
 export async function down(knex: Knex): Promise<void> {
   await knex.schema.dropTableIfExists(product.tableName);
   await knex.schema.dropTableIfExists(retail.tableName);
-  await knex.schema.dropTableIfExists(platform.tableName);
   await knex.schema.dropTableIfExists(availability.tableName);
   await knex.schema.dropTableIfExists(condition.tableName);
   await knex.schema.dropTableIfExists(category.tableName);
