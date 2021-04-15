@@ -5,7 +5,7 @@ import IRetail from 'src/models/IRetail';
 import asyncForEachParallel from 'src/utils/asyncForEachParallel';
 import ScraperFactory from 'src/helpers/ScraperFactory';
 import logger from 'src/utils/logger';
-import productService from 'src/services/product-service';
+import productService from 'src/services/productService';
 import config from 'src/config/appConfig';
 import Scraper from 'src/helpers/Scraper';
 
@@ -16,7 +16,6 @@ export default class ScraperController {
 
   async scrape(req: Request, res: Response): Promise<void> {
     // TODO: should we use Redis for something?
-    // TODO: scrape all catalogs ("Próximamente", "Usados", etc)
     const retails = config.retails.filter((retail) => retail.isActive);
 
     if (!retails.length) {
@@ -27,7 +26,7 @@ export default class ScraperController {
 
     await asyncForEachParallel(retails, async (retail: IRetail) => {
       const scraper: Scraper = ScraperFactory.getScraper(retail);
-      logger.info(`Scraping retail ${retail.name}`);
+      logger.info(`Scraping retail "${retail.name}"`);
 
       await asyncForEachParallel(retail.urls, async (url: string) => {
         scraper.config.url = url;
