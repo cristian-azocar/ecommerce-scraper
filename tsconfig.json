@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "module": "commonjs",
     "esModuleInterop": true,
     "resolveJsonModule": true,
@@ -10,10 +9,12 @@
     "noImplicitAny": true,
     "moduleResolution": "node",
     "sourceMap": true,
+    "composite": true,
     "outDir": "dist",
-    "paths": {
-      "*": ["*"]
-    }
   },
-  "include": ["src/**/*.ts"]
+  "references": [
+    { "path": "packages/types" },
+    { "path": "packages/database" },
+    { "path": "packages/scraper" }
+  ]
 }
