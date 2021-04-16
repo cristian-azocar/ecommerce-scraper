@@ -1,10 +1,9 @@
 import { performance } from 'perf_hooks';
 import { Request, Response } from 'express';
-import { IProduct, IRetail } from '@project/database';
+import { IProduct, IRetail, productService } from '@project/database';
 import asyncForEachParallel from 'src/utils/asyncForEachParallel';
 import ScraperFactory from 'src/helpers/ScraperFactory';
 import logger from 'src/utils/logger';
-import productService from 'src/services/productService';
 import config from 'src/config/appConfig';
 import Scraper from 'src/helpers/Scraper';
 

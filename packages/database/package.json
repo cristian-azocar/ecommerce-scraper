@@ -7,7 +7,8 @@
   "scripts": {
     "db:migrate": "npx knex --knexfile=./src/knexfile.ts migrate:latest",
     "db:seed": "npx knex --knexfile=./src/knexfile.ts seed:run",
-    "dev": "tsc -w"
+    "dev": "tsc -w",
+    "build": "tsc"
   },
   "dependencies": {
     "date-fns": "^2.19.0",

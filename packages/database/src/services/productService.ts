@@ -1,4 +1,6 @@
-import db, { IProduct, schema } from '@project/database';
+import db from 'src/client';
+import schema from 'src/schema';
+import IProduct from 'src/models/IProduct';
 
 const { tables } = schema;
 

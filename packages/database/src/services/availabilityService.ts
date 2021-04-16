@@ -1,4 +1,6 @@
-import db, { IAvailability, schema } from '@project/database';
+import db from 'src/client';
+import schema from 'src/schema';
+import IAvailability from 'src/models/IAvailability';
 
 const { tables } = schema;
 

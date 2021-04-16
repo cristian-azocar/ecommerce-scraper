@@ -1,4 +1,6 @@
-import db, { ICondition, schema } from '@project/database';
+import db from 'src/client';
+import schema from 'src/schema';
+import ICondition from 'src/models/ICondition';
 
 const { tables } = schema;
 

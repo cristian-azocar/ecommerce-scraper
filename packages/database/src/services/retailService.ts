@@ -1,4 +1,6 @@
-import db, { IRetail, schema } from '@project/database';
+import db from 'src/client';
+import schema from 'src/schema';
+import IRetail from 'src/models/IRetail';
 
 const { tables } = schema;
 

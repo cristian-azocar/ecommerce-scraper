@@ -1,4 +1,6 @@
-import db, { schema, ICategory } from '@project/database';
+import db from 'src/client';
+import schema from 'src/schema';
+import ICategory from 'src/models/ICategory';
 
 const { tables } = schema;
 

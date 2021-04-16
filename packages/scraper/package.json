@@ -7,7 +7,8 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "start": "node dist/server.js",
-    "dev": "nodemon src/server.ts"
+    "dev": "nodemon src/server.ts",
+    "build": "tsc"
   },
   "author": "Cristian Azócar",
   "license": "MIT",

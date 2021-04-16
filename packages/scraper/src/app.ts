@@ -1,11 +1,13 @@
 import express from 'express';
 import 'express-async-errors';
-import routes from './routes';
-import retailService from './services/retailService';
+import {
+  retailService,
+  availabilityService,
+  conditionService,
+  categoryService,
+} from '@project/database';
 import config from './config/appConfig';
-import availabilityService from './services/availabilityService';
-import conditionService from './services/conditionService';
-import categoryService from './services/categoryService';
+import routes from './routes';
 import logger from './utils/logger';
 // import ErrorHandlerMiddleware from './middlewares/ErrorHandlerMiddleware';
 // import redisStorage from './storage/RedisStorage';
