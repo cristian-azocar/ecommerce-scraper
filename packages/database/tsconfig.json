@@ -3,9 +3,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "lib",
+    "preserveWatchOutput": true,
     "paths": {
       "src/*": ["./src/*"]
     },
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts"]
 }
