@@ -1,7 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "build": "tsc -b packages/types packages/database packages/scraper",
+    "dev:database": "yarn workspace @project/database dev",
+    "dev:scraper": "yarn workspace @project/scraper dev",
+    "dev": "yarn dev:database & yarn dev:scraper",
+    "build": "tsc -b packages/database packages/scraper",
     "db:migrate": "yarn workspace @project/database db:migrate",
     "db:seed": "yarn workspace @project/database db:seed"
   },

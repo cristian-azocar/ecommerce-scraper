@@ -10,10 +10,9 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "composite": true,
-    "outDir": "dist",
+    "outDir": "lib",
   },
   "references": [
-    { "path": "packages/types" },
     { "path": "packages/database" },
     { "path": "packages/scraper" }
   ]

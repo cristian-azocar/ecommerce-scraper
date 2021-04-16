@@ -40,10 +40,9 @@
       "node": {
         "extensions": [".js", ".jsx", ".ts", ".tsx"],
         "paths": [
-          "./packages/types/",
+          "./packages/database/",
           "./packages/admin-app/",
           "./packages/client-app/",
-          "./packages/database/",
           "./packages/scraper/"
         ]
       }

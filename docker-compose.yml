@@ -15,10 +15,10 @@ services:
   api:
     depends_on:
       - database
-    build: ./packages/scraper
+    build: ./
     ports:
       - 3001:3001
     volumes:
-      - ./packages/scraper/:/usr/src/app
+      - ./:/usr/src/app
     environment:
       - DB_HOST=database

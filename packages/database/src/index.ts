@@ -7,3 +7,5 @@ export { default as ICondition } from './models/ICondition';
 export { default as ILookupTable } from './models/ILookupTable';
 export { default as IProduct } from './models/IProduct';
 export { default as IRetail } from './models/IRetail';
+export { default as ISelectors } from './models/ISelectors';
+export { default as IPagination } from './models/IPagination';

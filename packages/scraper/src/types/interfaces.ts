@@ -1,5 +1,6 @@
-import { IPagination, ISelectors } from '@project/types';
 import {
+  IPagination,
+  ISelectors,
   IAvailability,
   ICategory,
   ICondition,

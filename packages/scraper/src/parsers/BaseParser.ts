@@ -12,6 +12,7 @@ import { sanitizeNumber, parseDate, isUrlAbsolute, logger } from 'src/utils';
 export default class BaseParser implements IParser {
   readonly config: IParserConfig;
   protected dateFormat = 'dd/M/yyyy';
+  private slugifyOptions = { lower: true, remove: /[*+~.()'"!:@/;,]/g };
 
   constructor(config: IParserConfig) {
     this.config = config;
@@ -33,7 +34,7 @@ export default class BaseParser implements IParser {
         categoryId: this.extractCategoryId(productEl),
         sku: this.extractSKU(productEl),
         name: productName,
-        slug: slugify(productName, { lower: true }),
+        slug: slugify(productName, this.slugifyOptions),
         url: this.extractUrl(productEl),
         imageUrl: this.extractImageUrl(productEl),
         sourceUrl: url,

@@ -1,8 +1,4 @@
-export interface IPagination {
-  queryString: string;
-}
-
-export interface ISelectors {
+export default interface ISelectors {
   id: string;
   product: string;
   sku: string;

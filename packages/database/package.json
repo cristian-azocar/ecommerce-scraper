@@ -6,10 +6,10 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "db:migrate": "npx knex --knexfile=./src/knexfile.ts migrate:latest",
-    "db:seed": "npx knex --knexfile=./src/knexfile.ts seed:run"
+    "db:seed": "npx knex --knexfile=./src/knexfile.ts seed:run",
+    "dev": "tsc -w"
   },
   "dependencies": {
-    "@project/types": "^1.0.0",
     "date-fns": "^2.19.0",
     "knex": "^0.95.4",
     "knex-stringcase": "^1.4.5",

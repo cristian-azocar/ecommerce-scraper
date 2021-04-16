@@ -1,4 +1,5 @@
-import { ISelectors, IPagination } from '@project/types';
+import ISelectors from './ISelectors';
+import IPagination from './IPagination';
 
 export default interface IRetail {
   id: number;

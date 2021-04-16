@@ -13,7 +13,6 @@
   "license": "MIT",
   "dependencies": {
     "@project/database": "^1.0.0",
-    "@project/types": "^1.0.0",
     "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.5",
     "express": "^4.17.1",
