@@ -11,3 +11,5 @@
 **/dist
 **/README.md
 **/LICENSE
+**/lib
+**/tsconfig.tsbuildinfo
