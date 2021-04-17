@@ -1,4 +1,4 @@
-export interface IConfig {
+export default interface IConfig {
   database: {
     user: string;
     password: string;

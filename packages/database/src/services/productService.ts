@@ -1,6 +1,6 @@
-import db from 'src/client';
-import schema from 'src/schema';
-import IProduct from 'src/models/IProduct';
+import db from '../client';
+import schema from '../schema';
+import IProduct from '../types/IProduct';
 
 const { tables } = schema;
 

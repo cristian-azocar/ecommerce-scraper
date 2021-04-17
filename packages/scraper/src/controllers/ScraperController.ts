@@ -1,11 +1,9 @@
 import { performance } from 'perf_hooks';
 import { Request, Response } from 'express';
 import { IProduct, IRetail, productService } from '@project/database';
-import asyncForEachParallel from 'src/utils/asyncForEachParallel';
-import ScraperFactory from 'src/helpers/ScraperFactory';
-import logger from 'src/utils/logger';
-import config from 'src/config/appConfig';
-import Scraper from 'src/helpers/Scraper';
+import { asyncForEachParallel, logger } from '../utils';
+import { Scraper, ScraperFactory } from '../helpers';
+import config from '../config/appConfig';
 
 export default class ScraperController {
   constructor() {

@@ -2,8 +2,8 @@
 /* eslint-disable no-await-in-loop */
 import axios, { AxiosRequestConfig } from 'axios';
 import { IProduct } from '@project/database';
-import { IScraperConfig, IParseResult } from 'src/types/interfaces';
-import logger from 'src/utils/logger';
+import { IScraperConfig, IParseResult } from '../types';
+import logger from '../utils/logger';
 
 export default class Scraper {
   private axiosConfig: AxiosRequestConfig = { responseType: 'arraybuffer' };

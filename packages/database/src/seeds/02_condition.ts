@@ -1,6 +1,6 @@
-import ICondition from 'src/models/ICondition';
-import db from 'src/client';
-import schema from 'src/schema';
+import ICondition from '../types/ICondition';
+import db from '../client';
+import schema from '../schema';
 
 const {
   tables: { condition },

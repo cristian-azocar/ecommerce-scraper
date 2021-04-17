@@ -1,5 +1,5 @@
 import { Knex } from 'knex';
-import schema from 'src/schema';
+import schema from '../schema';
 
 const {
   tables: { availability, condition, retail, category, product },

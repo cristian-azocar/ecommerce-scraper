@@ -1,7 +1,7 @@
 import { IRetail } from '@project/database';
-import config from 'src/config/appConfig';
-import ZmartParser from 'src/parsers/ZmartParser';
-import { IParserConfig } from 'src/types/interfaces';
+import config from '../config/appConfig';
+import ZmartParser from '../parsers/ZmartParser';
+import { IParserConfig } from '../types';
 import Scraper from './Scraper';
 
 export default class ScraperFactory {

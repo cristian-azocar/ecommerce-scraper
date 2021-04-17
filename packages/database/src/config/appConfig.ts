@@ -1,4 +1,4 @@
-import { IConfig } from '../types/interfaces';
+import IConfig from '../types/IConfig';
 
 const config: IConfig = {
   database: {

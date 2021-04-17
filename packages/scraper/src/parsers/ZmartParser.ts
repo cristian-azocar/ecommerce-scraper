@@ -1,6 +1,5 @@
 import { ICategory, ICondition } from '@project/database';
-import { sanitizeNumber, parseDate, splitByLineBreaks } from 'src/utils';
-import logger from 'src/utils/logger';
+import { sanitizeNumber, parseDate, splitByLineBreaks, logger } from '../utils';
 import BaseParser from './BaseParser';
 
 export default class ZmartParser extends BaseParser {

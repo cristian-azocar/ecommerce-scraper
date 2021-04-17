@@ -3,12 +3,12 @@
   "name": "@project/scraper",
   "version": "1.0.0",
   "description": "",
-  "main": "lib/src/index.js",
-  "types": "lib/src/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
-    "build": "tsc && tsc-alias"
+    "build": "tsc"
   },
   "author": "Cristian Azócar",
   "license": "MIT",

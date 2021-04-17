@@ -1,6 +1,6 @@
-import IAvailability from 'src/models/IAvailability';
-import db from 'src/client';
-import schema from 'src/schema';
+import IAvailability from '../types/IAvailability';
+import db from '../client';
+import schema from '../schema';
 
 const {
   tables: { availability },

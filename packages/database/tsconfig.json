@@ -1,12 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
+    "rootDir": "src",
     "outDir": "lib",
     "preserveWatchOutput": true,
-    "paths": {
-      "src/*": ["./src/*"]
-    },
   },
   "include": ["src/**/*.ts"]
 }

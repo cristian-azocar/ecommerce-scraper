@@ -2,13 +2,13 @@
   "private": true,
   "name": "@project/database",
   "version": "1.0.0",
-  "main": "lib/src/index.js",
-  "types": "lib/src/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "db:migrate": "npx knex --knexfile=./src/knexfile.ts migrate:latest",
     "db:seed": "npx knex --knexfile=./src/knexfile.ts seed:run",
-    "dev": "tsc -w & tsc-alias -w",
-    "build": "tsc && tsc-alias"
+    "dev": "tsc -w",
+    "build": "tsc"
   },
   "dependencies": {
     "knex": "^0.95.4",

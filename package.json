@@ -1,14 +1,12 @@
 {
   "private": true,
   "scripts": {
-    "dev:database": "yarn workspace @project/database dev",
-    "dev:scraper": "yarn workspace @project/scraper dev",
-    "build:database": "yarn workspace @project/database build",
-    "build:scraper": "yarn workspace @project/scraper build",
-    "dev": "yarn dev:database & yarn dev:scraper",
-    "build": "yarn build:database && yarn build:scraper",
-    "db:migrate": "yarn workspace @project/database db:migrate",
-    "db:seed": "yarn workspace @project/database db:seed"
+    "database": "yarn workspace @project/database",
+    "scraper": "yarn workspace @project/scraper",
+    "dev": "yarn database dev & yarn scraper dev",
+    "build": "tsc -b",
+    "db:migrate": "yarn database db:migrate",
+    "db:seed": "yarn database db:seed"
   },
   "workspaces": [
     "packages/*"
@@ -24,7 +22,6 @@
     "eslint-plugin-prettier": "^3.3.1",
     "prettier": "^2.2.1",
     "ts-node": "^9.1.1",
-    "tsc-alias": "^1.2.9",
     "typescript": "^4.2.3"
   }
 }

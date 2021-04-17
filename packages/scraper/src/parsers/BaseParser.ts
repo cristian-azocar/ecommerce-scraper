@@ -1,13 +1,8 @@
 import cheerio from 'cheerio';
 import slugify from 'slugify';
 import { IProduct, ILookupTable } from '@project/database';
-import {
-  IParser,
-  IParseResult,
-  IPrices,
-  IParserConfig,
-} from 'src/types/interfaces';
-import { sanitizeNumber, parseDate, isUrlAbsolute, logger } from 'src/utils';
+import { IParser, IParseResult, IPrices, IParserConfig } from '../types';
+import { sanitizeNumber, parseDate, isUrlAbsolute, logger } from '../utils';
 
 export default class BaseParser implements IParser {
   readonly config: IParserConfig;

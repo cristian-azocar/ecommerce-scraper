@@ -1,6 +1,6 @@
-import db from 'src/client';
-import schema from 'src/schema';
-import IRetail from 'src/models/IRetail';
+import db from '../client';
+import schema from '../schema';
+import IRetail from '../types/IRetail';
 
 const { tables } = schema;
 

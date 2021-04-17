@@ -1,16 +1,18 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "module": "commonjs",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "target": "es2018",
     "forceConsistentCasingInFileNames": true,
+    "preserveWatchOutput": true,
     "removeComments": true,
     "noImplicitAny": true,
     "moduleResolution": "node",
     "sourceMap": true,
     "composite": true,
-    "outDir": "lib",
+    "outDir": "lib"
   },
   "references": [
     { "path": "packages/database" },
