@@ -5,8 +5,8 @@
     "scraper": "yarn workspace @project/scraper",
     "dev": "yarn database dev & yarn scraper dev",
     "build": "tsc -b",
-    "db:migrate": "yarn database db:migrate",
-    "db:seed": "yarn database db:seed"
+    "db:migrate": "yarn database migrate",
+    "db:seed": "yarn database seed"
   },
   "workspaces": [
     "packages/*"

@@ -2,9 +2,7 @@ import Retail from '../types/Retail';
 import db from '../client';
 import schema from '../schema';
 
-const {
-  tables: { retail },
-} = schema;
+const { retail } = schema;
 const parentSelectors: string[] = ['.BoxProductoS2', '.ProdBox146'];
 
 function buildSelector(selector: string): string {

@@ -5,7 +5,13 @@
 yarn build
 ```
 
-2. Run Docker
+2. Create and populate the database
+```
+yarn database migrate
+yarn database seed
+```
+
+3. Run Docker
 ```
 docker-compose up
 ```

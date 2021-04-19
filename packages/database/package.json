@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "db:migrate": "npx knex --knexfile=./src/knexfile.ts migrate:latest",
-    "db:seed": "npx knex --knexfile=./src/knexfile.ts seed:run",
+    "migrate": "npx knex --knexfile=./src/knexfile.ts migrate:latest",
+    "seed": "npx knex --knexfile=./src/knexfile.ts seed:run",
     "dev": "tsc -w",
     "build": "tsc"
   },

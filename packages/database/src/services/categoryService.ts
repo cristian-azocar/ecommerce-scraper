@@ -2,11 +2,11 @@ import db from '../client';
 import schema from '../schema';
 import Category from '../types/Category';
 
-const { tables } = schema;
+const { category } = schema;
 
 class CategoryService {
   async findAll(): Promise<Category[]> {
-    return db.select().from(tables.category.tableName);
+    return db.select().from(category.tableName);
   }
 }
 

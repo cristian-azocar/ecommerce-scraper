@@ -2,9 +2,7 @@ import Availability from '../types/Availability';
 import db from '../client';
 import schema from '../schema';
 
-const {
-  tables: { availability },
-} = schema;
+const { availability } = schema;
 
 // eslint-disable-next-line import/prefer-default-export
 export async function seed(): Promise<void> {
