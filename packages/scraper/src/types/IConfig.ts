@@ -1,9 +1,4 @@
-import {
-  IAvailability,
-  ICategory,
-  ICondition,
-  IRetail,
-} from '@project/database';
+import { Availability, Category, Condition, Retail } from '@project/database';
 
 export default interface IConfig {
   port: number;
@@ -14,8 +9,8 @@ export default interface IConfig {
     port: number;
     database: string;
   };
-  retails: IRetail[];
-  availabilities: IAvailability[];
-  conditions: ICondition[];
-  categories: ICategory[];
+  retails: Retail[];
+  availabilities: Availability[];
+  conditions: Condition[];
+  categories: Category[];
 }

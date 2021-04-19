@@ -1,6 +1,6 @@
 import cheerio from 'cheerio';
 import slugify from 'slugify';
-import { IProduct, ILookupTable } from '@project/database';
+import { Product, LookupTable } from '@project/database';
 import { IParser, IParseResult, IPrices, IParserConfig } from '../types';
 import { sanitizeNumber, parseDate, isUrlAbsolute, logger } from '../utils';
 
@@ -16,7 +16,7 @@ export default class BaseParser implements IParser {
   parse(html: string, url: string): IParseResult {
     const $: cheerio.Root = cheerio.load(html);
     const { selectors, retailId } = this.config;
-    const products: IProduct[] = [];
+    const products: Product[] = [];
     const morePages: boolean = $(selectors.nextPage).length > 0;
 
     $(selectors.product).each((_, el: cheerio.Element): void => {
@@ -124,10 +124,10 @@ export default class BaseParser implements IParser {
   private extractByLookup(
     el: cheerio.Cheerio,
     selector: string,
-    lookupTables: ILookupTable[]
-  ): ILookupTable {
+    lookupTables: LookupTable[]
+  ): LookupTable {
     const str: string = el.find(selector).text().trim();
-    const result: ILookupTable = lookupTables.find(
+    const result: LookupTable = lookupTables.find(
       (item) => item.name === str || item.codes?.includes(str)
     );
 

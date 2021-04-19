@@ -1,4 +1,4 @@
-export default interface ILookupTable {
+export default interface LookupTable {
   id: number;
   name: string;
   codes?: string[];

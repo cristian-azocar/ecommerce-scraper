@@ -1,6 +1,6 @@
 {
   "ignore": ["node_modules/**/node_modules"],
-  "exec": "node -r tsconfig-paths/register -r ts-node/register src/server.ts",
+  "exec": "node -r ts-node/register src/server.ts",
   "verbose": true,
   "watch": ["src/"],
   "ext": "ts"

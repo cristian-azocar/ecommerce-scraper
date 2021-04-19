@@ -1,4 +1,4 @@
-export default interface ISelectors {
+export default interface Selectors {
   id: string;
   product: string;
   sku: string;

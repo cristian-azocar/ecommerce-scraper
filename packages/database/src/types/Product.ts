@@ -1,13 +1,13 @@
-import IAttribute from './IAttribute';
+import Attribute from './Attribute';
 
-export default interface IProduct {
+export default interface Product {
   id: number;
   retailId: number;
   categoryId?: number;
   sku: string;
   name: string;
   slug: string;
-  attributes?: IAttribute[];
+  attributes?: Attribute[];
   url: string;
   imageUrl: string;
   sourceUrl: string;

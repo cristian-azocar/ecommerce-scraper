@@ -1,15 +1,12 @@
 import db from '../client';
 import schema from '../schema';
-import ICondition from '../types/ICondition';
+import Condition from '../types/Condition';
 
 const { tables } = schema;
 
 class ConditionService {
-  async find(query?: Partial<ICondition>): Promise<ICondition[]> {
-    return db
-      .select('*')
-      .from(tables.condition.tableName)
-      .where(query || {});
+  async findAll(): Promise<Condition[]> {
+    return db.select().from(tables.condition.tableName);
   }
 }
 

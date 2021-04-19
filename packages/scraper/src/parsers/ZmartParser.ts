@@ -1,4 +1,4 @@
-import { ICategory, ICondition } from '@project/database';
+import { Category, Condition } from '@project/database';
 import { sanitizeNumber, parseDate, splitByLineBreaks, logger } from '../utils';
 import BaseParser from './BaseParser';
 
@@ -21,7 +21,7 @@ export default class ZmartParser extends BaseParser {
     const { categories } = this.config;
     const platformClass: string = this.extractClass(el, 1);
     const cleanStr: string = platformClass.replace('BorderPlat', '');
-    const category: ICategory = categories.find(
+    const category: Category = categories.find(
       (item) => item.name === cleanStr || item.codes?.includes(cleanStr)
     );
 
@@ -71,8 +71,8 @@ export default class ZmartParser extends BaseParser {
   protected extractConditionId(el: cheerio.Cheerio): number {
     const { conditions } = this.config;
     const productName: string = this.extractName(el);
-    const defaultCondition: ICondition = conditions[0];
-    const condition: ICondition = conditions.find((item) =>
+    const defaultCondition: Condition = conditions[0];
+    const condition: Condition = conditions.find((item) =>
       item.codes?.find((code) => productName.includes(code))
     );
 

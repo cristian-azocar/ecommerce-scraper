@@ -1,6 +1,6 @@
-import IConfig from '../types/IConfig';
+import Config from '../types/Config';
 
-const config: IConfig = {
+const config: Config = {
   database: {
     user: process.env.DB_USER || 'admin',
     password: process.env.DB_PASSWORD || 'admin',

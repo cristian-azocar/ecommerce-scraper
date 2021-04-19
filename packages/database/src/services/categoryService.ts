@@ -1,15 +1,12 @@
 import db from '../client';
 import schema from '../schema';
-import ICategory from '../types/ICategory';
+import Category from '../types/Category';
 
 const { tables } = schema;
 
 class CategoryService {
-  async find(query?: Partial<ICategory>): Promise<ICategory[]> {
-    return db
-      .select('*')
-      .from(tables.category.tableName)
-      .where(query || {});
+  async findAll(): Promise<Category[]> {
+    return db.select().from(tables.category.tableName);
   }
 }
 

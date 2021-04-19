@@ -9,7 +9,7 @@
 **/.eslintrc
 **/.prettierrc
 **/dist
+**/lib
 **/README.md
 **/LICENSE
-**/lib
 **/tsconfig.tsbuildinfo

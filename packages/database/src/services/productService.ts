@@ -1,29 +1,19 @@
 import db from '../client';
 import schema from '../schema';
-import IProduct from '../types/IProduct';
+import Product from '../types/Product';
 
 const { tables } = schema;
 
 class ProductService {
-  async find(query?: Partial<IProduct>): Promise<IProduct[]> {
-    return db
-      .select('*')
-      .from(tables.product.tableName)
-      .where(query || {});
+  async findAll(): Promise<Product[]> {
+    return db.select().from(tables.product.tableName);
   }
 
-  async findOne(query?: Partial<IProduct>): Promise<IProduct> {
-    return db
-      .first('*')
-      .from(tables.product.tableName)
-      .where(query || {});
-  }
-
-  async create(products: IProduct | IProduct[]): Promise<void> {
+  async create(products: Product | Product[]): Promise<void> {
     await db.insert(products).into(tables.product.tableName);
   }
 
-  async createOrUpdate(products: IProduct | IProduct[]): Promise<void> {
+  async createOrUpdate(products: Product | Product[]): Promise<void> {
     const {
       product: { columns },
     } = tables;

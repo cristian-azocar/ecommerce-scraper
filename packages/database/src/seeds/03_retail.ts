@@ -1,4 +1,4 @@
-import IRetail from '../types/IRetail';
+import Retail from '../types/Retail';
 import db from '../client';
 import schema from '../schema';
 
@@ -16,7 +16,7 @@ function buildSelector(selector: string): string {
 // eslint-disable-next-line import/prefer-default-export
 export async function seed(): Promise<void> {
   await db(retail.tableName).del();
-  await db<IRetail>(retail.tableName).insert([
+  await db<Retail>(retail.tableName).insert([
     {
       id: 1,
       slug: 'zmart',

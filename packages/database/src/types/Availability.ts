@@ -1,4 +1,4 @@
-export default interface ICondition {
+export default interface Availability {
   id: number;
   name: string;
   slug: string;

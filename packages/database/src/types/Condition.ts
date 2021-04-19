@@ -1,4 +1,4 @@
-export default interface IAvailability {
+export default interface Condition {
   id: number;
   name: string;
   slug: string;

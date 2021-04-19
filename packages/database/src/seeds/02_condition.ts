@@ -1,4 +1,4 @@
-import ICondition from '../types/ICondition';
+import Condition from '../types/Condition';
 import db from '../client';
 import schema from '../schema';
 
@@ -9,7 +9,7 @@ const {
 // eslint-disable-next-line import/prefer-default-export
 export async function seed(): Promise<void> {
   await db(condition.tableName).del();
-  await db<ICondition>(condition.tableName).insert([
+  await db<Condition>(condition.tableName).insert([
     { id: 1, name: 'Nuevo', slug: 'new', codes: ['Nuevo'] },
     { id: 2, name: 'Usado', slug: 'used', codes: ['Usado'] },
   ]);

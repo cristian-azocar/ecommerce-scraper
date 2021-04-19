@@ -1,4 +1,4 @@
-import ICategory from '../types/ICategory';
+import Category from '../types/Category';
 import db from '../client';
 import schema from '../schema';
 
@@ -9,7 +9,7 @@ const {
 // eslint-disable-next-line import/prefer-default-export
 export async function seed(): Promise<void> {
   await db(category.tableName).del();
-  await db<ICategory>(category.tableName).insert([
+  await db<Category>(category.tableName).insert([
     // Level 0
     { id: 1, parentId: null, name: 'Root', slug: 'root', isActive: true },
 

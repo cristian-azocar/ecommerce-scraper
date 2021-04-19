@@ -1,4 +1,7 @@
 {
+  "files": [],
+  "include": [],
+  "exclude": ["**/node_modules"],
   "compilerOptions": {
     "baseUrl": ".",
     "module": "commonjs",
@@ -11,8 +14,7 @@
     "noImplicitAny": true,
     "moduleResolution": "node",
     "sourceMap": true,
-    "composite": true,
-    "outDir": "lib"
+    "composite": true
   },
   "references": [
     { "path": "packages/database" },

@@ -1,6 +1,6 @@
-import { IProduct } from '@project/database';
+import { Product } from '@project/database';
 
 export default interface IParseResult {
-  products: IProduct[];
+  products: Product[];
   morePages: boolean;
 }

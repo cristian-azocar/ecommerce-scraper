@@ -1,15 +1,12 @@
 import db from '../client';
 import schema from '../schema';
-import IRetail from '../types/IRetail';
+import Retail from '../types/Retail';
 
 const { tables } = schema;
 
 class RetailService {
-  async find(query?: Partial<IRetail>): Promise<IRetail[]> {
-    return db
-      .select('*')
-      .from(tables.retail.tableName)
-      .where(query || {});
+  async findAll(): Promise<Retail[]> {
+    return db.select().from(tables.retail.tableName);
   }
 }
 

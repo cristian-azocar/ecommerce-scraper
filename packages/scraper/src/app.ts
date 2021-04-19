@@ -19,10 +19,10 @@ const app: express.Application = express();
 (async function loadConfigFromDatabase() {
   logger.info('Loading configuration from database...');
 
-  config.retails = await retailService.find();
-  config.availabilities = await availabilityService.find();
-  config.conditions = await conditionService.find();
-  config.categories = await categoryService.find();
+  config.retails = await retailService.findAll();
+  config.availabilities = await availabilityService.findAll();
+  config.conditions = await conditionService.findAll();
+  config.categories = await categoryService.findAll();
 
   logger.info('Configuration loaded successfully');
 })();

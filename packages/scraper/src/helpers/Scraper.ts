@@ -1,7 +1,7 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-await-in-loop */
 import axios, { AxiosRequestConfig } from 'axios';
-import { IProduct } from '@project/database';
+import { Product } from '@project/database';
 import { IScraperConfig, IParseResult } from '../types';
 import logger from '../utils/logger';
 
@@ -16,9 +16,9 @@ export default class Scraper {
   // TODO: move the "pagination" as an option, because at some point we may need to scrape only a single page
   // TODO: invoke an event called "onPageScraped" to send data as soon as the page is scraped
   // TODO: implement a retry logic if an error occurs
-  async scrape(): Promise<IProduct[]> {
+  async scrape(): Promise<Product[]> {
     const { parser, httpMethod } = this.config;
-    const products: IProduct[] = [];
+    const products: Product[] = [];
     const url: URL = new URL(this.config.url);
 
     let page = 1;

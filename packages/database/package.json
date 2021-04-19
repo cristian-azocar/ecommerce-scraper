@@ -2,8 +2,8 @@
   "private": true,
   "name": "@project/database",
   "version": "1.0.0",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "db:migrate": "npx knex --knexfile=./src/knexfile.ts migrate:latest",
     "db:seed": "npx knex --knexfile=./src/knexfile.ts seed:run",
@@ -13,7 +13,6 @@
   "dependencies": {
     "knex": "^0.95.4",
     "knex-stringcase": "^1.4.5",
-    "pg": "^8.5.1",
-    "winston": "^3.3.3"
+    "pg": "^8.5.1"
   }
 }

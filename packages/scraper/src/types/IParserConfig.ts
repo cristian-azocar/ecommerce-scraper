@@ -1,15 +1,15 @@
 import {
-  ISelectors,
-  IAvailability,
-  ICategory,
-  ICondition,
+  Selectors,
+  Availability,
+  Category,
+  Condition,
 } from '@project/database';
 
 export default interface IParserConfig {
   retailId: number;
   baseUrl: string;
-  selectors: ISelectors;
-  availabilities: IAvailability[];
-  conditions: ICondition[];
-  categories: ICategory[];
+  selectors: Selectors;
+  availabilities: Availability[];
+  conditions: Condition[];
+  categories: Category[];
 }

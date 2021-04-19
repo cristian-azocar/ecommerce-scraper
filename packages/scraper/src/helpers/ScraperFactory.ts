@@ -1,11 +1,11 @@
-import { IRetail } from '@project/database';
+import { Retail } from '@project/database';
 import config from '../config/appConfig';
 import ZmartParser from '../parsers/ZmartParser';
 import { IParserConfig } from '../types';
 import Scraper from './Scraper';
 
 export default class ScraperFactory {
-  static getScraper(retail: IRetail): Scraper {
+  static getScraper(retail: Retail): Scraper {
     const { id, slug, baseUrl, selectors, httpMethod, pagination } = retail;
     const { availabilities, conditions, categories } = config;
     const scraperConfig: IParserConfig = {
