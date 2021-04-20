@@ -1,10 +1,10 @@
 import { Knex } from 'knex';
-import config from './config/appConfig';
+import appConfig from './config/appConfig';
 
 const knexConfig: Record<string, Knex.Config> = {
   development: {
     client: 'pg',
-    connection: config.database,
+    connection: appConfig.connection,
     pool: {
       min: 2,
       max: 10,
@@ -15,7 +15,7 @@ const knexConfig: Record<string, Knex.Config> = {
     seeds: {
       directory: './seeds',
     },
-    debug: Boolean(process.env.DB_DEBUG),
+    debug: appConfig.debug,
   },
 
   // staging: {

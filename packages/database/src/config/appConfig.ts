@@ -6,13 +6,14 @@ import Config from '../types/Config';
 dotenv.config({ path: path.resolve(__dirname, '../../../../.env') });
 
 const config: Config = {
-  database: {
+  connection: {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
     port: +process.env.DB_PORT,
   },
+  debug: Boolean(process.env.DB_DEBUG),
 };
 
 export default config;
