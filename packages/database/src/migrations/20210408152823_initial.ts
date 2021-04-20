@@ -4,9 +4,9 @@ import SchemaBuilder from '../helpers/SchemaBuilder';
 const schemaBuilder: SchemaBuilder = new SchemaBuilder();
 
 export async function up(knex: Knex): Promise<void> {
-  schemaBuilder.install(knex);
+  await schemaBuilder.install(knex);
 }
 
 export async function down(knex: Knex): Promise<void> {
-  schemaBuilder.uninstall(knex);
+  await schemaBuilder.uninstall(knex);
 }

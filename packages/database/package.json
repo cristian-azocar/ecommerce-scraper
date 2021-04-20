@@ -11,6 +11,7 @@
     "build": "tsc"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "knex": "^0.95.4",
     "knex-stringcase": "^1.4.5",
     "pg": "^8.5.1"

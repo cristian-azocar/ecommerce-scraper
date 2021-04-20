@@ -1,12 +1,17 @@
+import path from 'path';
+import dotenv from 'dotenv';
 import Config from '../types/Config';
+
+// TODO: Maybe pass the config to this library instead of reading it directly from the env vars?
+dotenv.config({ path: path.resolve(__dirname, '../../../../.env') });
 
 const config: Config = {
   database: {
-    user: process.env.DB_USER || 'admin',
-    password: process.env.DB_PASSWORD || 'admin',
-    database: process.env.DB_NAME || 'videogames_scraper_db',
-    host: process.env.DB_HOST || 'localhost',
-    port: +process.env.DB_PORT || 5432,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    host: process.env.DB_HOST,
+    port: +process.env.DB_PORT,
   },
 };
 

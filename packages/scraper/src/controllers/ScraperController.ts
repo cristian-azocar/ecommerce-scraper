@@ -1,6 +1,14 @@
 import { performance } from 'perf_hooks';
 import { Request, Response } from 'express';
-import { Product, Retail, productService } from '@project/database';
+import {
+  Product,
+  Retail,
+  productService,
+  retailService,
+  availabilityService,
+  conditionService,
+  categoryService,
+} from '@project/database';
 import { asyncForEachParallel, logger } from '../utils';
 import { Scraper, ScraperFactory } from '../helpers';
 import config from '../config/appConfig';
@@ -10,8 +18,10 @@ export default class ScraperController {
     this.scrape = this.scrape.bind(this);
   }
 
+  // TODO: should we use Redis for something?
   async scrape(req: Request, res: Response): Promise<void> {
-    // TODO: should we use Redis for something?
+    await this.loadConfigFromDatabase();
+
     const retails = config.retails.filter((retail) => retail.isActive);
 
     if (!retails.length) {
@@ -38,6 +48,17 @@ export default class ScraperController {
 
     logger.info('All pages scraped successfully');
     res.json({ message: 'Scraping finished successfully' });
+  }
+
+  async loadConfigFromDatabase(): Promise<void> {
+    logger.info('Loading configuration from database...');
+
+    config.retails = await retailService.findAll();
+    config.availabilities = await availabilityService.findAll();
+    config.conditions = await conditionService.findAll();
+    config.categories = await categoryService.findAll();
+
+    logger.info('Configuration loaded successfully');
   }
 
   private async saveToDatabase(products: Product[]): Promise<void> {
