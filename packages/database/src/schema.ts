@@ -11,7 +11,7 @@ export type Column = {
   scale?: number;
   useTz?: boolean;
   enumValues?: Knex.Value[];
-  foreignKey?: { columnName: string; tableName: string };
+  foreignKey?: { column: string; table: string };
 };
 
 export type Table = {
@@ -81,12 +81,12 @@ const schema = asTypedObject<Table>()({
         name: 'retail_id',
         type: 'integer',
         nullable: false,
-        foreignKey: { columnName: 'id', tableName: 'retail' },
+        foreignKey: { column: 'id', table: 'retail' },
       },
       {
         name: 'category_id',
         type: 'integer',
-        foreignKey: { columnName: 'id', tableName: 'category' },
+        foreignKey: { column: 'id', table: 'category' },
       },
       { name: 'sku', type: 'string', length: 64 },
       { name: 'name', type: 'string', length: 512, nullable: false },
@@ -102,13 +102,13 @@ const schema = asTypedObject<Table>()({
       {
         name: 'availability_id',
         type: 'integer',
-        foreignKey: { columnName: 'id', tableName: 'availability' },
+        foreignKey: { column: 'id', table: 'availability' },
       },
       { name: 'arrival_date', type: 'timestamp' },
       {
         name: 'condition_id',
         type: 'integer',
-        foreignKey: { columnName: 'id', tableName: 'condition' },
+        foreignKey: { column: 'id', table: 'condition' },
       },
     ],
     primaryKey: ['id', 'retail_id'],

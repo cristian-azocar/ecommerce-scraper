@@ -1,5 +1,6 @@
 /* eslint-disable no-await-in-loop */
 import { Knex } from 'knex';
+import { onUpdateTrigger } from './dbHelpers';
 import schema, { Column, Table } from '../schema';
 
 export default class SchemaBuilder {
@@ -35,6 +36,10 @@ export default class SchemaBuilder {
         table.timestamps(true, true);
       }
     });
+
+    if (tableData.timestamps) {
+      await knex.raw(onUpdateTrigger(tableData.tableName));
+    }
   }
 
   private createColumn(
@@ -50,6 +55,9 @@ export default class SchemaBuilder {
       precision,
       scale,
       enumValues,
+      nullable,
+      foreignKey,
+      primaryKey,
     } = columnData;
     let column;
 
@@ -78,16 +86,15 @@ export default class SchemaBuilder {
       column = table.specificType(name, type);
     }
 
-    if (columnData.nullable === false) {
+    if (nullable === false) {
       column.notNullable();
     }
 
-    if (columnData.foreignKey) {
-      const { columnName, tableName } = columnData.foreignKey;
-      column.references(columnName).inTable(tableName);
+    if (foreignKey) {
+      column.references(foreignKey.column).inTable(foreignKey.table);
     }
 
-    if (columnData.primaryKey) {
+    if (primaryKey) {
       column.primary();
     }
   }
