@@ -21,7 +21,7 @@ yarn build
 
 5. Run Docker
 ```
-docker-compose up -d
+docker-compose up
 ```
 
 6. Create and populate the database
@@ -33,5 +33,5 @@ yarn database seed
 ## Run
 
 ```
-docker-compose up -d
+docker-compose up
 ```
