@@ -1,6 +1,6 @@
 import db from '../client';
 import schema from '../schema';
-import Condition from '../types/Condition';
+import Condition from '../models/Condition';
 
 const { condition } = schema;
 

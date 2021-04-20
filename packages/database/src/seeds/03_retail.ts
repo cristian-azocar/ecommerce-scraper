@@ -1,4 +1,4 @@
-import Retail from '../types/Retail';
+import Retail from '../models/Retail';
 import db from '../client';
 import schema from '../schema';
 

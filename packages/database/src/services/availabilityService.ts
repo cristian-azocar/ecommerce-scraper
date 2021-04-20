@@ -1,6 +1,6 @@
 import db from '../client';
 import schema from '../schema';
-import Availability from '../types/Availability';
+import Availability from '../models/Availability';
 
 const { availability } = schema;
 

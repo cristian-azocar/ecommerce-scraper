@@ -1,6 +1,6 @@
 import db from '../client';
 import schema from '../schema';
-import Category from '../types/Category';
+import Category from '../models/Category';
 
 const { category } = schema;
 

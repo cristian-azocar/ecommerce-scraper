@@ -1,4 +1,4 @@
-import Condition from '../types/Condition';
+import Condition from '../models/Condition';
 import db from '../client';
 import schema from '../schema';
 

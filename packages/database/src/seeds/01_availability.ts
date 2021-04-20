@@ -1,4 +1,4 @@
-import Availability from '../types/Availability';
+import Availability from '../models/Availability';
 import db from '../client';
 import schema from '../schema';
 

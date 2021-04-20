@@ -1,5 +1,5 @@
-import Selectors from './Selectors';
 import Pagination from './Pagination';
+import Selectors from '../types/Selectors';
 
 export default interface Retail {
   id: number;

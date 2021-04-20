@@ -1,6 +1,6 @@
 import db from '../client';
 import schema from '../schema';
-import Retail from '../types/Retail';
+import Retail from '../models/Retail';
 
 const { retail } = schema;
 

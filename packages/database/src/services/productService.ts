@@ -1,6 +1,6 @@
 import db from '../client';
 import schema from '../schema';
-import Product from '../types/Product';
+import Product from '../models/Product';
 
 const { product } = schema;
 
