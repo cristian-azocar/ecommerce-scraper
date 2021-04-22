@@ -2,8 +2,10 @@ import path from 'path';
 import dotenv from 'dotenv';
 import Config from '../types/Config';
 
-// TODO: Maybe pass the config to this library instead of reading it directly from the env vars?
-dotenv.config({ path: path.resolve(__dirname, '../../../../.env') });
+const nodeEnv = process.env.NODE_ENV || 'development';
+const configPath = path.resolve(__dirname, `../../../../.env.${nodeEnv}`);
+
+dotenv.config({ path: configPath });
 
 const config: Config = {
   connection: {
