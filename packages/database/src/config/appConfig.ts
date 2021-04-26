@@ -2,10 +2,12 @@ import path from 'path';
 import dotenv from 'dotenv';
 import Config from '../types/Config';
 
-const nodeEnv = process.env.NODE_ENV || 'development';
-const configPath = path.resolve(__dirname, `../../../../.env.${nodeEnv}`);
+const nodeEnv: string = process.env.NODE_ENV || 'development';
 
-dotenv.config({ path: configPath });
+if (nodeEnv === 'development') {
+  const envPath = path.resolve(__dirname, `../../../../.env`);
+  dotenv.config({ path: envPath });
+}
 
 const config: Config = {
   connection: {

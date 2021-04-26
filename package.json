@@ -6,7 +6,8 @@
     "dev": "yarn database dev & yarn scraper dev",
     "build": "tsc -b",
     "db:migrate": "yarn database migrate",
-    "db:seed": "yarn database seed"
+    "db:seed": "yarn database seed",
+    "postinstall": "node scripts/post-install.js"
   },
   "workspaces": [
     "packages/*"

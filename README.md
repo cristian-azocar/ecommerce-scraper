@@ -6,7 +6,7 @@ Make sure you have installed all of the following prerequisites on your machine:
 * Git
 * Node.js
 * Docker
-* Yarn: install Yarn globally using npm:
+* Yarn - install Yarn globally using npm:
 
 ```
 npm install --global yarn

@@ -3,4 +3,4 @@
 **/lib
 **/tsconfig.tsbuildinfo
 **/.DS_Store
-.env.local
+.env
