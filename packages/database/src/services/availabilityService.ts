@@ -4,7 +4,7 @@ import Availability from '../models/Availability';
 
 const { availability } = schema;
 
-class AvailabilityService {
+export class AvailabilityService {
   async findAll(): Promise<Availability[]> {
     return db.select().from(availability.tableName);
   }

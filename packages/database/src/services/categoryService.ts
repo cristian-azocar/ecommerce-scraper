@@ -4,7 +4,7 @@ import Category from '../models/Category';
 
 const { category } = schema;
 
-class CategoryService {
+export class CategoryService {
   async findAll(): Promise<Category[]> {
     return db.select().from(category.tableName);
   }

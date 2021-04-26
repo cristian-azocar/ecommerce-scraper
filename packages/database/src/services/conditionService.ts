@@ -4,7 +4,7 @@ import Condition from '../models/Condition';
 
 const { condition } = schema;
 
-class ConditionService {
+export class ConditionService {
   async findAll(): Promise<Condition[]> {
     return db.select().from(condition.tableName);
   }

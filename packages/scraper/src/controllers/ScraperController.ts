@@ -1,14 +1,6 @@
 import { performance } from 'perf_hooks';
 import { Request, Response } from 'express';
-import {
-  Product,
-  Retail,
-  productService,
-  retailService,
-  availabilityService,
-  conditionService,
-  categoryService,
-} from '@project/database';
+import db, { Product, Retail } from '@project/database';
 import { asyncForEachParallel, logger } from '../utils';
 import { Scraper, ScraperFactory } from '../helpers';
 import config from '../config/appConfig';
@@ -53,10 +45,10 @@ export default class ScraperController {
   async loadConfigFromDatabase(): Promise<void> {
     logger.info('Loading configuration from database...');
 
-    config.retails = await retailService.findAll();
-    config.availabilities = await availabilityService.findAll();
-    config.conditions = await conditionService.findAll();
-    config.categories = await categoryService.findAll();
+    config.retails = await db.retail.findAll();
+    config.availabilities = await db.availability.findAll();
+    config.conditions = await db.condition.findAll();
+    config.categories = await db.category.findAll();
 
     logger.info('Configuration loaded successfully');
   }
@@ -68,7 +60,7 @@ export default class ScraperController {
     }
 
     logger.info(`Saving ${products.length} products into database...`);
-    await productService.createOrUpdate(products);
+    await db.product.createOrUpdate(products);
     logger.info('Products saved successfully');
   }
 }

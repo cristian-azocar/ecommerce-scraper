@@ -4,7 +4,7 @@ import Product from '../models/Product';
 
 const { product } = schema;
 
-class ProductService {
+export class ProductService {
   async findAll(): Promise<Product[]> {
     return db.select().from(product.tableName);
   }
