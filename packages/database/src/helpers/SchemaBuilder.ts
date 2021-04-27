@@ -1,6 +1,6 @@
 /* eslint-disable no-await-in-loop */
 import { Knex } from 'knex';
-import { onUpdateTrigger } from './dbHelpers';
+import { buildHistoryTrigger, buildOnUpdateTrigger } from './dbHelpers';
 import schema, { Column, Table } from '../schema';
 
 export default class SchemaBuilder {
@@ -38,7 +38,11 @@ export default class SchemaBuilder {
     });
 
     if (tableData.timestamps) {
-      await knex.raw(onUpdateTrigger(tableData.tableName));
+      await knex.raw(buildOnUpdateTrigger(tableData.tableName));
+    }
+
+    if (tableData.trackTableChanges) {
+      await knex.raw(buildHistoryTrigger(tableData.tableName));
     }
   }
 
@@ -58,6 +62,7 @@ export default class SchemaBuilder {
       nullable,
       foreignKey,
       primaryKey,
+      defaultValue,
     } = columnData;
     let column;
 
@@ -84,6 +89,10 @@ export default class SchemaBuilder {
       column = table.increments(name);
     } else {
       column = table.specificType(name, type);
+    }
+
+    if (defaultValue) {
+      column.defaultTo(defaultValue);
     }
 
     if (nullable === false) {

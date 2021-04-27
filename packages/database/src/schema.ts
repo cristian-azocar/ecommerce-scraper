@@ -12,13 +12,15 @@ export type Column = {
   useTz?: boolean;
   enumValues?: Knex.Value[];
   foreignKey?: { column: string; table: string };
+  defaultValue?: string;
 };
 
 export type Table = {
   tableName: string;
   columns: Column[];
-  timestamps: boolean;
+  timestamps?: boolean;
   primaryKey?: string[];
+  trackTableChanges?: boolean;
 };
 
 // Helper function to infer the keys of an object and at the same time restrict the value types.
@@ -26,6 +28,29 @@ export type Table = {
 const asTypedObject = <E>() => <T>(et: { [K in keyof T]: E }) => et;
 
 const schema = asTypedObject<Table>()({
+  tableHistory: {
+    tableName: 'table_history',
+    columns: [
+      { name: 'id', type: 'integer', nullable: false },
+      {
+        name: 'dml_type',
+        type: 'enum',
+        enumValues: ['INSERT', 'UPDATE', 'DELETE'],
+        nullable: false,
+      },
+      { name: 'created_at', type: 'timestamp', useTz: true, nullable: false },
+      {
+        name: 'created_by',
+        type: 'string',
+        length: 255,
+        nullable: false,
+        defaultValue: 'current_user',
+      },
+      { name: 'old_data', type: 'json' },
+      { name: 'new_data', type: 'json' },
+    ],
+    primaryKey: ['id', 'dml_type', 'created_at'],
+  },
   availability: {
     tableName: 'availability',
     columns: [
@@ -113,6 +138,7 @@ const schema = asTypedObject<Table>()({
     ],
     primaryKey: ['id', 'retail_id'],
     timestamps: true,
+    trackTableChanges: true,
   },
 });
 
