@@ -29,6 +29,7 @@ const schema = asTypedObject<Table>()({
     tableName: 'table_history',
     columns: [
       { name: 'id', type: 'integer', nullable: false },
+      { name: 'table_name', type: 'string', length: 64, nullable: false },
       {
         name: 'dml_type',
         type: 'enum',
