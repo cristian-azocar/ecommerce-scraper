@@ -16,7 +16,7 @@ export default interface Product {
   discount: number;
   discountPercentage: number;
   availabilityId: number;
-  arrivalDate: Date;
+  arrivalDate?: Date;
   conditionId: number;
   createdAt?: Date;
   updatedAt?: Date;

@@ -17,7 +17,7 @@ const config: Config = {
     host: process.env.DB_HOST,
     port: +process.env.DB_PORT,
   },
-  debug: Boolean(process.env.DB_DEBUG),
+  debug: process.env.DB_DEBUG === 'true',
 };
 
 export default config;
