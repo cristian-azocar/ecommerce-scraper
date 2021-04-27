@@ -4,14 +4,14 @@ import Product from '../models/Product';
 import { distinctFrom } from '../helpers/dbHelpers';
 
 const { product } = schema;
-const distinctColumns: string[] = [
+const distinctFromQuery = distinctFrom(product.tableName, [
   'price',
   'list_price',
   'discount',
   'discount_percentage',
   'availability_id',
   'arrival_date',
-];
+]);
 
 export class ProductService {
   async findAll(): Promise<Product[]> {
@@ -28,7 +28,7 @@ export class ProductService {
       .into(product.tableName)
       .onConflict(product.primaryKey)
       .merge()
-      .where(distinctFrom(product.tableName, distinctColumns));
+      .where(distinctFromQuery);
   }
 }
 
