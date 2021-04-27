@@ -1,4 +1,5 @@
 import { Knex } from 'knex';
+import asTypedObject from './utils/asTypedObject';
 
 export type Column = {
   name: string;
@@ -22,10 +23,6 @@ export type Table = {
   primaryKey?: string[];
   trackTableChanges?: boolean;
 };
-
-// Helper function to infer the keys of an object and at the same time restrict the value types.
-// Cannot use "Record<K, T>" because the IntelliSense doesn't autocomplete anonymous objects.
-const asTypedObject = <E>() => <T>(et: { [K in keyof T]: E }) => et;
 
 const schema = asTypedObject<Table>()({
   tableHistory: {
