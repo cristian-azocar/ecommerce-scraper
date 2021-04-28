@@ -1,6 +1,5 @@
 /* eslint-disable no-await-in-loop */
 import { Knex } from 'knex';
-import { buildHistoryTrigger, buildOnUpdateTrigger } from './dbHelpers';
 import schema, { Column, Table } from '../schema';
 
 export default class SchemaBuilder {
@@ -37,12 +36,10 @@ export default class SchemaBuilder {
       }
     });
 
-    if (tableData.timestamps) {
-      await knex.raw(buildOnUpdateTrigger(tableData.tableName));
-    }
-
-    if (tableData.trackTableChanges) {
-      await knex.raw(buildHistoryTrigger(tableData.tableName));
+    if (tableData.triggers) {
+      for (let i = 0; i < tableData.triggers.length; i++) {
+        await knex.raw(tableData.triggers[i]);
+      }
     }
   }
 

@@ -1,5 +1,6 @@
 import { Knex } from 'knex';
 import asTypedObject from './utils/asTypedObject';
+import { buildHistoryTrigger, buildOnUpdateTrigger } from './helpers/dbHelpers';
 
 export type Column = {
   name: string;
@@ -21,7 +22,7 @@ export type Table = {
   columns: Column[];
   timestamps?: boolean;
   primaryKey?: string[];
-  trackTableChanges?: boolean;
+  triggers?: string[];
 };
 
 const schema = asTypedObject<Table>()({
@@ -58,6 +59,7 @@ const schema = asTypedObject<Table>()({
       { name: 'codes', type: 'varchar(32)[]' },
     ],
     timestamps: true,
+    triggers: [buildOnUpdateTrigger('availability')],
   },
   condition: {
     tableName: 'condition',
@@ -68,6 +70,7 @@ const schema = asTypedObject<Table>()({
       { name: 'codes', type: 'varchar(32)[]' },
     ],
     timestamps: true,
+    triggers: [buildOnUpdateTrigger('condition')],
   },
   retail: {
     tableName: 'retail',
@@ -83,6 +86,7 @@ const schema = asTypedObject<Table>()({
       { name: 'selectors', type: 'json', nullable: false },
     ],
     timestamps: true,
+    triggers: [buildOnUpdateTrigger('retail')],
   },
   category: {
     tableName: 'category',
@@ -95,6 +99,7 @@ const schema = asTypedObject<Table>()({
       { name: 'codes', type: 'varchar(32)[]' },
     ],
     timestamps: true,
+    triggers: [buildOnUpdateTrigger('category')],
   },
   product: {
     tableName: 'product',
@@ -136,7 +141,7 @@ const schema = asTypedObject<Table>()({
     ],
     primaryKey: ['id', 'retail_id'],
     timestamps: true,
-    trackTableChanges: true,
+    triggers: [buildOnUpdateTrigger('product'), buildHistoryTrigger('product')],
   },
 });
 
