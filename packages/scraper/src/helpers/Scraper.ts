@@ -5,8 +5,9 @@ import { Product } from '@project/database';
 import { IScraperConfig, IParseResult } from '../types';
 import logger from '../utils/logger';
 
+const axiosConfig: AxiosRequestConfig = { responseType: 'arraybuffer' };
+
 export default class Scraper {
-  private axiosConfig: AxiosRequestConfig = { responseType: 'arraybuffer' };
   config: IScraperConfig;
 
   constructor(config: IScraperConfig) {
@@ -28,7 +29,7 @@ export default class Scraper {
     do {
       logger.info(`Scraping ${fullUrl}`);
 
-      const { data } = await axios[httpMethod](fullUrl, null, this.axiosConfig);
+      const { data } = await axios[httpMethod](fullUrl, null, axiosConfig);
       const html: string = data.toString('latin1');
 
       result = parser.parse(html, fullUrl);

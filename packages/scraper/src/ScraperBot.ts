@@ -1,24 +1,18 @@
 import { performance } from 'perf_hooks';
-import { Request, Response } from 'express';
 import db, { Product, Retail } from '@project/database';
-import { asyncForEachParallel, logger } from '../utils';
-import { Scraper, ScraperFactory } from '../helpers';
-import config from '../config/appConfig';
+import { asyncForEachParallel, logger } from './utils';
+import { Scraper, ScraperFactory } from './helpers';
+import config from './config/appConfig';
 
-export default class ScraperController {
-  constructor() {
-    this.scrape = this.scrape.bind(this);
-  }
-
+export default class ScraperBot {
   // TODO: should we use Redis for something?
-  async scrape(req: Request, res: Response): Promise<void> {
+  async scrape(): Promise<void> {
     await this.loadConfigFromDatabase();
 
     const retails = config.retails.filter((retail) => retail.isActive);
 
     if (!retails.length) {
       logger.info('No retail is enabled. Will not scrape.');
-      res.json({ message: 'No retail is enabled' });
       return;
     }
 
@@ -39,12 +33,12 @@ export default class ScraperController {
     });
 
     logger.info('All pages scraped successfully');
-    res.json({ message: 'Scraping finished successfully' });
   }
 
-  async loadConfigFromDatabase(): Promise<void> {
+  private async loadConfigFromDatabase(): Promise<void> {
     logger.info('Loading configuration from database...');
 
+    // TODO: read once instead of executing multiple queries
     config.retails = await db.retail.findAll();
     config.availabilities = await db.availability.findAll();
     config.conditions = await db.condition.findAll();
