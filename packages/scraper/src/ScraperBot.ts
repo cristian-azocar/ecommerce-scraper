@@ -5,14 +5,13 @@ import { Scraper, ScraperFactory } from './helpers';
 import config from './config/appConfig';
 
 export default class ScraperBot {
-  // TODO: should we use Redis for something?
   async scrape(): Promise<void> {
     await this.loadConfigFromDatabase();
 
     const retails = config.retails.filter((retail) => retail.isActive);
 
     if (!retails.length) {
-      logger.info('No retail is enabled. Will not scrape.');
+      logger.warn('No retail is enabled. Will not scrape.');
       return;
     }
 
@@ -21,18 +20,20 @@ export default class ScraperBot {
       logger.info(`Scraping retail "${retail.name}"`);
 
       await asyncForEachParallel(retail.urls, async (url: string) => {
-        scraper.config.url = url;
+        try {
+          scraper.config.url = url;
 
-        const t0: number = performance.now();
-        const products: Product[] = await scraper.scrape();
-        const t1: number = performance.now();
+          const t0: number = performance.now();
+          const products: Product[] = await scraper.scrape();
+          const t1: number = performance.now();
 
-        this.saveToDatabase(products);
-        logger.info(`Scraping finished in ${t1 - t0} milliseconds`);
+          this.saveProductsToDatabase(products);
+          logger.info(`Scraping finished in ${t1 - t0} milliseconds`);
+        } catch (e) {
+          logger.error(e);
+        }
       });
     });
-
-    logger.info('All pages scraped successfully');
   }
 
   private async loadConfigFromDatabase(): Promise<void> {
@@ -47,7 +48,7 @@ export default class ScraperBot {
     logger.info('Configuration loaded successfully');
   }
 
-  private async saveToDatabase(products: Product[]): Promise<void> {
+  private async saveProductsToDatabase(products: Product[]): Promise<void> {
     if (!products.length) {
       logger.warn('The list of products is empty');
       return;

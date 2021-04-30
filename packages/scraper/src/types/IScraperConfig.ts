@@ -6,4 +6,5 @@ export default interface IScraperConfig {
   parser: IParser;
   httpMethod: 'get' | 'post';
   pagination: Pagination;
+  maxRetries?: number;
 }

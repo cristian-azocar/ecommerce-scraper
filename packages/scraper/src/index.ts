@@ -11,4 +11,6 @@ const scraperBot: ScraperBot = new ScraperBot();
   } catch (e) {
     logger.error(e);
   }
+
+  process.exit();
 })();
