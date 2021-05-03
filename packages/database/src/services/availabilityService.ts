@@ -1,13 +1,11 @@
-import db from '../client';
-import schema from '../schema';
+import db from '../internal/dbClient';
+import schema from '../schemaBuilder/schema';
 import Availability from '../models/Availability';
 
 const { availability } = schema;
 
-export class AvailabilityService {
+export default class AvailabilityService {
   async findAll(): Promise<Availability[]> {
     return db.select().from(availability.tableName);
   }
 }
-
-export default new AvailabilityService();

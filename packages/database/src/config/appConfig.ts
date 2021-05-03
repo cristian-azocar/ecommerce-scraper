@@ -1,23 +1,27 @@
-import path from 'path';
-import dotenv from 'dotenv';
-import Config from '../types/Config';
+import setupDotenv from './setupDotenv';
 
-const nodeEnv: string = process.env.NODE_ENV || 'development';
-
-if (nodeEnv === 'development') {
-  const envPath = path.resolve(__dirname, `../../../../.env`);
-  dotenv.config({ path: envPath });
+interface Config {
+  connection: {
+    user: string;
+    password: string;
+    host: string;
+    port: number;
+    database: string;
+  };
+  debug: boolean;
 }
 
-const config: Config = {
+if (process.env.NODE_ENV !== 'production') {
+  setupDotenv();
+}
+
+export default {
   connection: {
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
-    port: +process.env.DB_PORT,
+    user: process.env.DB_USER || '',
+    password: process.env.DB_PASSWORD || '',
+    database: process.env.DB_NAME || '',
+    host: process.env.DB_HOST || '',
+    port: (process.env.DB_PORT && +process.env.DB_PORT) || 0,
   },
   debug: process.env.DB_DEBUG === 'true',
-};
-
-export default config;
+} as Config;

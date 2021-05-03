@@ -1,7 +1,4 @@
 {
-  "files": [],
-  "include": [],
-  "exclude": ["**/node_modules"],
   "compilerOptions": {
     "baseUrl": ".",
     "module": "commonjs",
@@ -9,13 +6,15 @@
     "resolveJsonModule": true,
     "target": "es2018",
     "forceConsistentCasingInFileNames": true,
-    "preserveWatchOutput": true,
     "removeComments": true,
-    "noImplicitAny": true,
     "moduleResolution": "node",
     "sourceMap": true,
-    "composite": true
+    "composite": true,
+    "strict": true,
   },
+  "files": [],
+  "include": [],
+  "exclude": ["**/node_modules"],
   "references": [
     { "path": "packages/database" },
     { "path": "packages/scraper" }

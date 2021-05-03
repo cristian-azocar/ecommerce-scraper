@@ -1,6 +1,6 @@
 import { Knex } from 'knex';
-import asTypedObject from './utils/asTypedObject';
-import { buildHistoryTrigger, buildOnUpdateTrigger } from './helpers/dbHelpers';
+import asTypedObject from '../utils/asTypedObject';
+import { buildHistoryTrigger, buildOnUpdateTrigger } from '../utils/dbUtils';
 
 export type Column = {
   name: string;

@@ -1,6 +1,6 @@
 import Category from '../models/Category';
-import db from '../client';
-import schema from '../schema';
+import db from '../internal/dbClient';
+import schema from '../schemaBuilder/schema';
 
 const { category } = schema;
 
@@ -9,7 +9,7 @@ export async function seed(): Promise<void> {
   await db(category.tableName).del();
   await db<Category>(category.tableName).insert([
     // Level 0
-    { id: 1, parentId: null, name: 'Root', slug: 'root', isActive: true },
+    { id: 1, parentId: undefined, name: 'Root', slug: 'root', isActive: true },
 
     // Level 1
     {

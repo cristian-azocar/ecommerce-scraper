@@ -1,16 +1,14 @@
 {
-  "private": true,
   "name": "@project/scraper",
+  "private": true,
   "version": "1.0.0",
-  "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "dev": "ts-node src/index.ts",
+    "start": "node dist/index.js",
     "build": "tsc"
   },
-  "author": "Cristian Azócar",
-  "license": "MIT",
   "dependencies": {
     "@project/database": "^1.0.0",
     "axios": "^0.21.1",

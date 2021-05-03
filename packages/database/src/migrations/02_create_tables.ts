@@ -1,5 +1,5 @@
 import { Knex } from 'knex';
-import SchemaBuilder from '../helpers/SchemaBuilder';
+import SchemaBuilder from '../schemaBuilder/SchemaBuilder';
 
 const schemaBuilder: SchemaBuilder = new SchemaBuilder();
 

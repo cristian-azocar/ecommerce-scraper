@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import { Knex } from 'knex';
-import db from '../client';
 
 export function buildOnUpdateTrigger(tableName: string): string {
   return `
@@ -25,13 +24,13 @@ export function readScript(fileName: string): string {
   return fs.readFileSync(filePath, { encoding: 'utf-8' });
 }
 
-export async function testConnection(): Promise<void> {
-  await db.raw('SELECT 1+1 AS result');
-}
-
-export function distinctFrom(tableName: string, columns: string[]): Knex.Raw {
+export function distinctFrom(
+  knex: Knex,
+  tableName: string,
+  columns: string[]
+): Knex.Raw {
   const first: string = columns.map((col) => `${tableName}.${col}`).join(',');
   const second: string = columns.map((col) => `excluded.${col}`).join(',');
 
-  return db.raw(`(${first}) is distinct from (${second})`);
+  return knex.raw(`(${first}) is distinct from (${second})`);
 }

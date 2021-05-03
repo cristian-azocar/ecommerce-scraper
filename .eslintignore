@@ -1,0 +1,6 @@
+/.git
+/.yarn
+/tmp
+build
+dist
+node_modules

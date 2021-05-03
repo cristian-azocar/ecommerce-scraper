@@ -1,6 +1,6 @@
 import Retail from '../models/Retail';
-import db from '../client';
-import schema from '../schema';
+import db from '../internal/dbClient';
+import schema from '../schemaBuilder/schema';
 
 const { retail } = schema;
 const parentSelectors: string[] = ['.BoxProductoS2', '.ProdBox146'];

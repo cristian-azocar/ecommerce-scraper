@@ -14,9 +14,7 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     'class-methods-use-this': 'off',
-    '@typescript-eslint/no-var-requires': 0,
-    'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': ['error'],
+    '@typescript-eslint/no-explicit-any': 'error',
     'lines-between-class-members': [
       'error',
       'always',
@@ -51,4 +49,12 @@ module.exports = {
       },
     },
   },
+  overrides: [
+    {
+      files: ['*.js'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
+      },
+    },
+  ],
 };

@@ -1,6 +1,6 @@
 /* eslint-disable no-await-in-loop */
 import { Knex } from 'knex';
-import schema, { Column, Table } from '../schema';
+import schema, { Column, Table } from './schema';
 
 export default class SchemaBuilder {
   async install(knex: Knex): Promise<void> {
@@ -80,7 +80,7 @@ export default class SchemaBuilder {
       column = table[type](name, precision, scale);
     } else if (type === 'timestamp' || type === 'dateTime') {
       column = table.timestamp(name, { useTz, precision });
-    } else if (type === 'enu' || type === 'enum') {
+    } else if ((type === 'enu' || type === 'enum') && enumValues) {
       column = table[type](name, enumValues);
     } else if (type === 'increments') {
       column = table.increments(name);

@@ -3,10 +3,11 @@
   "scripts": {
     "database": "yarn workspace @project/database",
     "scraper": "yarn workspace @project/scraper",
-    "dev": "yarn database dev",
+    "dev": "echo \"Running in dev mode\"",
     "build": "tsc -b",
     "db:migrate": "yarn database migrate",
     "db:seed": "yarn database seed",
+    "lint": "eslint . --cache --ext .js,.ts,.tsx --max-warnings 0",
     "postinstall": "node scripts/post-install.js"
   },
   "workspaces": [

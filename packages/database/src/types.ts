@@ -1,9 +1,15 @@
-export default interface Selectors {
-  id: string;
+export interface LookupTable {
+  id: number;
+  name: string;
+  codes?: string[];
+}
+
+export interface Selectors {
+  id?: string;
   product: string;
   sku: string;
   name: string;
-  platform: string;
+  platform?: string;
   url: string;
   imageUrl: string;
   price: string;
@@ -12,6 +18,6 @@ export default interface Selectors {
   discountPercentage: string;
   availability: string;
   arrivalDate: string;
-  condition: string;
+  condition?: string;
   nextPage: string;
 }

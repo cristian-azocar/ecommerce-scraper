@@ -1,5 +1,5 @@
 import { Knex } from 'knex';
-import { readScript } from '../helpers/dbHelpers';
+import { readScript } from '../utils/dbUtils';
 
 export async function up(knex: Knex): Promise<void> {
   await knex.raw(readScript('on_update_timestamp.sql'));

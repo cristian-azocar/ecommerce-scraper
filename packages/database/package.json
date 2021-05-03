@@ -1,19 +1,19 @@
 {
-  "private": true,
   "name": "@project/database",
+  "private": true,
   "version": "1.0.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "src/index.ts",
   "scripts": {
-    "migrate": "npx knex --knexfile=./src/knexfile.ts migrate:latest",
-    "seed": "npx knex --knexfile=./src/knexfile.ts seed:run",
-    "dev": "tsc -w",
+    "migrate": "npx knex --knexfile=./src/config/knexfile.ts migrate:latest",
+    "seed": "npx knex --knexfile=./src/config/knexfile.ts seed:run",
     "build": "tsc"
   },
   "dependencies": {
-    "dotenv": "^8.2.0",
     "knex": "^0.95.4",
     "knex-stringcase": "^1.4.5",
     "pg": "^8.5.1"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
   }
 }
