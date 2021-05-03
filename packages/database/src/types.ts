@@ -9,7 +9,7 @@ export interface Selectors {
   product: string;
   sku: string;
   name: string;
-  platform?: string;
+  category?: string;
   url: string;
   imageUrl: string;
   price: string;

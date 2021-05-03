@@ -10,10 +10,10 @@ const knexConfig: Record<string, Knex.Config> = {
       max: 10,
     },
     migrations: {
-      directory: './migrations',
+      directory: '../migrations',
     },
     seeds: {
-      directory: './seeds',
+      directory: '../seeds',
     },
     debug: appConfig.debug,
   },

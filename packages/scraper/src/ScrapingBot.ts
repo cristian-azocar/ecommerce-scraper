@@ -4,8 +4,8 @@ import { asyncForEachParallel, logger } from './utils';
 import { Scraper, ScraperFactory } from './helpers';
 import config from './config/appConfig';
 
-export default class ScraperBot {
-  async scrape(): Promise<void> {
+export default class ScrapingBot {
+  async run(): Promise<void> {
     await this.loadConfigFromDatabase();
 
     const retails = config.retails.filter((retail) => retail.isActive);

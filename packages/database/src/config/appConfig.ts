@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== 'production') {
   setupDotenv();
 }
 
-export default {
+const config: Config = {
   connection: {
     user: process.env.DB_USER || '',
     password: process.env.DB_PASSWORD || '',
@@ -24,4 +24,6 @@ export default {
     port: (process.env.DB_PORT && +process.env.DB_PORT) || 0,
   },
   debug: process.env.DB_DEBUG === 'true',
-} as Config;
+};
+
+export default config;

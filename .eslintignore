@@ -1,6 +1,7 @@
 /.git
 /.yarn
 /tmp
+.vscode
 build
 dist
 node_modules

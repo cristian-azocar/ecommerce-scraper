@@ -36,7 +36,7 @@ export async function seed(): Promise<void> {
         product: parentSelectors.join(', '),
         sku: buildSelector('$PARENT_Image > a > img'),
         name: buildSelector('$PARENT_Descripcion > a'),
-        platform: undefined,
+        category: undefined,
         url: buildSelector('$PARENT_Descripcion > a'),
         imageUrl: buildSelector('$PARENT_Image > a > img'),
         availability: buildSelector('$PARENT_Precios > $PARENT_Disponibilidad'),

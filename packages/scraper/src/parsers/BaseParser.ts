@@ -44,10 +44,16 @@ export default class BaseParser implements IParser {
   }
 
   protected extractId(el: cheerio.Cheerio): number {
-    return sanitizeNumber(el.find(this.config.selectors.id).text());
+    const { selectors } = this.config;
+
+    if (!selectors.id) {
+      throw new Error('Provide a valid ID selector or override this method');
+    }
+
+    return sanitizeNumber(el.find(selectors.id).text());
   }
 
-  protected extractSKU(el: cheerio.Cheerio): string {
+  protected extractSKU(el: cheerio.Cheerio): string | undefined {
     return el.find(this.config.selectors.sku).text().trim();
   }
 
@@ -56,7 +62,11 @@ export default class BaseParser implements IParser {
   }
 
   protected extractUrl(el: cheerio.Cheerio): string {
-    const url: string = el.find(this.config.selectors.url).attr('href');
+    const url = el.find(this.config.selectors.url).attr('href');
+
+    if (!url) {
+      throw new Error('Could not extract the URL');
+    }
 
     if (isUrlAbsolute(url)) {
       return url;
@@ -66,12 +76,25 @@ export default class BaseParser implements IParser {
   }
 
   protected extractImageUrl(el: cheerio.Cheerio): string {
-    return el.find(this.config.selectors.imageUrl).attr('src');
+    const imageUrl = el.find(this.config.selectors.imageUrl).attr('src');
+
+    if (!imageUrl) {
+      throw new Error('Could not extract the image URL');
+    }
+
+    return imageUrl;
   }
 
-  protected extractCategoryId(el: cheerio.Cheerio): number {
+  protected extractCategoryId(el: cheerio.Cheerio): number | undefined {
     const { selectors, categories } = this.config;
-    const category = this.extractByLookup(el, selectors.platform, categories);
+
+    if (!selectors.category) {
+      throw new Error(
+        'Provide a valid category selector or override this method'
+      );
+    }
+
+    const category = this.extractByLookup(el, selectors.category, categories);
 
     return category?.id;
   }
@@ -93,7 +116,7 @@ export default class BaseParser implements IParser {
     };
   }
 
-  protected extractAvailabilityId(el: cheerio.Cheerio): number {
+  protected extractAvailabilityId(el: cheerio.Cheerio): number | undefined {
     const { selectors, availabilities } = this.config;
     const availability = this.extractByLookup(
       el,
@@ -104,30 +127,40 @@ export default class BaseParser implements IParser {
     return availability?.id;
   }
 
-  protected extractArrivalDate(el: cheerio.Cheerio): Date {
+  protected extractArrivalDate(el: cheerio.Cheerio): Date | undefined {
     const arrivalDate = el.find(this.config.selectors.arrivalDate).text();
 
     return parseDate(arrivalDate, this.dateFormat);
   }
 
-  protected extractConditionId(el: cheerio.Cheerio): number {
+  protected extractConditionId(el: cheerio.Cheerio): number | undefined {
     const { selectors, conditions } = this.config;
+
+    if (!selectors.condition) {
+      throw new Error(
+        'Provide a valid condition selector or override this method'
+      );
+    }
+
     const condition = this.extractByLookup(el, selectors.condition, conditions);
 
     return condition?.id;
   }
 
-  protected extractClass(el: cheerio.Cheerio, index: number): string {
-    return el.attr('class').split(/\s+/)[index];
+  protected extractClass(
+    el: cheerio.Cheerio,
+    index: number
+  ): string | undefined {
+    return el.attr('class')?.split(/\s+/)[index];
   }
 
   private extractByLookup(
     el: cheerio.Cheerio,
     selector: string,
     lookupTables: LookupTable[]
-  ): LookupTable {
+  ): LookupTable | undefined {
     const str: string = el.find(selector).text().trim();
-    const result: LookupTable = lookupTables.find(
+    const result: LookupTable | undefined = lookupTables.find(
       (item) => item.name === str || item.codes?.includes(str)
     );
 
