@@ -11,10 +11,15 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2018,
   },
+  ecmaFeatures: {
+    jsx: true,
+  },
   rules: {
     'prettier/prettier': 'error',
     'class-methods-use-this': 'off',
     '@typescript-eslint/no-explicit-any': 'error',
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': ['error'],
     'lines-between-class-members': [
       'error',
       'always',
@@ -32,7 +37,9 @@ module.exports = {
     ],
     'import/no-extraneous-dependencies': [
       'error',
-      { devDependencies: ['**/*.test.ts'] },
+      {
+        devDependencies: ['**/*.test.ts', 'packages/**/*.stories.*'],
+      },
     ],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
   },

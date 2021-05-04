@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "database": "yarn workspace @project/database",
+    "ui": "yarn workspace @project/ui",
     "scraper": "yarn workspace @project/scraper",
     "dev": "echo \"Running in dev mode\"",
     "build": "tsc -b",

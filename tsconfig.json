@@ -10,13 +10,14 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "composite": true,
-    "strict": true,
+    "strict": true
   },
   "files": [],
   "include": [],
   "exclude": ["**/node_modules"],
   "references": [
     { "path": "packages/database" },
+    { "path": "packages/ui" },
     { "path": "packages/scraper" }
   ]
 }
