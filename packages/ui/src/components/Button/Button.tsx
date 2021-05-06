@@ -1,12 +1,24 @@
-import React, { MouseEventHandler, ReactNode } from 'react';
+import { MouseEventHandler, ReactNode } from 'react';
 
 export interface ButtonProps {
   children?: ReactNode;
+  className?: string;
+  disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  type: 'button' | 'reset' | 'submit';
 }
 
 export default function Button(props: ButtonProps): JSX.Element {
-  const { children, onClick } = props;
+  const { children, className, disabled, onClick, type } = props;
 
-  return <button onClick={onClick}>{children}</button>;
+  return (
+    <button
+      className={className}
+      disabled={disabled}
+      onClick={onClick}
+      type={type}
+    >
+      {children}
+    </button>
+  );
 }
