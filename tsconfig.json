@@ -3,11 +3,12 @@
     "baseUrl": ".",
     "target": "es5",
     "module": "esnext",
-    "lib": ["dom", "esnext"],
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "removeComments": true,
-    "moduleResolution": "node",
     "sourceMap": true,
     "composite": true,
     "strict": true,
@@ -15,5 +16,5 @@
     "allowJs": true,
     "esModuleInterop": true
   },
-  "exclude": ["**/.*/", "**/node_modules"],
+  "exclude": ["**/.*/", "**/node_modules", "./scripts/**"],
 }

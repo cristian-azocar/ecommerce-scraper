@@ -3,9 +3,10 @@
   "scripts": {
     "database": "yarn workspace @project/database",
     "ui": "yarn workspace @project/ui",
+    "utils": "yarn workspace @project/utils",
     "scraper": "yarn workspace @project/scraper",
     "dev": "echo \"Running in dev mode\"",
-    "build": "tsc -b",
+    "build": "tsc --build tsconfig.json",
     "db:migrate": "yarn database migrate",
     "db:seed": "yarn database seed",
     "lint": "eslint . --cache --ext .js,.ts,.tsx --max-warnings 0",

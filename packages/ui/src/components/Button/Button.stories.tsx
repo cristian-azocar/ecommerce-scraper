@@ -10,18 +10,18 @@ const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  children: 'Default Button',
+  children: 'Default',
 };
 
 export const Primary = Template.bind({});
 Primary.args = {
-  children: 'Primary Button',
+  children: 'Primary',
   color: 'primary',
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  children: 'Secondary Button',
+  children: 'Secondary',
   color: 'secondary',
 };
 
