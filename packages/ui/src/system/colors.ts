@@ -8,6 +8,7 @@ export interface Colors {
   warning: string;
   info: string;
   success: string;
+  danger: string;
   gray: {
     50: string;
     200: string;
@@ -26,12 +27,13 @@ const colors: Colors = {
   background: '#fff',
   black: '#000',
   white: '#fff',
-  primary: '#3f51b5',
+  primary: '#3182ce',
   secondary: '#f50057',
   error: '#f44336',
   warning: '#ff9800',
   info: '#2196f3',
   success: '#4caf50',
+  danger: '#f14668',
   gray: {
     50: '#f7Fafc',
     200: '#e2e8f0',
@@ -40,7 +42,7 @@ const colors: Colors = {
     900: '#171923',
   },
   text: {
-    primary: '#2d3748',
+    primary: '#4a4a4a',
     secondary: '#e2e8f0',
     disabled: 'rgba(0, 0, 0, 0.38)',
   },

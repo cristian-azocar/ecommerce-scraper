@@ -1,9 +1,9 @@
 export interface Shape {
-  borderRadius: number;
+  borderRadius: string;
 }
 
 const shape: Shape = {
-  borderRadius: 4,
+  borderRadius: '6px',
 };
 
 export default shape;

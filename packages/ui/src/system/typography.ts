@@ -51,7 +51,7 @@ const fontWeights: Typography['fontWeights'] = {
 };
 
 const typography: Typography = {
-  fontFamily: '"Arial", sans-serif',
+  fontFamily: '"Inter", sans-serif',
   fontSize: '16px',
   fontWeights,
   h1: createVariant('6rem', fontWeights.light, 1.167, '-0.01562em'),
@@ -60,9 +60,9 @@ const typography: Typography = {
   h4: createVariant('2.125rem', fontWeights.regular, 1.235, '0.00735em'),
   h5: createVariant('1.5rem', fontWeights.regular, 1.334, '0em'),
   h6: createVariant('1.25rem', fontWeights.medium, 1.6, '0.0075em'),
-  body1: createVariant('1rem', fontWeights.regular, 1.5, '0.00938em'),
+  body1: createVariant('1rem', fontWeights.regular, 1.5, 'normal'),
   body2: createVariant('0.875rem', fontWeights.regular, 1.43, '0.01071em'),
-  button: createVariant('0.875rem', fontWeights.medium, 1.75, '0.02857em'),
+  button: createVariant('1rem', fontWeights.semibold, 1.2, 'normal'),
 };
 
 export default typography;

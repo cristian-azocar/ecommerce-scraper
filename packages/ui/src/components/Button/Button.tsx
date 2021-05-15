@@ -2,11 +2,12 @@ import { forwardRef, MouseEventHandler, ReactNode, Ref } from 'react';
 import styled from 'styled-components';
 import { darken } from 'polished';
 import theme from '../../system/theme';
+import { Colors } from '../../system';
 
 export interface ButtonProps {
   children?: ReactNode;
   className?: string;
-  color?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info';
+  color?: keyof Colors;
   disabled?: boolean;
   fullWidth?: boolean;
   href?: string;
@@ -17,7 +18,7 @@ export interface ButtonProps {
   variant?: 'solid' | 'outlined' | 'text';
 }
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<ButtonProps>`
   display: inline-flex;
   appearance: none;
   align-items: center;
@@ -27,22 +28,24 @@ const StyledButton = styled.button`
   position: relative;
   white-space: nowrap;
   vertical-align: middle;
-  outline: none;
   width: auto;
-  line-height: 1.2;
-  padding: 0px;
-  box-sizing: border-box;
-  border-width: 0px;
-  cursor: pointer;
-  background: ${theme.colors.primary};
+  line-height: ${theme.typography.button.lineHeight};
+  font-size: ${theme.typography.button.fontSize};
+  font-weight: ${theme.typography.button.fontWeight};
+  letter-spacing: ${theme.typography.button.letterSpacing};
+  background: ${(props) => theme.colors[props.color || 'primary']};
   color: ${theme.colors.white};
-  border-radius: ${theme.shape.borderRadius}px;
+  border-radius: ${theme.shape.borderRadius};
   padding-inline-start: ${theme.spacing(4)};
   padding-inline-end: ${theme.spacing(4)};
-  height: ${theme.spacing(8)};
+  height: ${theme.spacing(10)};
 
   &:hover {
     background: ${darken(0.2, theme.colors.primary)};
+  }
+
+  &:focus {
+    box-shadow: ${theme.shadow.outline};
   }
 `;
 
