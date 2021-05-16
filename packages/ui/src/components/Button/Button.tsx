@@ -1,5 +1,5 @@
 import { forwardRef, MouseEventHandler, ReactNode, Ref } from 'react';
-import styled from 'styled-components';
+import { styled } from '@linaria/react';
 import { darken } from 'polished';
 import theme from '../../system/theme';
 import { Colors } from '../../system';
@@ -33,7 +33,8 @@ const StyledButton = styled.button<ButtonProps>`
   font-size: ${theme.typography.button.fontSize};
   font-weight: ${theme.typography.button.fontWeight};
   letter-spacing: ${theme.typography.button.letterSpacing};
-  background: ${(props) => theme.colors[props.color || 'primary']};
+  background: ${theme.colors.primary};
+  /* background: ${(props) => theme.colors[props.color || 'primary']}; */
   color: ${theme.colors.white};
   border-radius: ${theme.shape.borderRadius};
   padding-inline-start: ${theme.spacing(4)};
@@ -50,29 +51,11 @@ const StyledButton = styled.button<ButtonProps>`
 `;
 
 function Button(props: ButtonProps, ref: Ref<HTMLButtonElement>): JSX.Element {
-  const {
-    children,
-    className,
-    color = 'primary',
-    disabled = false,
-    fullWidth = false,
-    href,
-    loading = false,
-    onClick,
-    size = 'medium',
-    type = 'button',
-    variant = 'solid',
-  } = props;
+  const { children, href } = props;
+  const as = href ? 'a' : 'button';
 
   return (
-    <StyledButton
-      // as={href ? 'a' : 'button'}
-      className={className}
-      disabled={disabled}
-      onClick={onClick}
-      type={type}
-      ref={ref}
-    >
+    <StyledButton as={as} ref={ref} {...props}>
       {children}
     </StyledButton>
   );

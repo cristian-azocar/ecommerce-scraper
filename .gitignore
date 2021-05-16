@@ -1,5 +1,6 @@
 .DS_Store
 .env
+.linaria-cache
 *.log
 *.tsbuildinfo
 /.eslintcache
