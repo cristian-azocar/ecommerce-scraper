@@ -1,0 +1,99 @@
+@use 'sass:map';
+@use '../../sass/abstracts/functions' as *;
+
+$colors: (
+  'primary': var(--color-primary),
+  'secondary': var(--color-secondary),
+  'warning': var(--color-warning),
+  'info': var(--color-info),
+  'success': var(--color-success),
+  'danger': var(--color-danger)
+);
+
+$sizes: (
+  'small': (
+    'height': var(--size-sm),
+    'padding': 0px var(--space-md)
+  ),
+  'medium': (
+    'height': var(--size-md),
+    'padding': 0px var(--space-md)
+  ),
+  'large': (
+    'height': var(--size-lg),
+    'padding': 0px var(--space-lg)
+  )
+);
+
+.btn {
+  display: inline-flex;
+  appearance: none;
+  align-items: center;
+  justify-content: center;
+  transition: all 250ms ease 0s;
+  user-select: none;
+  position: relative;
+  white-space: nowrap;
+  vertical-align: middle;
+  width: auto;
+  height: map.get($sizes, 'medium', 'height');
+  padding: map.get($sizes, 'medium', 'padding');
+  line-height: 1.2;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--border-radius);
+  color: var(--color-text-primary);
+
+  &:not(:disabled):hover {
+    background-color: var(--color-gray-100);
+  }
+
+  &:focus {
+    box-shadow: var(--shadow-outline);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  &-fullWidth {
+    width: 100%;
+  }
+}
+
+@each $name, $value in $colors {
+  .btn-#{$name} {
+    border-color: $value;
+    color: $value;
+
+    &.btn-solid {
+      background-color: $value;
+      color: var(--color-white);
+      border-color: transparent;
+
+      &:not(:disabled):hover {
+        background: background-darken($value, 0.2);
+      }
+    }
+
+    &.btn-outlined {
+      &:not(:disabled):hover {
+        background: $value;
+        color: var(--color-white);
+      }
+    }
+
+    &.btn-text {
+      border-color: transparent;
+    }
+  }
+}
+
+@each $name, $value in $sizes {
+  .btn-#{$name} {
+    height: map.get($value, 'height');
+    padding: map.get($value, 'padding');
+  }
+}

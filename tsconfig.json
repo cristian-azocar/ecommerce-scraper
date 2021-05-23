@@ -6,6 +6,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "moduleResolution": "node",
     "jsx": "react-jsx",
+    "outDir": "dist",
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "removeComments": true,
@@ -16,5 +17,5 @@
     "allowJs": true,
     "esModuleInterop": true
   },
-  "exclude": ["**/.*/", "**/node_modules", "./scripts/**"],
+  "exclude": ["**/.*/", "**/node_modules", "scripts/**", "**/dist"],
 }

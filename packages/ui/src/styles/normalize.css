@@ -1,7 +1,3 @@
-import { css } from 'styled-components';
-
-// prettier-ignore
-const normalize = css`
 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
@@ -148,6 +144,3 @@ template {
 [hidden] {
   display: none;
 }
-`;
-
-export default normalize;

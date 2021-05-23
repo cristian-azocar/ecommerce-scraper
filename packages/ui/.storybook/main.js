@@ -1,37 +1,18 @@
+const path = require('path');
+
 module.exports = {
   stories: ['../src/**/*.stories.tsx'],
   addons: [
     '@storybook/addon-essentials',
   ],
+  core: {
+    builder: 'webpack5',
+  },
   webpackFinal: (config) => {
     config.module.rules.push({
-      // test: /\.(js|ts|tsx)$/,
-      test: /\.tsx?$/,
-      exclude: /node_modules/,
-      use: [
-        {
-          loader: '@linaria/webpack-loader',
-          options: {
-            sourceMap: process.env.NODE_ENV !== 'production',
-            // ignore: /node_modules\/(?!@project)/,
-            // rules: [
-            //   {
-            //     test: /node_modules\/(?!@project)/,
-            //     action: 'ignore',
-            //   },
-            // ],
-            babelOptions: {
-              // rootMode: 'upward',
-              presets: [
-                // '@babel/preset-env',
-                '@babel/preset-typescript',
-                '@babel/preset-react',
-                '@linaria'
-              ]
-            }
-          },
-        }
-      ],
+      test: /\.scss$/,
+      use: ['style-loader', 'css-loader', 'sass-loader'],
+      include: path.resolve(__dirname, '../'),
     });
 
     return config;
