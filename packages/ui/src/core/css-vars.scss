@@ -1,19 +1,31 @@
 :root {
   /* Typography */
   --font-family: "Inter", sans-serif;
-  --font-size-sm: 12px;
-  --font-size-md: 16px;
-  --font-size-large: 20px;
-  --font-line-height: 1.5;
-  /* Font weights */
+  --font-size-base: 1rem;
+
+  --h1-font-size: 2.5rem;
+  --h2-font-size: 2rem;
+  --h3-font-size: 1.75rem;
+  --h4-font-size: 1.5rem;
+  --h5-font-size: 1.25rem;
+  --h6-font-size: 1rem;
+
+  --line-height-short: 1.25;
+  --line-height-base: 1.5;
+  --line-height-tall: 2;
+
   --font-weight-thin: 100;
   --font-weight-light: 300;
-  --font-weight-regular: 400;
+  --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
   --font-weight-extrabold: 800;
   --font-weight-black: 900;
+
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
 
   /* Colors */
   --color-background: #fff;
@@ -33,7 +45,6 @@
   --color-gray-500: #718096;
   --color-gray-700: #2d3748;
   --color-gray-900: #171923;
-  --color-whiteAlpha-200: rgba(255, 255, 255, 0.08);
   --color-text-primary: #4a4a4a;
 
   /* Shapes */

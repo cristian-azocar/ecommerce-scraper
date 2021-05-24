@@ -29,12 +29,16 @@ function Button(props: ButtonProps, ref: Ref<HTMLButtonElement>): JSX.Element {
     variant,
     ...rest
   } = props;
-  const classes: string = clsx(className, 'btn', {
-    [`btn-${color}`]: !!color,
-    [`btn-${size}`]: !!size,
-    [`btn-${variant}`]: !!variant,
-    'btn-fullWidth': fullWidth,
-  });
+  const classes: string = clsx(
+    'button',
+    {
+      [`button-${color}`]: !!color,
+      [`button-${size}`]: !!size,
+      [`button-${variant}`]: !!variant,
+      'button-fullWidth': fullWidth,
+    },
+    className
+  );
 
   return (
     <Component

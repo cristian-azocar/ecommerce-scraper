@@ -47,7 +47,7 @@ export const Sizes = (): JSX.Element => (
 
 export const Variants = (): JSX.Element => (
   <>
-    <p>Solid</p>
+    <h6>Solid</h6>
     <Button variant="solid" color="primary">
       Primary
     </Button>
@@ -67,7 +67,7 @@ export const Variants = (): JSX.Element => (
       Danger
     </Button>
 
-    <p>Outlined</p>
+    <h6>Outlined</h6>
     <Button variant="outlined" color="primary">
       Primary
     </Button>
@@ -87,7 +87,7 @@ export const Variants = (): JSX.Element => (
       Danger
     </Button>
 
-    <p>Text</p>
+    <h6>Text</h6>
     <Button variant="text" color="primary">
       Primary
     </Button>

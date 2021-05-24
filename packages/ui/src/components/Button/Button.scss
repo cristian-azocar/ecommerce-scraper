@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../../sass/abstracts/functions' as *;
+@use '../../scss/abstracts/functions' as *;
 
 $colors: (
   'primary': var(--color-primary),
@@ -25,12 +25,12 @@ $sizes: (
   )
 );
 
-.btn {
+.button {
   display: inline-flex;
   appearance: none;
   align-items: center;
   justify-content: center;
-  transition: all 250ms ease 0s;
+  transition: background-color 250ms ease 0s;
   user-select: none;
   position: relative;
   white-space: nowrap;
@@ -64,35 +64,35 @@ $sizes: (
 }
 
 @each $name, $value in $colors {
-  .btn-#{$name} {
+  .button-#{$name} {
     border-color: $value;
     color: $value;
 
-    &.btn-solid {
+    &.button-solid {
       background-color: $value;
       color: var(--color-white);
       border-color: transparent;
 
       &:not(:disabled):hover {
-        background: background-darken($value, 0.2);
+        background: darken-background($value, 0.2);
       }
     }
 
-    &.btn-outlined {
+    &.button-outlined {
       &:not(:disabled):hover {
         background: $value;
         color: var(--color-white);
       }
     }
 
-    &.btn-text {
+    &.button-text {
       border-color: transparent;
     }
   }
 }
 
 @each $name, $value in $sizes {
-  .btn-#{$name} {
+  .button-#{$name} {
     height: map.get($value, 'height');
     padding: map.get($value, 'padding');
   }

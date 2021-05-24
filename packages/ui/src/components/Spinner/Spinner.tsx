@@ -6,7 +6,7 @@ export type SpinnerProps = React.ComponentPropsWithRef<'div'>;
 
 function Spinner(props: SpinnerProps, ref: Ref<HTMLDivElement>): JSX.Element {
   const { className, ...rest } = props;
-  const classes: string = clsx(className, 'spinner');
+  const classes: string = clsx('spinner', className);
 
   return <div className={classes} ref={ref} {...rest} />;
 }
