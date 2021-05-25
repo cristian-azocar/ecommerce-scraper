@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../../scss/abstracts/functions' as *;
+@use '../../scss/abstracts/mixins' as *;
 
 $colors: (
   'primary': var(--color-primary),
@@ -30,7 +30,8 @@ $sizes: (
   appearance: none;
   align-items: center;
   justify-content: center;
-  transition: background-color 250ms ease 0s;
+  transition: all 250ms ease;
+  transition-property: background-color, box-shadow;
   user-select: none;
   position: relative;
   white-space: nowrap;
@@ -38,14 +39,13 @@ $sizes: (
   width: auto;
   height: map.get($sizes, 'medium', 'height');
   padding: map.get($sizes, 'medium', 'padding');
-  line-height: 1.2;
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
-  border: 1px solid var(--color-gray-300);
   border-radius: var(--border-radius);
   color: var(--color-text-primary);
+  border: 1px solid var(--color-gray-300);
 
-  &:not(:disabled):hover {
+  @include hover {
     background-color: var(--color-gray-100);
   }
 
@@ -63,34 +63,46 @@ $sizes: (
   }
 }
 
+/* Variants with no color */
+.button-solid {
+  background-color: var(--color-gray-300);
+  border-color: transparent;
+
+  @include hover {
+    background-color: var(--color-gray-400);
+  }
+}
+
+.button-text {
+  border-color: transparent;
+}
+
+/* Variants with color */
 @each $name, $value in $colors {
   .button-#{$name} {
-    border-color: $value;
     color: $value;
 
     &.button-solid {
       background-color: $value;
       color: var(--color-white);
-      border-color: transparent;
 
-      &:not(:disabled):hover {
-        background: darken-background($value, 0.2);
+      @include hover {
+        background-color: var(--color-#{$name}-dark);
       }
     }
 
     &.button-outlined {
-      &:not(:disabled):hover {
+      border-color: $value;
+
+      @include hover {
         background: $value;
         color: var(--color-white);
       }
     }
-
-    &.button-text {
-      border-color: transparent;
-    }
   }
 }
 
+/* Sizes */
 @each $name, $value in $sizes {
   .button-#{$name} {
     height: map.get($value, 'height');

@@ -8,7 +8,9 @@ export interface ButtonProps extends React.ComponentPropsWithRef<'button'> {
   color?: 'primary' | 'secondary' | 'warning' | 'info' | 'success' | 'danger';
   fullWidth?: boolean;
   href?: string;
+  leftIcon?: React.ReactNode;
   loading?: boolean;
+  rightIcon?: React.ReactNode;
   size?: 'small' | 'medium' | 'large';
   type?: 'button' | 'reset' | 'submit';
   variant?: 'solid' | 'outlined' | 'text';
@@ -20,25 +22,29 @@ function Button(props: ButtonProps, ref: Ref<HTMLButtonElement>): JSX.Element {
     as: Component = href ? 'a' : 'button',
     children,
     className,
-    fullWidth,
-    disabled,
-    loading,
-    type = 'button',
     color,
+    disabled,
+    fullWidth,
+    leftIcon,
+    loading,
+    rightIcon,
     size,
-    variant,
+    type = 'button',
+    variant = 'outlined',
     ...rest
   } = props;
   const classes: string = clsx(
     'button',
+    `button-${variant}`,
     {
       [`button-${color}`]: !!color,
       [`button-${size}`]: !!size,
-      [`button-${variant}`]: !!variant,
       'button-fullWidth': fullWidth,
     },
     className
   );
+
+  // TODO: add anchor props
 
   return (
     <Component
@@ -49,8 +55,10 @@ function Button(props: ButtonProps, ref: Ref<HTMLButtonElement>): JSX.Element {
       aria-busy={loading}
       {...rest}
     >
+      {leftIcon && !loading && <span className="mr-2">{leftIcon}</span>}
       {loading && <Spinner className="absolute" />}
       {loading ? <span className="opacity-0">{children}</span> : children}
+      {rightIcon && !loading && <span className="ml-2">{rightIcon}</span>}
     </Component>
   );
 }

@@ -18,7 +18,7 @@ module.exports = {
     return config;
   },
   typescript: {
-    check: true,
+    check: false,
     checkOptions: {},
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {

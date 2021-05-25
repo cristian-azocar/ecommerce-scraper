@@ -4,6 +4,29 @@ import Button, { ButtonProps } from './Button';
 export default {
   title: 'Button',
   component: Button,
+  argTypes: {
+    color: {
+      options: [
+        undefined,
+        'primary',
+        'secondary',
+        'warning',
+        'info',
+        'success',
+        'danger',
+      ],
+      control: { type: 'select' },
+    },
+    size: {
+      options: [undefined, 'small', 'medium', 'large'],
+      control: { type: 'select' },
+    },
+    variant: {
+      options: [undefined, 'solid', 'outlined', 'text'],
+      control: { type: 'select' },
+    },
+    onClick: { action: 'clicked' },
+  },
 } as Meta;
 
 const Template: Story<ButtonProps> = (args) => <Button {...args} />;
@@ -13,130 +36,52 @@ Default.args = {
   children: 'Default',
 };
 
-export const Colors = (): JSX.Element => (
-  <>
-    <Button>Default</Button>
-    <Button color="primary" variant="solid">
-      Primary
-    </Button>
-    <Button color="secondary" variant="solid">
-      Secondary
-    </Button>
-    <Button color="info" variant="solid">
-      Info
-    </Button>
-    <Button color="success" variant="solid">
-      Success
-    </Button>
-    <Button color="warning" variant="solid">
-      Warning
-    </Button>
-    <Button color="danger" variant="solid">
-      Danger
-    </Button>
-  </>
-);
+export const Color = Template.bind({});
+Color.args = {
+  children: 'Color',
+  color: 'primary',
+};
 
-export const Sizes = (): JSX.Element => (
-  <>
-    <Button size="small">Small</Button>
-    <Button size="medium">Medium</Button>
-    <Button size="large">Large</Button>
-  </>
-);
+export const Size = Template.bind({});
+Size.args = {
+  children: 'Medium',
+  size: 'medium',
+};
 
-export const Variants = (): JSX.Element => (
-  <>
-    <h6>Solid</h6>
-    <Button variant="solid" color="primary">
-      Primary
-    </Button>
-    <Button variant="solid" color="secondary">
-      Secondary
-    </Button>
-    <Button variant="solid" color="warning">
-      Warning
-    </Button>
-    <Button variant="solid" color="info">
-      Info
-    </Button>
-    <Button variant="solid" color="success">
-      Success
-    </Button>
-    <Button variant="solid" color="danger">
-      Danger
-    </Button>
+export const Variant = Template.bind({});
+Variant.args = {
+  children: 'Variant',
+  variant: 'solid',
+  color: 'primary',
+};
 
-    <h6>Outlined</h6>
-    <Button variant="outlined" color="primary">
-      Primary
-    </Button>
-    <Button variant="outlined" color="secondary">
-      Secondary
-    </Button>
-    <Button variant="outlined" color="warning">
-      Warning
-    </Button>
-    <Button variant="outlined" color="info">
-      Info
-    </Button>
-    <Button variant="outlined" color="success">
-      Success
-    </Button>
-    <Button variant="outlined" color="danger">
-      Danger
-    </Button>
+export const FullWidth = Template.bind({});
+FullWidth.args = {
+  children: 'Full width',
+  fullWidth: true,
+};
 
-    <h6>Text</h6>
-    <Button variant="text" color="primary">
-      Primary
-    </Button>
-    <Button variant="text" color="secondary">
-      Secondary
-    </Button>
-    <Button variant="text" color="warning">
-      Warning
-    </Button>
-    <Button variant="text" color="info">
-      Info
-    </Button>
-    <Button variant="text" color="success">
-      Success
-    </Button>
-    <Button variant="text" color="danger">
-      Danger
-    </Button>
-  </>
-);
+export const Disabled = Template.bind({});
+Disabled.args = {
+  children: 'Disabled',
+  disabled: true,
+};
 
-export const States = (): JSX.Element => (
-  <>
-    <p>Disabled</p>
-    <Button disabled>Disabled</Button>
-
-    <p>Loading</p>
-    <Button loading color="primary" variant="solid">
-      Loading
-    </Button>
-  </>
-);
-
-export const Displays = (): JSX.Element => (
-  <div style={{ width: 300 }}>
-    <Button fullWidth size="small">
-      Small
-    </Button>
-    <Button fullWidth size="medium">
-      Medium
-    </Button>
-    <Button fullWidth size="large">
-      Large
-    </Button>
-  </div>
-);
+export const Loading = Template.bind({});
+Loading.args = {
+  children: 'Loading',
+  loading: true,
+};
 
 export const Link = Template.bind({});
 Link.args = {
   children: 'Link',
   href: 'https://www.google.cl',
+};
+
+export const WithIcon = Template.bind({});
+WithIcon.args = {
+  children: 'Icon',
+  leftIcon: '👉',
+  rightIcon: '👈',
 };
