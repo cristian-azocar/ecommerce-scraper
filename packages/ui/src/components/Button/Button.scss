@@ -12,15 +12,18 @@ $colors: (
 $sizes: (
   'small': (
     'height': var(--size-sm),
-    'padding': 0px var(--space-md)
+    'padding': 0px var(--space-sm),
+    'font-size': var(--font-size-sm)
   ),
   'medium': (
     'height': var(--size-md),
-    'padding': 0px var(--space-md)
+    'padding': 0px var(--space-md),
+    'font-size': var(--font-size-md)
   ),
   'large': (
     'height': var(--size-lg),
-    'padding': 0px var(--space-lg)
+    'padding': 0px var(--space-lg),
+    'font-size': var(--font-size-lg)
   )
 );
 
@@ -106,6 +109,7 @@ $sizes: (
   .button-#{$name} {
     height: map.get($value, 'height');
     padding: map.get($value, 'padding');
+    font-size: map.get($value, 'font-size');
   }
 }
 
@@ -114,8 +118,8 @@ $sizes: (
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1rem;
-  height: 1rem;
+  width: 1em;
+  height: 1em;
 
   &:first-child {
     margin-right: 0.5rem;
