@@ -1,13 +1,11 @@
-import db from '../client';
-import schema from '../schema';
+import db from '../internal/dbClient';
+import schema from '../schemaBuilder/schema';
 import Condition from '../models/Condition';
 
 const { condition } = schema;
 
-class ConditionService {
+export default class ConditionService {
   async findAll(): Promise<Condition[]> {
     return db.select().from(condition.tableName);
   }
 }
-
-export default new ConditionService();

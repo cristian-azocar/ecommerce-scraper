@@ -1,13 +1,11 @@
-import db from '../client';
-import schema from '../schema';
+import db from '../internal/dbClient';
+import schema from '../schemaBuilder/schema';
 import Category from '../models/Category';
 
 const { category } = schema;
 
-class CategoryService {
+export default class CategoryService {
   async findAll(): Promise<Category[]> {
     return db.select().from(category.tableName);
   }
 }
-
-export default new CategoryService();

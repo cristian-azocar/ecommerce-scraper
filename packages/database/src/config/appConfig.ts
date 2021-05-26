@@ -1,19 +1,29 @@
-import path from 'path';
-import dotenv from 'dotenv';
-import Config from '../types/Config';
+import setupDotenv from './setupDotenv';
 
-// TODO: Maybe pass the config to this library instead of reading it directly from the env vars?
-dotenv.config({ path: path.resolve(__dirname, '../../../../.env') });
+interface Config {
+  connection: {
+    user: string;
+    password: string;
+    host: string;
+    port: number;
+    database: string;
+  };
+  debug: boolean;
+}
+
+if (process.env.NODE_ENV !== 'production') {
+  setupDotenv();
+}
 
 const config: Config = {
   connection: {
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
-    port: +process.env.DB_PORT,
+    user: process.env.DB_USER || '',
+    password: process.env.DB_PASSWORD || '',
+    database: process.env.DB_NAME || '',
+    host: process.env.DB_HOST || '',
+    port: (process.env.DB_PORT && +process.env.DB_PORT) || 0,
   },
-  debug: Boolean(process.env.DB_DEBUG),
+  debug: process.env.DB_DEBUG === 'true',
 };
 
 export default config;

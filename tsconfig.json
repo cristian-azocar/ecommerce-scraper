@@ -1,23 +1,21 @@
 {
-  "files": [],
-  "include": [],
-  "exclude": ["**/node_modules"],
   "compilerOptions": {
     "baseUrl": ".",
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "target": "es2018",
-    "forceConsistentCasingInFileNames": true,
-    "preserveWatchOutput": true,
-    "removeComments": true,
-    "noImplicitAny": true,
+    "target": "es5",
+    "module": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "removeComments": true,
     "sourceMap": true,
-    "composite": true
+    "composite": true,
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "esModuleInterop": true
   },
-  "references": [
-    { "path": "packages/database" },
-    { "path": "packages/scraper" }
-  ]
+  "exclude": ["**/.*/", "**/node_modules", "scripts/**", "**/dist"],
 }

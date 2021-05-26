@@ -12,13 +12,13 @@ services:
     volumes:
       - ~/postgresql/data:/var/lib/postgresql/data
 
-  api:
-    depends_on:
-      - database
-    build: ./
-    ports:
-      - 3001:3001
-    volumes:
-      - ./:/usr/src/app
-    environment:
-      DB_HOST: database
+  # scraper:
+  #   depends_on:
+  #     - database
+  #   build: ./
+  #   ports:
+  #     - 3001:3001
+  #   volumes:
+  #     - ./:/usr/src/app
+  #   environment:
+  #     DB_HOST: database

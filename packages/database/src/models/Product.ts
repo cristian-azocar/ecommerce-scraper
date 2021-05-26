@@ -4,7 +4,7 @@ export default interface Product {
   id: number;
   retailId: number;
   categoryId?: number;
-  sku: string;
+  sku?: string;
   name: string;
   slug: string;
   attributes?: Attribute[];
@@ -15,9 +15,9 @@ export default interface Product {
   listPrice: number;
   discount: number;
   discountPercentage: number;
-  availabilityId: number;
-  arrivalDate: Date;
-  conditionId: number;
+  availabilityId?: number;
+  arrivalDate?: Date;
+  conditionId?: number;
   createdAt?: Date;
   updatedAt?: Date;
 }

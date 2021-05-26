@@ -1,37 +1,53 @@
 # Video game scraper
 
-## Install
+## Prerequisites
 
-1. Create a file called `.env` at the root of the project and paste the content of the `.env.example` file on it.
+Make sure you have installed all of the following prerequisites on your machine:
+* Git
+* Node.js
+* Docker
+* Yarn - install Yarn globally using npm:
 
-2. Install Yarn
-```
+```bash
 npm install --global yarn
 ```
 
-3. Install the packages
+## Install
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/cristian-azocar/ecommerce-scraper.git
 ```
+
+2. Install the dependencies
+
+```bash
+cd ecommerce-scraper
 yarn install
 ```
 
-4. Build the project
-```
+3. Build the project
+
+```bash
 yarn build
 ```
 
-5. Run Docker
-```
-docker-compose up
+4. Build and start the Docker container
+
+```bash
+docker-compose up --build
 ```
 
-6. Create and populate the database
-```
+5. Create and populate the database
+
+```bash
 yarn database migrate
 yarn database seed
 ```
 
 ## Run
 
-```
+```bash
 docker-compose up
 ```

@@ -20,7 +20,7 @@ export default class ScraperFactory {
     switch (slug) {
       case 'zmart':
         return new Scraper({
-          url: undefined,
+          url: '',
           parser: new ZmartParser(scraperConfig),
           httpMethod,
           pagination,

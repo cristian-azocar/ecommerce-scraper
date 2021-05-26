@@ -1,6 +1,8 @@
-**/node_modules
-**/dist
-**/lib
-**/tsconfig.tsbuildinfo
-**/.DS_Store
+.DS_Store
 .env
+*.log
+*.tsbuildinfo
+/.eslintcache
+dist
+node_modules
+package-lock.json

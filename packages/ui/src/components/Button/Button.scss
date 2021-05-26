@@ -1,0 +1,131 @@
+@use 'sass:map';
+@use '../../scss/abstracts/mixins' as *;
+
+$colors: (
+  'primary': var(--color-primary),
+  'secondary': var(--color-secondary),
+  'warning': var(--color-warning),
+  'info': var(--color-info),
+  'success': var(--color-success),
+  'danger': var(--color-danger)
+);
+$sizes: (
+  'small': (
+    'height': var(--size-sm),
+    'padding': 0px var(--space-sm),
+    'font-size': var(--font-size-sm)
+  ),
+  'medium': (
+    'height': var(--size-md),
+    'padding': 0px var(--space-md),
+    'font-size': var(--font-size-md)
+  ),
+  'large': (
+    'height': var(--size-lg),
+    'padding': 0px var(--space-lg),
+    'font-size': var(--font-size-lg)
+  )
+);
+
+.button {
+  display: inline-flex;
+  appearance: none;
+  align-items: center;
+  justify-content: center;
+  transition: 250ms ease;
+  transition-property: color, background-color, box-shadow;
+  user-select: none;
+  position: relative;
+  white-space: nowrap;
+  vertical-align: middle;
+  width: auto;
+  height: map.get($sizes, 'medium', 'height');
+  padding: map.get($sizes, 'medium', 'padding');
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--border-radius);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-gray-300);
+
+  @include hover {
+    background-color: var(--color-gray-200);
+  }
+
+  &:focus {
+    box-shadow: var(--shadow-outline);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  &-full-width {
+    width: 100%;
+  }
+}
+
+/* Variants with no color */
+.button-solid {
+  background-color: var(--color-gray-300);
+  border-color: transparent;
+
+  @include hover {
+    background-color: var(--color-gray-400);
+  }
+}
+
+.button-text {
+  border-color: transparent;
+}
+
+/* Variants with color */
+@each $name, $value in $colors {
+  .button-#{$name} {
+    color: $value;
+
+    &.button-solid {
+      background-color: $value;
+      color: var(--color-white);
+
+      @include hover {
+        background-color: var(--color-#{$name}-dark);
+      }
+    }
+
+    &.button-outlined {
+      border-color: $value;
+
+      @include hover {
+        background: $value;
+        color: var(--color-white);
+      }
+    }
+  }
+}
+
+/* Sizes */
+@each $name, $value in $sizes {
+  .button-#{$name} {
+    height: map.get($value, 'height');
+    padding: map.get($value, 'padding');
+    font-size: map.get($value, 'font-size');
+  }
+}
+
+/* Icons */
+.button-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+
+  &:first-child {
+    margin-right: 0.5rem;
+  }
+
+  &:last-child {
+    margin-left: 0.5rem;
+  }
+}

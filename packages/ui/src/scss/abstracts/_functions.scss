@@ -1,0 +1,5 @@
+@function darken-background($color, $opacity) {
+  @return unquote(
+    'linear-gradient(to top, rgba(0, 0, 0, #{$opacity}), rgba(0, 0, 0, #{$opacity})) #{$color}'
+  );
+}
