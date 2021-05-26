@@ -1,5 +1,16 @@
+@use 'sass:map';
+@use './variables' as *;
+
 @mixin hover {
   &:not(:disabled):hover {
+    @content;
+  }
+}
+
+@mixin breakpoint($breakpoint) {
+  $value: map.get($breakpoints, $breakpoint);
+
+  @media only screen and (min-width: $value) {
     @content;
   }
 }

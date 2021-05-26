@@ -1,4 +1,4 @@
-import React, { Ref } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import Spinner from '../Spinner';
 import './Button.scss';
@@ -6,17 +6,22 @@ import './Button.scss';
 export interface ButtonProps extends React.ComponentPropsWithRef<'button'> {
   as?: React.ElementType;
   color?: 'primary' | 'secondary' | 'warning' | 'info' | 'success' | 'danger';
+  children?: React.ReactNode;
   fullWidth?: boolean;
   href?: string;
   leftIcon?: React.ReactNode;
   loading?: boolean;
   rightIcon?: React.ReactNode;
   size?: 'small' | 'medium' | 'large';
+  target?: '_self' | '_blank' | '_parent' | '_top';
   type?: 'button' | 'reset' | 'submit';
   variant?: 'solid' | 'outlined' | 'text';
 }
 
-function Button(props: ButtonProps, ref: Ref<HTMLButtonElement>): JSX.Element {
+function Button(
+  props: ButtonProps,
+  ref: React.Ref<HTMLButtonElement>
+): JSX.Element {
   const {
     href,
     as: Component = href ? 'a' : 'button',
@@ -39,26 +44,28 @@ function Button(props: ButtonProps, ref: Ref<HTMLButtonElement>): JSX.Element {
     {
       [`button-${color}`]: !!color,
       [`button-${size}`]: !!size,
-      'button-fullWidth': fullWidth,
+      'button-full-width': fullWidth,
     },
     className
   );
 
-  // TODO: add anchor props
-
+  // TODO: Add and forward anchor props
   return (
     <Component
       ref={ref}
       className={classes}
       disabled={disabled || loading}
+      href={href}
       type={Component === 'button' ? type : undefined}
       aria-busy={loading}
       {...rest}
     >
-      {leftIcon && !loading && <span className="mr-2">{leftIcon}</span>}
+      {leftIcon && !loading && <span className="button-icon">{leftIcon}</span>}
       {loading && <Spinner className="absolute" />}
       {loading ? <span className="opacity-0">{children}</span> : children}
-      {rightIcon && !loading && <span className="ml-2">{rightIcon}</span>}
+      {rightIcon && !loading && (
+        <span className="button-icon">{rightIcon}</span>
+      )}
     </Component>
   );
 }

@@ -2,6 +2,11 @@
   /* Typography */
   --font-family: "Inter", sans-serif;
   --font-size-base: 1rem;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
 
   --h1-font-size: 2.5rem;
   --h2-font-size: 2rem;
@@ -32,17 +37,11 @@
   --color-black: #000;
   --color-white: #fff;
   --color-primary: #3182ce;
-  --color-primary-dark: #2768a4;
   --color-secondary: #f50057;
-  --color-secondary-dark: #c40045;
   --color-warning: #ff9800;
-  --color-warning-dark: #cc7900;
   --color-info: #2196f3;
-  --color-info-dark: #0b79d1;
   --color-success: #4caf50;
-  --color-success-dark: #3c8c40;
   --color-danger: #f14668;
-  --color-danger-dark: #e7113c;
   --color-transparent: transparent;
   --color-gray-50: #fafafa;
   --color-gray-100: #f5f5f5;
@@ -56,6 +55,13 @@
   --color-gray-900: #212121;
   --color-text-primary: #4a4a4a;
 
+  --color-primary-dark: #2768a4;
+  --color-secondary-dark: #c40045;
+  --color-warning-dark: #cc7900;
+  --color-info-dark: #0b79d1;
+  --color-success-dark: #3c8c40;
+  --color-danger-dark: #e7113c;
+
   /* Shapes */
   --border-radius: 6px;
 
@@ -63,6 +69,7 @@
   --shadow-outline: 0 0 0 3px rgb(66, 153, 225, 0.6);
 
   /* Spaces */
+  --space-none: 0;
   --space-xs: 0.5rem;
   --space-sm: 0.75rem;
   --space-md: 1rem;
