@@ -12,17 +12,17 @@ $colors: (
 $sizes: (
   'small': (
     'height': var(--size-sm),
-    'padding': 0px var(--space-sm),
+    'padding': 0px var(--space-3),
     'font-size': var(--font-size-sm)
   ),
   'medium': (
     'height': var(--size-md),
-    'padding': 0px var(--space-md),
+    'padding': 0px var(--space-4),
     'font-size': var(--font-size-md)
   ),
   'large': (
     'height': var(--size-lg),
-    'padding': 0px var(--space-lg),
+    'padding': 0px var(--space-6),
     'font-size': var(--font-size-lg)
   )
 );
