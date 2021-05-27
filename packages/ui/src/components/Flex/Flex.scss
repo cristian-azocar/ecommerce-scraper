@@ -38,16 +38,14 @@ $align-items: flex-start, center, flex-end, stretch, baseline;
     max-width: 100%;
   }
 
-  @for $i from 1 through 10 {
-    $value: var(--space-#{$i});
-
-    &-spacing-#{$i} {
-      width: calc(100% + #{$value} * 2);
-      margin: calc(#{$value} * -1);
+  @each $scale, $space in $space-map {
+    &-spacing-#{$scale} {
+      width: calc(100% + #{$space} * 2);
+      margin: calc(#{$space} * -1);
     }
 
-    &-spacing-#{$i} > &-item {
-      padding: $value;
+    &-spacing-#{$scale} > &-item {
+      padding: $space;
     }
   }
 
