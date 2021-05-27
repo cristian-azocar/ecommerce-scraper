@@ -19,7 +19,7 @@ export default {
   title: 'Flex',
   component: Flex,
   argTypes: {
-    autoItems: {
+    autoGrow: {
       control: { type: 'boolean' },
     },
     direction: {
@@ -49,7 +49,16 @@ export default {
 
 export const Default: Story<FlexProps> = (args) => (
   <Flex container {...args}>
-    <Flex item xs={12} sm={6} md={4}>
+    <Flex item>
+      <Box>Col 1</Box>
+    </Flex>
+    <Flex item>
+      <Box>Col 2</Box>
+    </Flex>
+    <Flex item>
+      <Box>Col 3</Box>
+    </Flex>
+    {/* <Flex item xs={12} sm={6} md={4}>
       <Box>Col 1</Box>
     </Flex>
     <Flex item xs={12} sm={6} md={4}>
@@ -67,6 +76,6 @@ export const Default: Story<FlexProps> = (args) => (
     </Flex>
     <Flex item xs={12} sm={6} md={4}>
       <Box>Col 6</Box>
-    </Flex>
+    </Flex> */}
   </Flex>
 );

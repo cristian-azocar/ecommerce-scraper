@@ -28,17 +28,14 @@ $align-items: flex-start, center, flex-end, stretch, baseline;
 
   &-item {
     display: block;
-    flex-basis: 0;
-    flex-grow: 1;
-    max-width: 100%;
     box-sizing: border-box;
   }
 
-  &-auto-items > &-item {
-    flex-grow: 0;
+  &-auto-grow > * {
+    flex-grow: 1;
     flex-shrink: 0;
-    flex-basis: auto;
-    width: auto;
+    flex-basis: 0;
+    max-width: 100%;
   }
 
   @for $i from 1 through 10 {

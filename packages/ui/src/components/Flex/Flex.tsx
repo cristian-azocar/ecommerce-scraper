@@ -15,7 +15,7 @@ type ColumnSize = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 type Spacing = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
 export interface FlexProps extends React.ComponentPropsWithRef<'div'> {
-  autoItems?: boolean;
+  autoGrow?: boolean;
   container?: boolean;
   item?: boolean;
   direction?: FlexDirection;
@@ -31,7 +31,7 @@ export interface FlexProps extends React.ComponentPropsWithRef<'div'> {
 
 function Flex(props: FlexProps, ref: React.Ref<HTMLDivElement>): JSX.Element {
   const {
-    autoItems,
+    autoGrow,
     children,
     className,
     container,
@@ -51,7 +51,7 @@ function Flex(props: FlexProps, ref: React.Ref<HTMLDivElement>): JSX.Element {
     {
       'flex-container': container,
       'flex-item': item,
-      'flex-auto-items': autoItems,
+      'flex-auto-grow': autoGrow,
       [`flex-direction-${direction}`]: direction,
       [`flex-justify-${justifyContent}`]: justifyContent,
       [`flex-align-items-${alignItems}`]: alignItems,
