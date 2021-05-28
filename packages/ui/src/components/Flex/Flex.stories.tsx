@@ -41,7 +41,7 @@ export default {
       options: ['flex-start', 'center', 'flex-end', 'stretch', 'baseline'],
       control: { type: 'select' },
     },
-    spacing: {
+    space: {
       control: { type: 'number' },
     },
   },
@@ -58,24 +58,81 @@ export const Default: Story<FlexProps> = (args) => (
     <Flex item>
       <Box>Col 3</Box>
     </Flex>
-    {/* <Flex item xs={12} sm={6} md={4}>
-      <Box>Col 1</Box>
-    </Flex>
-    <Flex item xs={12} sm={6} md={4}>
-      <Box>Col 2</Box>
-    </Flex>
-    <Flex item xs={12} sm={6} md={4}>
-      <Box>Col 3</Box>
-    </Flex>
-
-    <Flex item xs={12} sm={6} md={4}>
-      <Box>Col 4</Box>
-    </Flex>
-    <Flex item xs={12} sm={6} md={4}>
-      <Box>Col 5</Box>
-    </Flex>
-    <Flex item xs={12} sm={6} md={4}>
-      <Box>Col 6</Box>
-    </Flex> */}
   </Flex>
 );
+
+export const Fluid: Story<FlexProps> = (args) => (
+  <Flex container {...args}>
+    <Flex item xs={12}>
+      <Box>xs=12</Box>
+    </Flex>
+
+    <Flex item xs={6}>
+      <Box>xs=6</Box>
+    </Flex>
+    <Flex item xs={6}>
+      <Box>xs=6</Box>
+    </Flex>
+
+    <Flex item xs={4}>
+      <Box>xs=4</Box>
+    </Flex>
+    <Flex item xs={4}>
+      <Box>xs=4</Box>
+    </Flex>
+    <Flex item xs={4}>
+      <Box>xs=4</Box>
+    </Flex>
+
+    <Flex item xs={3}>
+      <Box>xs=3</Box>
+    </Flex>
+    <Flex item xs={3}>
+      <Box>xs=3</Box>
+    </Flex>
+    <Flex item xs={3}>
+      <Box>xs=3</Box>
+    </Flex>
+    <Flex item xs={3}>
+      <Box>xs=3</Box>
+    </Flex>
+  </Flex>
+);
+Fluid.args = {
+  space: 2,
+};
+
+export const Responsive: Story<FlexProps> = (args) => (
+  <Flex container {...args}>
+    <Flex item xs={12} sm={12} md={6} lg={4}>
+      <Box>Col 1</Box>
+    </Flex>
+    <Flex item xs={12} sm={6} md={6} lg={4}>
+      <Box>Col 2</Box>
+    </Flex>
+    <Flex item xs={12} sm={6} md={12} lg={4}>
+      <Box>Col 3</Box>
+    </Flex>
+  </Flex>
+);
+Responsive.args = {
+  space: 2,
+};
+
+export const AutoGrow: Story<FlexProps> = (args) => (
+  <Flex container {...args}>
+    <Flex item>
+      <Box>Col 1</Box>
+    </Flex>
+    <Flex item xs={6}>
+      <Box>Col 2 (xs=6)</Box>
+    </Flex>
+    <Flex item>
+      <Box>Col 3</Box>
+    </Flex>
+  </Flex>
+);
+AutoGrow.args = {
+  autoGrow: true,
+  space: 2,
+};

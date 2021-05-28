@@ -39,12 +39,12 @@ $align-items: flex-start, center, flex-end, stretch, baseline;
   }
 
   @each $scale, $space in $space-map {
-    &-spacing-#{$scale} {
+    &-space-#{$scale} {
       width: calc(100% + #{$space} * 2);
       margin: calc(#{$space} * -1);
     }
 
-    &-spacing-#{$scale} > &-item {
+    &-space-#{$scale} > &-item {
       padding: $space;
     }
   }
