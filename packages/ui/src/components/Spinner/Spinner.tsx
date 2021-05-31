@@ -4,8 +4,8 @@ import { SystemProps } from '../../system';
 import './Spinner.scss';
 
 export interface SpinnerProps extends React.ComponentPropsWithRef<'div'> {
-  size?: SystemProps.Size;
   color?: SystemProps.Color;
+  size?: SystemProps.Size;
 }
 
 function Spinner(props: SpinnerProps, ref: Ref<HTMLDivElement>): JSX.Element {
