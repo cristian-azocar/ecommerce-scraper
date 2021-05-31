@@ -35,3 +35,5 @@ export type TypographyVariant =
   | 'h4'
   | 'h5'
   | 'h6';
+
+export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
