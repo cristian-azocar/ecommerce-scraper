@@ -1,7 +1,7 @@
 import React, { Ref } from 'react';
 import clsx from 'clsx';
-import './Spinner.scss';
 import { SystemProps } from '../../system';
+import './Spinner.scss';
 
 export interface SpinnerProps extends React.ComponentPropsWithRef<'div'> {
   size?: SystemProps.Size;
@@ -9,7 +9,7 @@ export interface SpinnerProps extends React.ComponentPropsWithRef<'div'> {
 }
 
 function Spinner(props: SpinnerProps, ref: Ref<HTMLDivElement>): JSX.Element {
-  const { className, color, size = 'md', ...rest } = props;
+  const { className, color, size = 'sm', ...rest } = props;
   const classes: string = clsx(
     'spinner',
     `spinner-${size}`,

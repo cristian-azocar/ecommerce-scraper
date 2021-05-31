@@ -1,4 +1,3 @@
-@use '../../scss/abstracts/variables' as *;
 @use '../../scss/mixins/animations' as animations;
 
 $sizes: (
@@ -9,9 +8,22 @@ $sizes: (
   'xl': 3rem
 );
 
+// TODO: move this map to _variables.scss
+$colors: (
+  'primary': var(--color-primary),
+  'secondary': var(--color-secondary),
+  'warning': var(--color-warning),
+  'info': var(--color-info),
+  'success': var(--color-success),
+  'danger': var(--color-danger),
+  'black': var(--color-black),
+  'white': var(--color-white),
+);
+
 @include animations.spin;
 
 .spinner {
+  display: inline-block;
   animation: spin 0.5s infinite linear;
   border: 2px solid currentColor;
   border-radius: 9999px;

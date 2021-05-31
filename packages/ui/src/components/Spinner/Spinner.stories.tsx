@@ -15,7 +15,6 @@ export default {
         'danger',
         'black',
         'white',
-        'text-primary',
       ],
       control: { type: 'select' },
     },
