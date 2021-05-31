@@ -29,6 +29,8 @@ $colors: (
   border-radius: 9999px;
   border-right-color: transparent;
   border-top-color: transparent;
+  width: map.get($sizes, 'sm');
+  height: map.get($sizes, 'sm');
 
   @each $name, $value in $sizes {
     &-#{$name} {

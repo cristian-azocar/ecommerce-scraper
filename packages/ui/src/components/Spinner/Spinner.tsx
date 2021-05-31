@@ -9,12 +9,12 @@ export interface SpinnerProps extends React.ComponentPropsWithRef<'div'> {
 }
 
 function Spinner(props: SpinnerProps, ref: Ref<HTMLDivElement>): JSX.Element {
-  const { className, color, size = 'sm', ...rest } = props;
+  const { className, color, size, ...rest } = props;
   const classes: string = clsx(
     'spinner',
-    `spinner-${size}`,
     {
       [`spinner-color-${color}`]: color,
+      [`spinner-${size}`]: size,
     },
     className
   );
