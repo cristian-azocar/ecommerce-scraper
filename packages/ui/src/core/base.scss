@@ -55,13 +55,6 @@ h6 {
   font-weight: inherit;
 }
 
-@for $i from 1 through 6 {
-  h#{$i} {
-    font-size: var(--h#{$i}-font-size);
-    font-weight: var(--font-weight-bold);
-  }
-}
-
 p {
   margin: 0;
 }

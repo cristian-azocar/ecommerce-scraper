@@ -1,14 +1,8 @@
 @use 'sass:map';
 @use '../../scss/abstracts/mixins' as *;
+@use '../../scss/abstracts/variables' as *;
 
-$colors: (
-  'primary': var(--color-primary),
-  'secondary': var(--color-secondary),
-  'warning': var(--color-warning),
-  'info': var(--color-info),
-  'success': var(--color-success),
-  'danger': var(--color-danger)
-);
+$colors: $button-colors;
 $sizes: (
   'small': (
     'height': var(--size-sm),

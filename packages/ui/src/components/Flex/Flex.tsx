@@ -12,7 +12,7 @@ type JustifyContent =
   | 'space-evenly';
 type AlignItems = 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
 type ColumnSize = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-type Space = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+type Spacing = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
 export interface FlexProps extends React.ComponentPropsWithRef<'div'> {
   autoGrow?: boolean;
@@ -21,7 +21,7 @@ export interface FlexProps extends React.ComponentPropsWithRef<'div'> {
   direction?: FlexDirection;
   justifyContent?: JustifyContent;
   alignItems?: AlignItems;
-  space?: Space;
+  spacing?: Spacing;
   xs?: ColumnSize;
   sm?: ColumnSize;
   md?: ColumnSize;
@@ -39,7 +39,7 @@ function Flex(props: FlexProps, ref: React.Ref<HTMLDivElement>): JSX.Element {
     justifyContent,
     alignItems,
     item,
-    space,
+    spacing,
     xs,
     sm,
     md,
@@ -55,7 +55,7 @@ function Flex(props: FlexProps, ref: React.Ref<HTMLDivElement>): JSX.Element {
       [`flex-direction-${direction}`]: direction,
       [`flex-justify-${justifyContent}`]: justifyContent,
       [`flex-align-items-${alignItems}`]: alignItems,
-      [`flex-space-${space}`]: space,
+      [`flex-spacing-${spacing}`]: spacing,
       [`flex-xs-${xs}`]: xs,
       [`flex-sm-${sm}`]: sm,
       [`flex-md-${md}`]: md,

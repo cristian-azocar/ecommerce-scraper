@@ -41,7 +41,7 @@ export default {
       options: ['flex-start', 'center', 'flex-end', 'stretch', 'baseline'],
       control: { type: 'select' },
     },
-    space: {
+    spacing: {
       control: { type: 'number' },
     },
   },
@@ -99,7 +99,7 @@ export const Fluid: Story<FlexProps> = (args) => (
   </Flex>
 );
 Fluid.args = {
-  space: 2,
+  spacing: 2,
 };
 
 export const Responsive: Story<FlexProps> = (args) => (
@@ -116,7 +116,7 @@ export const Responsive: Story<FlexProps> = (args) => (
   </Flex>
 );
 Responsive.args = {
-  space: 2,
+  spacing: 2,
 };
 
 export const AutoGrow: Story<FlexProps> = (args) => (
@@ -134,5 +134,5 @@ export const AutoGrow: Story<FlexProps> = (args) => (
 );
 AutoGrow.args = {
   autoGrow: true,
-  space: 2,
+  spacing: 2,
 };
