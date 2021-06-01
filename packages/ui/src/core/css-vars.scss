@@ -42,7 +42,6 @@
   --color-info: #2196f3;
   --color-success: #4caf50;
   --color-danger: #f14668;
-  --color-transparent: transparent;
   --color-gray-50: #fafafa;
   --color-gray-100: #f5f5f5;
   --color-gray-200: #eee;
@@ -62,6 +61,8 @@
   --color-info-dark: #0b79d1;
   --color-success-dark: #3c8c40;
   --color-danger-dark: #e7113c;
+
+  --color-background-card: #fff;
 
   /* Shapes */
   --border-radius: 6px;
@@ -92,5 +93,6 @@
 
 [data-theme='dark'] {
   --color-background: rgb(53, 54, 58);
+  --color-background-card: #424242;
   --color-text-primary: rgba(232, 234, 237, 1);
 }

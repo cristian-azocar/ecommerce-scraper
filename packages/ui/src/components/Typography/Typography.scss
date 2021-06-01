@@ -2,8 +2,10 @@
 @use '../../scss/abstracts/variables' as *;
 
 $typography-colors: map.merge($colors,
-('text-primary': var(--color-text-primary)),
-('text-secondary': var(--color-text-secondary)));
+(
+  'text-primary': var(--color-text-primary),
+  'text-secondary': var(--color-text-secondary)
+));
 
 $typography-variants: (
   'body': (
