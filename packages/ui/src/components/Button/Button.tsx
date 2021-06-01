@@ -2,10 +2,11 @@ import React from 'react';
 import clsx from 'clsx';
 import Spinner from '../Spinner';
 import './Button.scss';
+import { SystemProps } from '../../system';
 
 export interface ButtonProps extends React.ComponentPropsWithRef<'button'> {
   as?: React.ElementType;
-  color?: 'primary' | 'secondary' | 'warning' | 'info' | 'success' | 'danger';
+  color?: SystemProps.Color;
   children?: React.ReactNode;
   fullWidth?: boolean;
   href?: string;

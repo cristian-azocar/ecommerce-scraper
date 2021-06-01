@@ -16,6 +16,7 @@ export default {
         'black',
         'white',
         'text-primary',
+        'text-secondary',
       ],
       control: { type: 'select' },
     },

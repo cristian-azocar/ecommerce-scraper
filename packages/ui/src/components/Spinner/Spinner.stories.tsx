@@ -6,16 +6,8 @@ export default {
   component: Spinner,
   argTypes: {
     color: {
-      options: [
-        'primary',
-        'secondary',
-        'warning',
-        'info',
-        'success',
-        'danger',
-        'black',
-        'white',
-      ],
+      // TODO: move this "color" to a helper. Button stories use them too.
+      options: ['primary', 'secondary', 'warning', 'info', 'success', 'danger'],
       control: { type: 'select' },
     },
     size: {

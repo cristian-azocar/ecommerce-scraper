@@ -2,44 +2,43 @@
 @use '../../scss/abstracts/mixins' as *;
 @use '../../scss/abstracts/variables' as *;
 
-$colors: $button-colors;
 $sizes: (
   'small': (
     'height': var(--size-sm),
-    'padding': 0px var(--space-3),
+    'padding': 0 var(--space-3),
     'font-size': var(--font-size-sm)
   ),
   'medium': (
     'height': var(--size-md),
-    'padding': 0px var(--space-4),
+    'padding': 0 var(--space-4),
     'font-size': var(--font-size-md)
   ),
   'large': (
     'height': var(--size-lg),
-    'padding': 0px var(--space-6),
+    'padding': 0 var(--space-6),
     'font-size': var(--font-size-lg)
   )
 );
 
 .button {
-  display: inline-flex;
-  appearance: none;
   align-items: center;
+  appearance: none;
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--border-radius);
+  color: var(--color-text-primary);
+  display: inline-flex;
+  font-size: map.get($sizes, 'medium', 'font-size');
+  font-weight: var(--font-weight-semibold);
+  height: map.get($sizes, 'medium', 'height');
   justify-content: center;
+  padding: map.get($sizes, 'medium', 'padding');
+  position: relative;
   transition: 250ms ease;
   transition-property: color, background-color, box-shadow;
   user-select: none;
-  position: relative;
-  white-space: nowrap;
   vertical-align: middle;
+  white-space: nowrap;
   width: auto;
-  height: map.get($sizes, 'medium', 'height');
-  padding: map.get($sizes, 'medium', 'padding');
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-semibold);
-  border-radius: var(--border-radius);
-  color: var(--color-text-primary);
-  border: 1px solid var(--color-gray-300);
 
   @include hover {
     background-color: var(--color-gray-200);
@@ -57,20 +56,36 @@ $sizes: (
   &-full-width {
     width: 100%;
   }
-}
 
-/* Variants with no color */
-.button-solid {
-  background-color: var(--color-gray-300);
-  border-color: transparent;
+  &-icon {
+    align-items: center;
+    display: inline-flex;
+    height: 1em;
+    justify-content: center;
+    width: 1em;
 
-  @include hover {
-    background-color: var(--color-gray-400);
+    &:first-child {
+      margin-right: 0.5rem;
+    }
+
+    &:last-child {
+      margin-left: 0.5rem;
+    }
   }
-}
 
-.button-text {
-  border-color: transparent;
+  /* Variants with no color */
+  &-solid {
+    background-color: var(--color-gray-300);
+    border-color: transparent;
+
+    @include hover {
+      background-color: var(--color-gray-400);
+    }
+  }
+
+  &-text {
+    border-color: transparent;
+  }
 }
 
 /* Variants with color */
@@ -91,7 +106,7 @@ $sizes: (
       border-color: $value;
 
       @include hover {
-        background: $value;
+        background-color: $value;
         color: var(--color-white);
       }
     }
@@ -101,25 +116,8 @@ $sizes: (
 /* Sizes */
 @each $name, $value in $sizes {
   .button-#{$name} {
+    font-size: map.get($value, 'font-size');
     height: map.get($value, 'height');
     padding: map.get($value, 'padding');
-    font-size: map.get($value, 'font-size');
-  }
-}
-
-/* Icons */
-.button-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1em;
-  height: 1em;
-
-  &:first-child {
-    margin-right: 0.5rem;
-  }
-
-  &:last-child {
-    margin-left: 0.5rem;
   }
 }

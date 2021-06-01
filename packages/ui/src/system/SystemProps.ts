@@ -22,10 +22,7 @@ export type Color =
   | 'warning'
   | 'info'
   | 'success'
-  | 'danger'
-  | 'black'
-  | 'white'
-  | 'text-primary';
+  | 'danger';
 
 export type TypographyVariant =
   | 'body'

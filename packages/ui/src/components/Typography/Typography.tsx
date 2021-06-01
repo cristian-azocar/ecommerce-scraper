@@ -8,7 +8,7 @@ type BaseProps = React.ComponentPropsWithRef<'p'>;
 export interface TypographyProps extends BaseProps {
   as?: React.ElementType;
   variant?: SystemProps.TypographyVariant;
-  color?: SystemProps.Color;
+  color?: SystemProps.Color | 'text-primary' | 'text-secondary';
   align?: SystemProps.TextAlign;
   weight?: SystemProps.FontWeight;
 }

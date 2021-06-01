@@ -1,6 +1,41 @@
 @use 'sass:map';
 @use '../../scss/abstracts/variables' as *;
 
+$typography-colors: map.merge($colors,
+('text-primary': var(--color-text-primary)),
+('text-secondary': var(--color-text-secondary)));
+
+$typography-variants: (
+  'body': (
+    'font-size': var(--font-size-base),
+    'font-weight': var(--font-weight-normal)
+  ),
+  'h1': (
+    'font-size': var(--font-size-h1),
+    'font-weight': var(--font-weight-bold)
+  ),
+  'h2': (
+    'font-size': var(--font-size-h2),
+    'font-weight': var(--font-weight-bold)
+  ),
+  'h3': (
+    'font-size': var(--font-size-h3),
+    'font-weight': var(--font-weight-bold)
+  ),
+  'h4': (
+    'font-size': var(--font-size-h4),
+    'font-weight': var(--font-weight-bold)
+  ),
+  'h5': (
+    'font-size': var(--font-size-h5),
+    'font-weight': var(--font-weight-bold)
+  ),
+  'h6': (
+    'font-size': var(--font-size-h6),
+    'font-weight': var(--font-weight-bold)
+  ),
+);
+
 .typography {
   @each $name, $value in $typography-variants {
     &-#{$name} {
@@ -9,7 +44,7 @@
     }
   }
 
-  @each $name, $value in $colors {
+  @each $name, $value in $typography-colors {
     &-color-#{$name} {
       color: $value;
     }
