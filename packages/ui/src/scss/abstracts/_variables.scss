@@ -28,6 +28,8 @@ $font-weights: (
 
 $text-aligns: (left, right, center, justify, initial, inherit);
 
+$sizes: ('xs', 'sm', 'md', 'lg', 'xl');
+
 $space-map: (
   0: var(--space-0),
   1: var(--space-1),

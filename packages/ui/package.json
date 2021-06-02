@@ -9,6 +9,7 @@
     "build": "tsc"
   },
   "dependencies": {
+    "@project/utils": "^1.0.0",
     "clsx": "^1.1.1"
   },
   "peerDependencies": {

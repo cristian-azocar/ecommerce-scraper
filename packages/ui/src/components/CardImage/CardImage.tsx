@@ -1,21 +1,17 @@
-import clsx from 'clsx';
 import React from 'react';
+import clsx from 'clsx';
 import './CardImage.scss';
 
-export type CardImageProps = React.ComponentPropsWithRef<'div'>;
+export type CardImageProps = React.ComponentPropsWithRef<'img'>;
 
 function CardImage(
   props: CardImageProps,
-  ref: React.Ref<HTMLDivElement>
+  ref: React.Ref<HTMLImageElement>
 ): JSX.Element {
-  const { children, className, ...rest } = props;
+  const { alt, children, className, ...rest } = props;
   const classes: string = clsx('card-image', className);
 
-  return (
-    <div ref={ref} className={classes} {...rest}>
-      {children}
-    </div>
-  );
+  return <img ref={ref} alt={alt} className={classes} {...rest} />;
 }
 
-export default React.forwardRef<HTMLDivElement, CardImageProps>(CardImage);
+export default React.forwardRef<HTMLImageElement, CardImageProps>(CardImage);

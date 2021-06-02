@@ -4,4 +4,5 @@ export { default as isArray } from './isArray';
 export { default as isObject } from './isObject';
 export { default as walkObject } from './walkObject';
 export { default as mergeRefs } from './mergeRefs';
+export { default as getValidChildren } from './getValidChildren';
 export * from './types';
