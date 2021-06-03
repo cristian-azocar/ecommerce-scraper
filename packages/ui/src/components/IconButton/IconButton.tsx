@@ -1,29 +1,43 @@
 import clsx from 'clsx';
 import React from 'react';
-import { SystemProps } from '../../system';
-import Button from '../Button';
+import Button, { ButtonProps } from '../Button';
 import './IconButton.scss';
 
-export interface IconButtonProps extends React.ComponentPropsWithRef<'button'> {
-  color?: SystemProps.Color;
-  size?: SystemProps.ButtonSize;
+type BaseProps = Omit<ButtonProps, 'leftIcon' | 'rightIcon'>;
+
+export interface IconButtonProps extends BaseProps {
+  rounded?: boolean;
 }
 
 function IconButton(
   props: IconButtonProps,
   ref: React.Ref<HTMLButtonElement>
 ): JSX.Element {
-  const { children, className, size, ...rest } = props;
+  const {
+    children,
+    className,
+    rounded,
+    size,
+    variant = 'text',
+    ...rest
+  } = props;
   const classes = clsx(
     'icon-button',
     {
       [`icon-button-${size}`]: size,
+      'icon-button-rounded': rounded,
     },
     className
   );
 
   return (
-    <Button ref={ref} variant="text" size={size} className={classes} {...rest}>
+    <Button
+      ref={ref}
+      variant={variant}
+      size={size}
+      className={classes}
+      {...rest}
+    >
       {children}
     </Button>
   );

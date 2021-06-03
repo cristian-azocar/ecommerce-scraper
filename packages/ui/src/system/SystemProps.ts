@@ -36,3 +36,5 @@ export type TypographyVariant =
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 export type ButtonSize = Omit<Size, 'xs' | 'xl'>;
+
+export type ButtonVariant = 'solid' | 'outlined' | 'text';

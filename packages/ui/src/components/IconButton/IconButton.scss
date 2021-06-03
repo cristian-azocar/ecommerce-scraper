@@ -5,9 +5,11 @@ $sizes: (
 );
 
 .icon-button {
-  border: 0;
-  border-radius: 50%;
   padding: var(--space-3);
+
+  &-rounded {
+    border-radius: 50%;
+  }
 
   @each $name, $value in $sizes {
     &-#{$name} {

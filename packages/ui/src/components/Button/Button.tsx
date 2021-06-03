@@ -7,7 +7,6 @@ import './Button.scss';
 export interface ButtonProps extends React.ComponentPropsWithRef<'button'> {
   as?: React.ElementType;
   color?: SystemProps.Color;
-  children?: React.ReactNode;
   fullWidth?: boolean;
   href?: string;
   leftIcon?: React.ReactNode;
@@ -16,7 +15,7 @@ export interface ButtonProps extends React.ComponentPropsWithRef<'button'> {
   size?: SystemProps.ButtonSize;
   target?: '_self' | '_blank' | '_parent' | '_top';
   type?: 'button' | 'reset' | 'submit';
-  variant?: 'solid' | 'outlined' | 'text';
+  variant?: SystemProps.ButtonVariant;
 }
 
 function Button(
