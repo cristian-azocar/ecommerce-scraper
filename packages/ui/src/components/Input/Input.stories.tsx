@@ -12,9 +12,6 @@ export default {
     isInvalid: {
       control: { type: 'boolean' },
     },
-    leftElement: {
-      control: { type: 'text' },
-    },
   },
 } as Meta;
 

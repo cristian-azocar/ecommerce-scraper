@@ -8,14 +8,13 @@ type BaseProps = Omit<React.ComponentPropsWithRef<'input'>, 'size'>;
 export interface InputProps extends BaseProps {
   size?: SystemProps.Size;
   isInvalid?: boolean;
-  leftElement?: React.ReactNode;
 }
 
 function Input(
   props: InputProps,
   ref: React.Ref<HTMLInputElement>
 ): JSX.Element {
-  const { className, size, isInvalid, leftElement, ...rest } = props;
+  const { className, size, isInvalid, ...rest } = props;
   const classes: string = clsx('input', { [`input-${size}`]: size }, className);
 
   return (
