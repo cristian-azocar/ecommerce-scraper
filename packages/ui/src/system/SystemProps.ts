@@ -34,3 +34,5 @@ export type TypographyVariant =
   | 'h6';
 
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+export type ButtonSize = Omit<Size, 'xs' | 'xl'>;

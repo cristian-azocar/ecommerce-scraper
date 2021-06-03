@@ -7,6 +7,12 @@
   }
 }
 
+@mixin active {
+  &:not(:disabled):active {
+    @content;
+  }
+}
+
 @mixin breakpoint($breakpoint) {
   $value: map.get($breakpoints, $breakpoint);
 

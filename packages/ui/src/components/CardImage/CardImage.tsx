@@ -8,7 +8,7 @@ function CardImage(
   props: CardImageProps,
   ref: React.Ref<HTMLImageElement>
 ): JSX.Element {
-  const { alt, children, className, ...rest } = props;
+  const { alt, className, ...rest } = props;
   const classes: string = clsx('card-image', className);
 
   return <img ref={ref} alt={alt} className={classes} {...rest} />;

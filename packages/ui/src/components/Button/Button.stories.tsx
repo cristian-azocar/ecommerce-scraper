@@ -18,12 +18,15 @@ export default {
       control: { type: 'select' },
     },
     size: {
-      options: [undefined, 'small', 'medium', 'large'],
+      options: [undefined, 'sm', 'md', 'lg'],
       control: { type: 'select' },
     },
     variant: {
       options: [undefined, 'solid', 'outlined', 'text'],
       control: { type: 'select' },
+    },
+    disabled: {
+      control: { type: 'boolean' },
     },
     onClick: { action: 'clicked' },
   },

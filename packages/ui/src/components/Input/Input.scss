@@ -31,13 +31,13 @@ $sizes: (
 .input {
   appearance: none;
   border: 1px solid var(--color-gray-400);
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-md);
   color: currentColor;
   font-size: map.get($sizes, 'md', 'font-size');
   height: map.get($sizes, 'md', 'height');
   padding: map.get($sizes, 'md', 'padding');
   position: relative;
-  transition: 200ms ease;
+  transition-duration: var(--transition-duration-normal);
   transition-property: border-color, box-shadow;
   width: 100%;
 

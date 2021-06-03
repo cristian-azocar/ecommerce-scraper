@@ -67,7 +67,10 @@
   --color-background-card: #fff;
 
   /* Shapes */
-  --border-radius: 6px;
+  --border-radius-sm: 0.125rem;
+  --border-radius-md: 0.375rem;
+  --border-radius-lg: 0.5rem;
+  --border-radius-xl: 0.75rem;
 
   /* Shadows */
   --shadow-outline: 0 0 0 3px rgb(66, 153, 225, 0.6);
@@ -91,6 +94,9 @@
   --size-md: 2.5rem;
   --size-lg: 3rem;
   --size-xl: 3.5rem;
+
+  /* Transitions */
+  --transition-duration-normal: 200ms;
 }
 
 [data-theme='dark'] {

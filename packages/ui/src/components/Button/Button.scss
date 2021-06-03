@@ -3,17 +3,17 @@
 @use '../../scss/abstracts/variables' as *;
 
 $sizes: (
-  'small': (
+  'sm': (
     'height': var(--size-sm),
     'padding': 0 var(--space-3),
     'font-size': var(--font-size-sm)
   ),
-  'medium': (
+  'md': (
     'height': var(--size-md),
     'padding': 0 var(--space-4),
     'font-size': var(--font-size-md)
   ),
-  'large': (
+  'lg': (
     'height': var(--size-lg),
     'padding': 0 var(--space-6),
     'font-size': var(--font-size-lg)
@@ -23,17 +23,17 @@ $sizes: (
 .button {
   align-items: center;
   appearance: none;
-  border: 1px solid var(--color-gray-300);
-  border-radius: var(--border-radius);
-  color: var(--color-text-primary);
+  border: 1px solid;
+  border-radius: var(--border-radius-md);
+  color: currentColor;
   display: inline-flex;
-  font-size: map.get($sizes, 'medium', 'font-size');
+  font-size: map.get($sizes, 'md', 'font-size');
   font-weight: var(--font-weight-semibold);
-  height: map.get($sizes, 'medium', 'height');
+  height: map.get($sizes, 'md', 'height');
   justify-content: center;
-  padding: map.get($sizes, 'medium', 'padding');
+  padding: map.get($sizes, 'md', 'padding');
   position: relative;
-  transition: 250ms ease;
+  transition-duration: var(--transition-duration-normal);
   transition-property: color, background-color, box-shadow;
   user-select: none;
   vertical-align: middle;
@@ -42,6 +42,10 @@ $sizes: (
 
   @include hover {
     background-color: var(--color-gray-200);
+  }
+
+  @include active {
+    background-color: var(--color-gray-300);
   }
 
   &:focus {
@@ -60,9 +64,7 @@ $sizes: (
   &-icon {
     align-items: center;
     display: inline-flex;
-    height: 1em;
     justify-content: center;
-    width: 1em;
 
     &:first-child {
       margin-right: 0.5rem;
@@ -74,6 +76,10 @@ $sizes: (
   }
 
   /* Variants with no color */
+  &-outlined {
+    border-color: var(--color-gray-300);
+  }
+
   &-solid {
     background-color: var(--color-gray-300);
     border-color: transparent;
@@ -85,6 +91,12 @@ $sizes: (
 
   &-text {
     border-color: transparent;
+  }
+
+  svg {
+    fill: currentColor;
+    height: 1em;
+    width: 1em;
   }
 }
 
@@ -118,6 +130,7 @@ $sizes: (
   .button-#{$name} {
     font-size: map.get($value, 'font-size');
     height: map.get($value, 'height');
+    min-width: map.get($value, 'height');
     padding: map.get($value, 'padding');
   }
 }

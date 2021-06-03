@@ -1,8 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
+import { SystemProps } from '../../system';
 import Spinner from '../Spinner';
 import './Button.scss';
-import { SystemProps } from '../../system';
 
 export interface ButtonProps extends React.ComponentPropsWithRef<'button'> {
   as?: React.ElementType;
@@ -13,7 +13,7 @@ export interface ButtonProps extends React.ComponentPropsWithRef<'button'> {
   leftIcon?: React.ReactNode;
   loading?: boolean;
   rightIcon?: React.ReactNode;
-  size?: 'small' | 'medium' | 'large';
+  size?: SystemProps.ButtonSize;
   target?: '_self' | '_blank' | '_parent' | '_top';
   type?: 'button' | 'reset' | 'submit';
   variant?: 'solid' | 'outlined' | 'text';
