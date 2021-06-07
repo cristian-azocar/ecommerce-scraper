@@ -1,0 +1,24 @@
+$positions: (absolute, fixed, relative, static, sticky);
+
+.header {
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-sm);
+  top: 0;
+  transition: box-shadow 200ms;
+  width: 100%;
+  z-index: var(--z-index-header);
+
+  &-content {
+    align-items: center;
+    display: flex;
+    min-height: var(--size-2xl);
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  @each $position in $positions {
+    &-#{$position} {
+      position: $position;
+    }
+  }
+}
