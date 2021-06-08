@@ -71,11 +71,19 @@ yarn database seed
 
 ## Run
 
+1. If not already running, start the container:
+
 ```bash
 docker-compose up
 ```
 
-## Run Storybook
+2. Execute the scraper:
+
+```bash
+yarn scraper start
+```
+
+Optionally you can start Storybook:
 
 ```bash
 yarn ui start

@@ -8,7 +8,7 @@ export default class ScraperFactory {
   static getScraper(retail: Retail): Scraper {
     const { id, slug, baseUrl, selectors, httpMethod, pagination } = retail;
     const { availabilities, conditions, categories } = config;
-    const scraperConfig: IParserConfig = {
+    const parserConfig: IParserConfig = {
       retailId: id,
       baseUrl,
       selectors,
@@ -21,7 +21,7 @@ export default class ScraperFactory {
       case 'zmart':
         return new Scraper({
           url: '',
-          parser: new ZmartParser(scraperConfig),
+          parser: new ZmartParser(parserConfig),
           httpMethod,
           pagination,
         });
