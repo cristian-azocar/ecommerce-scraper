@@ -1,4 +1,6 @@
 import { Story, Meta } from '@storybook/react';
+import Flex from '../Flex';
+import Input from '../Input';
 import Header, { HeaderProps } from './Header';
 
 export default {
@@ -31,9 +33,12 @@ export const Sticky: Story<HeaderProps> = (args) => (
 Sticky.args = {
   position: 'sticky',
   children: (
-    <>
-      <div className="flex-grow">Website</div>
-      <div>Login</div>
-    </>
+    <Flex container alignItems="center" justifyContent="space-between">
+      <Flex item>Logo</Flex>
+      <Flex item>
+        <Input placeholder="Search..." style={{ width: 500 }} />
+      </Flex>
+      <Flex item>Login</Flex>
+    </Flex>
   ),
 };
