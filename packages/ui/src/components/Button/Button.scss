@@ -1,54 +1,51 @@
 @use 'sass:map';
 @use '../../scss/abstracts/mixins' as *;
+@use '../../scss/abstracts/variables' as *;
 
-$colors: (
-  'primary': var(--color-primary),
-  'secondary': var(--color-secondary),
-  'warning': var(--color-warning),
-  'info': var(--color-info),
-  'success': var(--color-success),
-  'danger': var(--color-danger)
-);
 $sizes: (
-  'small': (
+  'sm': (
     'height': var(--size-sm),
-    'padding': 0px var(--space-sm),
+    'padding': 0 var(--space-3),
     'font-size': var(--font-size-sm)
   ),
-  'medium': (
+  'md': (
     'height': var(--size-md),
-    'padding': 0px var(--space-md),
+    'padding': 0 var(--space-4),
     'font-size': var(--font-size-md)
   ),
-  'large': (
+  'lg': (
     'height': var(--size-lg),
-    'padding': 0px var(--space-lg),
+    'padding': 0 var(--space-6),
     'font-size': var(--font-size-lg)
   )
 );
 
 .button {
-  display: inline-flex;
-  appearance: none;
   align-items: center;
-  justify-content: center;
-  transition: 250ms ease;
-  transition-property: color, background-color, box-shadow;
-  user-select: none;
-  position: relative;
-  white-space: nowrap;
-  vertical-align: middle;
-  width: auto;
-  height: map.get($sizes, 'medium', 'height');
-  padding: map.get($sizes, 'medium', 'padding');
-  font-size: var(--font-size-md);
+  appearance: none;
+  border: 1px solid;
+  border-radius: var(--border-radius-md);
+  color: currentColor;
+  display: inline-flex;
+  font-size: map.get($sizes, 'md', 'font-size');
   font-weight: var(--font-weight-semibold);
-  border-radius: var(--border-radius);
-  color: var(--color-text-primary);
-  border: 1px solid var(--color-gray-300);
+  height: map.get($sizes, 'md', 'height');
+  justify-content: center;
+  padding: map.get($sizes, 'md', 'padding');
+  position: relative;
+  transition-duration: var(--transition-duration-normal);
+  transition-property: color, background-color, border-color, box-shadow;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: auto;
 
   @include hover {
     background-color: var(--color-gray-200);
+  }
+
+  @include active {
+    background-color: var(--color-gray-300);
   }
 
   &:focus {
@@ -63,20 +60,48 @@ $sizes: (
   &-full-width {
     width: 100%;
   }
-}
 
-/* Variants with no color */
-.button-solid {
-  background-color: var(--color-gray-300);
-  border-color: transparent;
+  &-icon {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
 
-  @include hover {
-    background-color: var(--color-gray-400);
+    &:first-child {
+      margin-right: 0.5rem;
+    }
+
+    &:last-child {
+      margin-left: 0.5rem;
+    }
   }
-}
 
-.button-text {
-  border-color: transparent;
+  /* Variants with no color */
+  &-outlined {
+    border-color: var(--color-gray-300);
+  }
+
+  &-solid {
+    background-color: var(--color-gray-300);
+    border-color: transparent;
+
+    @include hover {
+      background-color: var(--color-gray-400);
+    }
+
+    @include active {
+      background-color: var(--color-gray-500);
+    }
+  }
+
+  &-text {
+    border-color: transparent;
+  }
+
+  svg {
+    fill: currentColor;
+    height: 1em;
+    width: 1em;
+  }
 }
 
 /* Variants with color */
@@ -91,14 +116,23 @@ $sizes: (
       @include hover {
         background-color: var(--color-#{$name}-dark);
       }
+
+      @include active {
+        background-color: var(--color-#{$name}-darker);
+      }
     }
 
     &.button-outlined {
       border-color: $value;
 
       @include hover {
-        background: $value;
+        background-color: $value;
         color: var(--color-white);
+      }
+
+      @include active {
+        background-color: var(--color-#{$name}-darker);
+        border-color: var(--color-#{$name}-darker);
       }
     }
   }
@@ -107,25 +141,9 @@ $sizes: (
 /* Sizes */
 @each $name, $value in $sizes {
   .button-#{$name} {
-    height: map.get($value, 'height');
-    padding: map.get($value, 'padding');
     font-size: map.get($value, 'font-size');
-  }
-}
-
-/* Icons */
-.button-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1em;
-  height: 1em;
-
-  &:first-child {
-    margin-right: 0.5rem;
-  }
-
-  &:last-child {
-    margin-left: 0.5rem;
+    height: map.get($value, 'height');
+    min-width: map.get($value, 'height');
+    padding: map.get($value, 'padding');
   }
 }

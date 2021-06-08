@@ -1,0 +1,25 @@
+@use '../../scss/abstracts/variables' as *;
+
+.badge {
+  background-color: var(--color-gray-500);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-white);
+  display: inline-block;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  padding-left: var(--space-1);
+  padding-right: var(--space-1);
+  white-space: nowrap;
+
+  @each $name, $value in $colors {
+    &-#{$name} {
+      background-color: $value;
+    }
+  }
+
+  @each $size in $sizes {
+    &-#{$size} {
+      font-size: var(--font-size-#{$size});
+    }
+  }
+}

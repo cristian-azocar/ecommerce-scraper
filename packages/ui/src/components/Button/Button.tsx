@@ -1,21 +1,21 @@
 import React from 'react';
 import clsx from 'clsx';
+import { SystemProps } from '../../system';
 import Spinner from '../Spinner';
 import './Button.scss';
 
 export interface ButtonProps extends React.ComponentPropsWithRef<'button'> {
   as?: React.ElementType;
-  color?: 'primary' | 'secondary' | 'warning' | 'info' | 'success' | 'danger';
-  children?: React.ReactNode;
+  color?: SystemProps.Color;
   fullWidth?: boolean;
   href?: string;
   leftIcon?: React.ReactNode;
   loading?: boolean;
   rightIcon?: React.ReactNode;
-  size?: 'small' | 'medium' | 'large';
+  size?: SystemProps.ButtonSize;
   target?: '_self' | '_blank' | '_parent' | '_top';
   type?: 'button' | 'reset' | 'submit';
-  variant?: 'solid' | 'outlined' | 'text';
+  variant?: SystemProps.ButtonVariant;
 }
 
 function Button(

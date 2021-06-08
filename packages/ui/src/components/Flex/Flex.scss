@@ -1,0 +1,75 @@
+@use 'sass:math';
+@use '../../scss/abstracts/mixins' as *;
+@use '../../scss/abstracts/variables' as *;
+
+$flex-direction: column-reverse, column, row-reverse, row;
+$justify-content: flex-start, center, flex-end, space-between, space-around, space-evenly;
+$align-items: flex-start, center, flex-end, stretch, baseline;
+
+@mixin create-columns($breakpoint) {
+  @for $i from 1 through 12 {
+    $col-width: math.div($i, 12) * 100%;
+
+    &-#{$breakpoint}-#{$i} {
+      flex-basis: $col-width;
+      flex-grow: 0;
+      max-width: $col-width;
+    }
+  }
+}
+
+.flex {
+  &-container {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  &-item {
+    box-sizing: border-box;
+    display: block;
+  }
+
+  &-auto-grow > * {
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 0;
+    max-width: 100%;
+  }
+
+  @each $scale, $space in $space-map {
+    &-spacing-#{$scale} {
+      margin: calc(#{$space} * -1);
+      width: calc(100% + #{$space} * 2);
+    }
+
+    &-spacing-#{$scale} > &-item {
+      padding: $space;
+    }
+  }
+
+  @each $direction in $flex-direction {
+    &-direction-#{$direction} {
+      flex-direction: $direction;
+    }
+  }
+
+  @each $justify in $justify-content {
+    &-justify-#{$justify} {
+      justify-content: $justify;
+    }
+  }
+
+  @each $align in $align-items {
+    &-align-items-#{$align} {
+      align-items: $align;
+    }
+  }
+
+  @each $breakpoint, $value in $breakpoints {
+    @include breakpoint($breakpoint) {
+      @include create-columns($breakpoint);
+    }
+  }
+}

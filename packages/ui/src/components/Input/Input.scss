@@ -1,0 +1,73 @@
+@use 'sass:map';
+
+$sizes: (
+  'xs': (
+    'height': var(--size-xs),
+    'font-size': var(--font-size-xs),
+    'padding': 0 var(--space-2)
+  ),
+  'sm': (
+    'height': var(--size-sm),
+    'font-size': var(--font-size-sm),
+    'padding': 0 var(--space-3)
+  ),
+  'md': (
+    'height': var(--size-md),
+    'font-size': var(--font-size-md),
+    'padding': 0 var(--space-4)
+  ),
+  'lg': (
+    'height': var(--size-lg),
+    'font-size': var(--font-size-lg),
+    'padding': 0 var(--space-4)
+  ),
+  'xl': (
+    'height': var(--size-xl),
+    'font-size': var(--font-size-xl),
+    'padding': 0 var(--space-5)
+  ),
+);
+
+.input {
+  appearance: none;
+  border: 1px solid var(--color-gray-400);
+  border-radius: var(--border-radius-md);
+  color: currentColor;
+  font-size: map.get($sizes, 'md', 'font-size');
+  height: map.get($sizes, 'md', 'height');
+  padding: map.get($sizes, 'md', 'padding');
+  position: relative;
+  transition-duration: var(--transition-duration-normal);
+  transition-property: border-color, box-shadow;
+  width: 100%;
+
+  &:hover {
+    border-color: var(--color-gray-500);
+  }
+
+  &:focus {
+    border-color: var(--color-blue-500);
+    box-shadow: 0 0 0 1px var(--color-blue-500);
+    outline: none;
+  }
+
+  &:disabled {
+    border-color: var(--color-gray-400);
+  }
+
+  &[aria-invalid='true'] {
+    border-color: var(--color-danger);
+
+    &:focus {
+      box-shadow: 0 0 0 1px var(--color-danger);
+    }
+  }
+
+  @each $name, $value in $sizes {
+    &-#{$name} {
+      font-size: map.get($value, 'font-size');
+      height: map.get($value, 'height');
+      padding: map.get($value, 'padding');
+    }
+  }
+}

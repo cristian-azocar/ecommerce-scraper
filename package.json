@@ -10,6 +10,7 @@
     "db:migrate": "yarn database migrate",
     "db:seed": "yarn database seed",
     "lint": "eslint . --cache --ext .js,.ts,.tsx --max-warnings 0",
+    "stylelint": "stylelint 'packages/**/*.scss'",
     "postinstall": "node scripts/post-install.js"
   },
   "workspaces": [
@@ -29,6 +30,8 @@
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "^2.2.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-sass-guidelines": "^8.0.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.3"
   }

@@ -1,7 +1,45 @@
 $breakpoints: (
-  'xs': 0px,
+  'xs': 0,
   'sm': 600px,
   'md': 768px,
   'lg': 992px,
   'xl': 1200px,
+);
+
+$colors: (
+  'primary': var(--color-primary),
+  'secondary': var(--color-secondary),
+  'warning': var(--color-warning),
+  'info': var(--color-info),
+  'success': var(--color-success),
+  'danger': var(--color-danger)
+);
+
+$font-weights: (
+  'thin': var(--font-weight-thin),
+  'light': var(--font-weight-light),
+  'normal': var(--font-weight-normal),
+  'medium': var(--font-weight-medium),
+  'semibold': var(--font-weight-semibold),
+  'bold': var(--font-weight-bold),
+  'extrabold': var(--font-weight-extrabold),
+  'black': var(--font-weight-black)
+);
+
+$text-aligns: (left, right, center, justify, initial, inherit);
+
+$sizes: ('xs', 'sm', 'md', 'lg', 'xl');
+
+$space-map: (
+  0: var(--space-0),
+  1: var(--space-1),
+  2: var(--space-2),
+  3: var(--space-3),
+  4: var(--space-4),
+  5: var(--space-5),
+  6: var(--space-6),
+  7: var(--space-7),
+  8: var(--space-8),
+  9: var(--space-9),
+  10: var(--space-10),
 );

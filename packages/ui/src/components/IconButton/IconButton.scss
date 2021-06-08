@@ -1,0 +1,19 @@
+$sizes: (
+  'sm': var(--space-1),
+  'md': var(--space-3),
+  'lg': var(--space-3)
+);
+
+.icon-button {
+  padding: var(--space-3);
+
+  &-rounded {
+    border-radius: 50%;
+  }
+
+  @each $name, $value in $sizes {
+    &-#{$name} {
+      padding: $value;
+    }
+  }
+}
