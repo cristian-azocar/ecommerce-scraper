@@ -3,6 +3,11 @@
 @use '../../scss/abstracts/variables' as *;
 
 $sizes: (
+  'xs': (
+    'height': var(--size-xs),
+    'padding': 0 var(--space-2),
+    'font-size': var(--font-size-xs)
+  ),
   'sm': (
     'height': var(--size-sm),
     'padding': 0 var(--space-3),
@@ -17,6 +22,11 @@ $sizes: (
     'height': var(--size-lg),
     'padding': 0 var(--space-6),
     'font-size': var(--font-size-lg)
+  ),
+  'xl': (
+    'height': var(--size-xl),
+    'padding': 0 var(--space-7),
+    'font-size': var(--font-size-xl)
   )
 );
 
