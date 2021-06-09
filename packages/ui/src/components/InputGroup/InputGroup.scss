@@ -1,0 +1,14 @@
+.input-group {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  width: 100%;
+
+  > .input:not(:first-child) {
+    padding-left: var(--space-10);
+  }
+
+  > .input:not(:last-child) {
+    padding-right: var(--space-10);
+  }
+}

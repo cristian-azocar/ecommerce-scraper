@@ -1,0 +1,25 @@
+.input-adornment {
+  align-items: center;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+  width: var(--size-md);
+  z-index: 2;
+
+  svg {
+    height: 1em;
+    width: 1em;
+  }
+
+  &-left {
+    left: 0;
+  }
+
+  &-right {
+    right: 0;
+  }
+}
