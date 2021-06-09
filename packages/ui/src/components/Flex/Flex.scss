@@ -2,9 +2,9 @@
 @use '../../scss/abstracts/mixins' as *;
 @use '../../scss/abstracts/variables' as *;
 
-$flex-direction: column-reverse, column, row-reverse, row;
-$justify-content: flex-start, center, flex-end, space-between, space-around, space-evenly;
-$align-items: flex-start, center, flex-end, stretch, baseline;
+$flex-direction: (column-reverse, column, row-reverse, row);
+$justify-content: (flex-start, center, flex-end, space-between, space-around, space-evenly);
+$align-items: (flex-start, center, flex-end, stretch, baseline);
 
 @mixin create-columns($breakpoint) {
   @for $i from 1 through 12 {
@@ -36,6 +36,10 @@ $align-items: flex-start, center, flex-end, stretch, baseline;
     flex-grow: 1;
     flex-shrink: 0;
     max-width: 100%;
+  }
+
+  &-grow {
+    flex-grow: 1;
   }
 
   @each $scale, $space in $space-map {
