@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
-import './Badge.scss';
 import { SystemProps } from '../../system';
+import './Badge.scss';
 
 export interface BadgeProps extends React.ComponentPropsWithRef<'span'> {
   color?: SystemProps.Color;

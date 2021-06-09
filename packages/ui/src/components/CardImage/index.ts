@@ -1,1 +1,2 @@
-export { default, CardImageProps } from './CardImage';
+export { default } from './CardImage';
+export type { CardImageProps } from './CardImage';

@@ -8,7 +8,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@project/ui": "^1.0.0",
     "next": "10.2.3",
+    "next-transpile-modules": "^7.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },

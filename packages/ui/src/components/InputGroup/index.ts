@@ -1,1 +1,2 @@
-export { default, InputGroupProps } from './InputGroup';
+export { default } from './InputGroup';
+export type { InputGroupProps } from './InputGroup';
