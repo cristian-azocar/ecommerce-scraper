@@ -28,16 +28,15 @@ function Typography(
   ref: React.Ref<HTMLElement>
 ): JSX.Element {
   const {
-    as,
+    variant = 'body',
+    as: Component = variantMapping[variant] || 'p',
     align,
     children,
     color,
     className,
     weight,
-    variant = 'body',
     ...rest
   } = props;
-  const Component = as || variantMapping[variant] || 'p';
   const classes: string = clsx(
     {
       [`typography-${variant}`]: variant,
