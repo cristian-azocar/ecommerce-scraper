@@ -1,5 +1,5 @@
 import { FaGithub, FaHeart, FaLinkedin } from 'react-icons/fa';
-import { Flex, Typography } from '@project/ui';
+import { Flex, Typography, Link } from '@project/ui';
 import styles from './Footer.module.scss';
 
 export default function Footer(): JSX.Element {
@@ -15,24 +15,22 @@ export default function Footer(): JSX.Element {
         className={styles['social-links']}
       >
         <Flex item>
-          <a
+          <Link
             href="https://github.com/cristian-azocar"
-            target="_blank"
-            rel="noopener noreferrer"
             aria-label="GitHub"
+            external
           >
             <FaGithub />
-          </a>
+          </Link>
         </Flex>
         <Flex item>
-          <a
-            href="https://github.com/cristian-azocar"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
+          <Link
+            href="https://www.linkedin.com/in/cristian-azocar/"
+            aria-label="LinkedIn"
+            external
           >
             <FaLinkedin />
-          </a>
+          </Link>
         </Flex>
       </Flex>
     </footer>
