@@ -10,7 +10,7 @@ $align-items: (flex-start, center, flex-end, stretch, baseline);
   @for $i from 1 through 12 {
     $col-width: math.div($i, 12) * 100%;
 
-    &-#{$breakpoint}-#{$i}.&-item {
+    &-#{$breakpoint}-#{$i}.flex-item {
       flex-basis: $col-width;
       flex-grow: 0;
       max-width: $col-width;
