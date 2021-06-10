@@ -26,6 +26,7 @@ export type Color =
 
 export type TypographyVariant =
   | 'body'
+  | 'body2'
   | 'h1'
   | 'h2'
   | 'h3'

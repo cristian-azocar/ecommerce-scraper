@@ -21,6 +21,7 @@ const variantMapping = {
   h5: 'h5',
   h6: 'h6',
   body: 'p',
+  body2: 'p',
 };
 
 function Typography(

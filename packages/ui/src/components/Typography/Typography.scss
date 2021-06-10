@@ -12,6 +12,10 @@ $typography-variants: (
     'font-size': var(--font-size-base),
     'font-weight': var(--font-weight-normal)
   ),
+  'body2': (
+    'font-size': var(--font-size-sm),
+    'font-weight': var(--font-weight-normal)
+  ),
   'h1': (
     'font-size': var(--font-size-h1),
     'font-weight': var(--font-weight-bold)
