@@ -25,7 +25,7 @@ export type Color =
   | 'danger';
 
 export type TypographyVariant =
-  | 'body'
+  | 'body1'
   | 'body2'
   | 'h1'
   | 'h2'
