@@ -31,7 +31,7 @@ $sizes: (
 .input {
   appearance: none;
   background-color: var(--color-background);
-  border: 1px solid var(--color-border-input);
+  border: 1px solid var(--color-border-base);
   border-radius: var(--border-radius-md);
   color: currentColor;
   font-size: map.get($sizes, 'md', 'font-size');
