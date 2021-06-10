@@ -49,7 +49,7 @@ function Flex(props: FlexProps, ref: React.Ref<HTMLDivElement>): JSX.Element {
       [`flex-direction-${direction}`]: container && direction,
       [`flex-justify-${justifyContent}`]: container && justifyContent,
       [`flex-align-items-${alignItems}`]: container && alignItems,
-      [`flex-spacing-${spacing}`]: container && spacing !== 0,
+      [`flex-spacing-${spacing}`]: container && spacing,
       [`flex-xs-${xs}`]: item && xs,
       [`flex-sm-${sm}`]: item && sm,
       [`flex-md-${md}`]: item && md,
