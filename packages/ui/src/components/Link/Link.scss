@@ -1,6 +1,8 @@
 @use '../../scss/abstracts/mixins' as *;
 
 .link {
+  text-decoration: none;
+
   @include hover {
     text-decoration: underline;
   }
