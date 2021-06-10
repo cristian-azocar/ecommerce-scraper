@@ -1,13 +1,17 @@
 import { Input, InputGroup, InputAdornment } from '@project/ui';
 import { FaSearch } from 'react-icons/fa';
 
-export default function SearchBar(): JSX.Element {
+export type SearchBarProps = React.ComponentPropsWithoutRef<'div'>;
+
+export default function SearchBar(props: SearchBarProps): JSX.Element {
   return (
-    <InputGroup>
-      <InputAdornment position="left">
-        <FaSearch />
-      </InputAdornment>
-      <Input placeholder="Search..." type="text" name="q" />
-    </InputGroup>
+    <form action="/search">
+      <InputGroup {...props}>
+        <InputAdornment position="left">
+          <FaSearch />
+        </InputAdornment>
+        <Input placeholder="Search..." type="text" name="q" />
+      </InputGroup>
+    </form>
   );
 }
