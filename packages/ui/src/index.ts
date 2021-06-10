@@ -36,3 +36,6 @@ export type { SpinnerProps } from './components/Spinner';
 
 export { default as Typography } from './components/Typography';
 export type { TypographyProps } from './components/Typography';
+
+export { default as Link } from './components/Link';
+export type { LinkProps } from './components/Link';
