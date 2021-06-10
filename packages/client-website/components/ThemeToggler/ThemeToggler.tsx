@@ -1,24 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { IconButton } from '@project/ui';
 
-export default function ThemeToggler(): JSX.Element {
-  const [icon, setIcon] = useState(getIcon);
+export default function ThemeToggler(): JSX.Element | null {
+  const [activeTheme, setActiveTheme] = useState<string | undefined>();
+  const [icon, setIcon] = useState<JSX.Element>();
 
-  function getIcon(): JSX.Element {
-    return getCurrentTheme() === 'dark' ? <FaSun /> : <FaMoon />;
-  }
+  useEffect(() => {
+    const initialTheme = document.body.dataset.theme;
 
-  function getCurrentTheme(): string | undefined {
-    return typeof window !== 'undefined'
-      ? document.body.dataset.theme
-      : undefined;
-  }
+    setActiveTheme(initialTheme);
+    setIcon(getIcon(initialTheme));
+  }, []);
 
   function toggleTheme(): void {
-    const newTheme = getCurrentTheme() === 'dark' ? 'light' : 'dark';
+    const newTheme = activeTheme === 'dark' ? 'light' : 'dark';
+
     document.body.dataset.theme = newTheme;
-    setIcon(getIcon);
+    localStorage.setItem('theme', newTheme);
+
+    setActiveTheme(newTheme);
+    setIcon(getIcon(newTheme));
+  }
+
+  function getIcon(theme: string | undefined): JSX.Element {
+    return theme === 'dark' ? <FaSun /> : <FaMoon />;
   }
 
   return <IconButton onClick={toggleTheme}>{icon}</IconButton>;
