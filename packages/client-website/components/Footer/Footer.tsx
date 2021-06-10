@@ -1,12 +1,19 @@
 import { FaGithub, FaHeart, FaLinkedin } from 'react-icons/fa';
-import { Flex } from '@project/ui';
+import { Flex, Typography } from '@project/ui';
 import styles from './Footer.module.scss';
 
 export default function Footer(): JSX.Element {
   return (
     <footer className={styles.root}>
-      Made with <FaHeart color="red" /> by Cristian Azócar
-      <Flex container justifyContent="center">
+      <Typography variant="body2">
+        Made with <FaHeart color="red" /> by Cristian Azócar
+      </Typography>
+      <Flex
+        container
+        justifyContent="center"
+        spacing={2}
+        className={styles['social-links']}
+      >
         <Flex item>
           <a
             href="https://github.com/cristian-azocar"
