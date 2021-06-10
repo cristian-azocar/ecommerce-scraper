@@ -45,7 +45,7 @@ $align-items: (flex-start, center, flex-end, stretch, baseline);
   @each $scale, $space in $space-map {
     &-spacing-#{$scale} {
       margin: calc(#{$space} * -1);
-      width: calc(100% + #{$space} * 2);
+      width: calc(100% + #{$space});
     }
 
     &-spacing-#{$scale} > &-item {
