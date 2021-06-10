@@ -51,11 +51,11 @@ $sizes: (
   width: auto;
 
   @include hover {
-    background-color: var(--color-gray-200);
+    background-color: var(--color-button-hover);
   }
 
   @include active {
-    background-color: var(--color-gray-300);
+    background-color: var(--color-button-active);
   }
 
   &:focus {

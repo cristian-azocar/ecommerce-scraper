@@ -42,6 +42,7 @@
   --color-info: #2196f3;
   --color-success: #4caf50;
   --color-danger: #f14668;
+
   --color-gray-50: #fafafa;
   --color-gray-100: #f5f5f5;
   --color-gray-200: #eee;
@@ -52,6 +53,12 @@
   --color-gray-700: #616161;
   --color-gray-800: #424242;
   --color-gray-900: #212121;
+
+  --color-blue-500: #3182ce;
+
+  --color-white-alpha-200: rgba(255, 255, 255, 0.08);
+  --color-white-alpha-300: rgba(255, 255, 255, 0.16);
+
   --color-text-primary: #4a4a4a;
   --color-text-secondary: rgba(0, 0, 0, 0.54);
 
@@ -69,9 +76,10 @@
   --color-success-darker: #307033;
   --color-danger-darker: #b80d30;
 
-  --color-blue-500: #3182ce;
-
   --color-background-card: #fff;
+  --color-border-input: #e0e0e0;
+  --color-button-hover: #eee;
+  --color-button-active: #e0e0e0;
 
   /* Shapes */
   --border-radius-sm: 0.125rem;
@@ -99,6 +107,9 @@
   --space-8: 2rem;
   --space-9: 2.25rem;
   --space-10: 2.5rem;
+  --space-11: 3rem;
+  --space-12: 3.5rem;
+  --space-13: 4rem;
 
   /* Sizes */
   --size-xs: 1.5rem;
@@ -120,4 +131,7 @@
   --color-background: rgb(53, 54, 58);
   --color-background-card: #424242;
   --color-text-primary: rgba(232, 234, 237, 1);
+  --color-border-input: var(--color-white-alpha-300);
+  --color-button-hover: var(--color-white-alpha-200);
+  --color-button-active: var(--color-white-alpha-300);
 }

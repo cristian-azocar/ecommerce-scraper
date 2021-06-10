@@ -1,8 +1,13 @@
 import '../styles/globals.css';
-import '@project/ui/src/core/index.scss'; // TODO: import a minified and CSS version
+import '@project/ui/src/core/index.scss';
 import type { AppProps } from 'next/app';
+import Layout from '../components/Layout';
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
-  return <Component {...pageProps} />;
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  );
 }
 export default MyApp;
