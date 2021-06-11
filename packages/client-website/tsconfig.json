@@ -8,5 +8,9 @@
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"],
-  "references": [{ "path": "../ui" }]
+  "references": [
+    { "path": "../ui" },
+    { "path": "../database" },
+    { "path": "../utils" }
+  ]
 }

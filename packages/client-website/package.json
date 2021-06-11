@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@project/ui": "^1.0.0",
+    "@project/database": "^1.0.0",
+    "@project/utils": "^1.0.0",
     "next": "10.2.3",
     "next-transpile-modules": "^7.2.0",
     "react": "17.0.2",
@@ -16,7 +18,9 @@
     "react-icons": "^4.2.0"
   },
   "devDependencies": {
+    "@types/node": "^15.12.2",
     "@types/react": "17.0.11",
+    "sass": "^1.34.1",
     "typescript": "4.3.2"
   }
 }
