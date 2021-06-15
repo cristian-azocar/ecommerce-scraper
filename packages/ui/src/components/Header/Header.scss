@@ -1,8 +1,8 @@
 $positions: (absolute, fixed, relative, static, sticky);
 
 .header {
-  background-color: var(--color-background);
-  box-shadow: var(--shadow-sm);
+  background-color: var(--color-background-card);
+  box-shadow: var(--shadow-md);
   top: 0;
   transition: box-shadow 200ms;
   width: 100%;

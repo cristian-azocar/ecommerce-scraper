@@ -18,6 +18,13 @@ export default class ProductService {
     return db.select().from(product.tableName);
   }
 
+  async findByName(name: string): Promise<Product[]> {
+    return db
+      .select()
+      .from(product.tableName)
+      .where('name', 'ilike', `%${name}%`);
+  }
+
   async create(products: Product | Product[]): Promise<void> {
     await db.insert(products).into(product.tableName);
   }

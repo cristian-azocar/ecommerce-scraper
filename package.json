@@ -5,7 +5,7 @@
     "ui": "yarn workspace @project/ui",
     "utils": "yarn workspace @project/utils",
     "scraper": "yarn workspace @project/scraper",
-    "client-website": "yarn workspace @project/client-website",
+    "website": "yarn workspace @project/website",
     "build": "tsc --build tsconfig.json",
     "db:migrate": "yarn database migrate",
     "db:seed": "yarn database seed",

@@ -43,7 +43,7 @@ $typography-variants: (
 );
 
 .typography {
-  margin: 0;
+  display: block;
 
   @each $name, $value in $typography-variants {
     &-#{$name} {

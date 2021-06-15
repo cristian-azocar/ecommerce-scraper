@@ -30,11 +30,18 @@ export async function seed(): Promise<void> {
     },
 
     // Level 3
-    { id: 4, parentId: 3, name: 'PC', slug: 'pc', isActive: true },
+    {
+      id: 4,
+      parentId: 3,
+      name: 'PC',
+      slug: 'pc',
+      codes: ['PC'],
+      isActive: true,
+    },
     {
       id: 5,
       parentId: 3,
-      name: 'Playstation Vita',
+      name: 'PlayStation Vita',
       slug: 'ps-vita',
       codes: ['PSV'],
       isActive: true,
@@ -43,14 +50,14 @@ export async function seed(): Promise<void> {
       id: 6,
       parentId: 3,
       slug: 'psp',
-      name: 'Playstation Portatil',
+      name: 'PlayStation Portatil',
       codes: ['PSP'],
       isActive: true,
     },
     {
       id: 7,
       parentId: 3,
-      name: 'Playstation 2',
+      name: 'PlayStation 2',
       slug: 'ps2',
       codes: ['PS2'],
       isActive: true,
@@ -58,7 +65,7 @@ export async function seed(): Promise<void> {
     {
       id: 8,
       parentId: 3,
-      name: 'Playstation 3',
+      name: 'PlayStation 3',
       slug: 'ps3',
       codes: ['PS3'],
       isActive: true,
@@ -66,7 +73,7 @@ export async function seed(): Promise<void> {
     {
       id: 9,
       parentId: 3,
-      name: 'Playstation 4',
+      name: 'PlayStation 4',
       slug: 'ps4',
       codes: ['PS4'],
       isActive: true,
@@ -74,7 +81,7 @@ export async function seed(): Promise<void> {
     {
       id: 10,
       parentId: 3,
-      name: 'Playstation 5',
+      name: 'PlayStation 5',
       slug: 'ps5',
       codes: ['PS5'],
       isActive: true,

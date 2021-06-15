@@ -1,8 +1,9 @@
-import clsx from 'clsx';
 import React from 'react';
+import clsx from 'clsx';
+import Flex, { FlexProps } from '../Flex';
 import './CardContent.scss';
 
-export type CardContentProps = React.ComponentPropsWithRef<'div'>;
+export type CardContentProps = FlexProps;
 
 function CardContent(
   props: CardContentProps,
@@ -12,9 +13,9 @@ function CardContent(
   const classes: string = clsx('card-content', className);
 
   return (
-    <div ref={ref} className={classes} {...rest}>
+    <Flex ref={ref} className={classes} container {...rest}>
       {children}
-    </div>
+    </Flex>
   );
 }
 

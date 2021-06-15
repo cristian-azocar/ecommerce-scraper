@@ -1,4 +1,4 @@
-import { setupDotenv } from '@project/utils';
+import setupDotenv from './setupDotenv';
 
 interface Config {
   connection: {

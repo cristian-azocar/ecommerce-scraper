@@ -20,8 +20,7 @@ The project is divided into multiple packages:
 - `packages/database`: a `Node.js` library to serve as an abstraction layer to communicate with the database.
 - `packages/ui`: a `React` library with shared components and styles. It works as a system design across the project websites.
 - `packages/utils`: a `Node.js` library with shared utilities.
-- `packages/client-website`: a `Next.js` website to search for video games.
-- `packages/admin-website`: a `Next.js` website to facilitate the project configuration.
+- `packages/website`: a `Next.js` website to search for the products.
 
 ## Prerequisites
 

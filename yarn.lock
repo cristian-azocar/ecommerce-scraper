@@ -2253,11 +2253,6 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.47.tgz#d7a51db20f0650efec24cd04994f523d93172ed4"
   integrity sha512-c5ciR06jK8u9BstrmJyO97m+klJrrhCf9u3rLu3DEAJBirxRqSCvDQoYKmxuYwQI5SZChAWu+tq9oVlGRuzPAg==
 
-"@types/find-config@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@types/find-config/-/find-config-1.0.0.tgz#6e211985148a166cdaf31f9ad6b6bacdae198c4e"
-  integrity sha512-wyNkArpclTc8XHMiAApJ3z3Ix3ERq8Qh6TrTcwIwAEwN4AgNbdhmf2jb+yIncsQwKjIV9S5qAkaiYxne7JpqKQ==
-
 "@types/glob-base@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@types/glob-base/-/glob-base-0.3.0.tgz#a581d688347e10e50dd7c17d6f2880a10354319d"

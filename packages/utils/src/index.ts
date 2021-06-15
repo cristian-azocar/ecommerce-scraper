@@ -6,5 +6,4 @@ export { default as walkObject } from './walkObject';
 export { default as mergeRefs } from './mergeRefs';
 export { default as getValidChildren } from './getValidChildren';
 export { default as setupDotenv } from './setupDotenv';
-export { default as safeSerialize } from './safeSerialize';
 export * from './types';

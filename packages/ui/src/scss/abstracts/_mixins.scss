@@ -20,3 +20,12 @@
     @content;
   }
 }
+
+@mixin clamp($line-clamp) {
+  /* stylelint-disable property-no-vendor-prefix, value-no-vendor-prefix */
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: $line-clamp;
+  overflow: hidden;
+  /* stylelint-enable property-no-vendor-prefix, value-no-vendor-prefix */
+}

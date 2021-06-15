@@ -129,8 +129,9 @@ export default class BaseParser implements IParser {
 
   protected extractArrivalDate(el: cheerio.Cheerio): Date | undefined {
     const arrivalDate = el.find(this.config.selectors.arrivalDate).text();
+    const parseResult = parseDate(arrivalDate, this.dateFormat);
 
-    return parseDate(arrivalDate, this.dateFormat);
+    return parseResult.isValid ? parseResult.date : undefined;
   }
 
   protected extractConditionId(el: cheerio.Cheerio): number | undefined {

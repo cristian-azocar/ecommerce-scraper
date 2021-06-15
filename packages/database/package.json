@@ -9,9 +9,11 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@project/utils": "^1.0.0",
     "knex": "^0.95.4",
     "knex-stringcase": "^1.4.5",
     "pg": "^8.5.1"
+  },
+  "devDependencies": {
+    "find-config": "^1.0.0"
   }
 }
