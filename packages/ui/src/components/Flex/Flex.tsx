@@ -10,6 +10,7 @@ export interface FlexProps extends React.ComponentPropsWithRef<'div'> {
   container?: boolean;
   item?: boolean;
   grow?: boolean;
+  alignContent?: SystemProps.AlignContent;
   direction?: SystemProps.FlexDirection;
   justifyContent?: SystemProps.JustifyContent;
   alignItems?: SystemProps.AlignItems;
@@ -23,6 +24,7 @@ export interface FlexProps extends React.ComponentPropsWithRef<'div'> {
 
 function Flex(props: FlexProps, ref: React.Ref<HTMLDivElement>): JSX.Element {
   const {
+    alignContent,
     autoGrow,
     children,
     className,
@@ -46,6 +48,7 @@ function Flex(props: FlexProps, ref: React.Ref<HTMLDivElement>): JSX.Element {
       'flex-item': item,
       'flex-auto-grow': container && autoGrow,
       'flex-grow': item && grow,
+      [`flex-align-content-${alignContent}`]: container && alignContent,
       [`flex-direction-${direction}`]: container && direction,
       [`flex-justify-${justifyContent}`]: container && justifyContent,
       [`flex-align-items-${alignItems}`]: container && alignItems,

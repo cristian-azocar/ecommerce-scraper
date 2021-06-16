@@ -10,14 +10,31 @@ export interface ProductCardProps extends CardProps {
   product: Product;
 }
 
+const availabilities: Record<number, string> = {
+  [AvailabilityEnum.OutOfStock]: 'Out of stock',
+  [AvailabilityEnum.Presale]: 'Presale',
+  [AvailabilityEnum.UpcomingRelease]: 'Upcoming release',
+};
+
 export default function ProductCard(props: ProductCardProps): JSX.Element {
   const { product, className, ...rest } = props;
   const outOfStock = product.availabilityId === AvailabilityEnum.OutOfStock;
+  const badge = createBadge();
   const classes = clsx(
     [styles.root],
     { [styles['out-of-stock']]: outOfStock },
     className
   );
+
+  function createBadge(): JSX.Element | null {
+    const label = availabilities[product.availabilityId || 0];
+
+    if (label) {
+      return <ProductBadge>{label}</ProductBadge>;
+    }
+
+    return null;
+  }
 
   return (
     <Card className={classes} {...rest}>
@@ -30,11 +47,16 @@ export default function ProductCard(props: ProductCardProps): JSX.Element {
           className={styles['image-container']}
         >
           <Link href={product.url} external>
-            {outOfStock && <ProductBadge>Out of stock</ProductBadge>}
+            {badge}
             <img src={product.imageUrl} alt={product.name} />
           </Link>
         </Flex>
-        <Flex container item className={styles['product-name-container']}>
+        <Flex
+          container
+          item
+          justifyContent="center"
+          className={styles['product-name-container']}
+        >
           <Flex item>
             <Typography>{product.name}</Typography>
           </Flex>

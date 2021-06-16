@@ -5,6 +5,7 @@
 $flex-direction: (column-reverse, column, row-reverse, row);
 $justify-content: (flex-start, center, flex-end, space-between, space-around, space-evenly);
 $align-items: (flex-start, center, flex-end, stretch, baseline);
+$align-contents: (flex-start, flex-end, center, space-between, space-around, stretch);
 
 @mixin create-columns($breakpoint) {
   @for $i from 1 through 12 {
@@ -68,6 +69,12 @@ $align-items: (flex-start, center, flex-end, stretch, baseline);
   @each $align in $align-items {
     &-align-items-#{$align} {
       align-items: $align;
+    }
+  }
+
+  @each $align in $align-contents {
+    &-align-content-#{$align} {
+      align-content: $align;
     }
   }
 

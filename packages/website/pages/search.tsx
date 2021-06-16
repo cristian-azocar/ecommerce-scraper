@@ -1,44 +1,28 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import { Flex } from '@project/ui';
-import db, { Category, Product } from '@project/database';
-import { safeSerialize } from '../utils';
+import db, { Product } from '@project/database';
 import Content from '../components/layout/Content';
-import ProductCard from '../components/product/ProductCard';
-import { ResultStats, ResultsNotFound } from '../components/search';
-import SearchFilters from '../components/search/SearchFilters';
+import { createFilter, safeSerialize } from '../utils';
+import { FilterBar, Filter } from '../components/search';
+import SearchResults from '../components/search/SearchResults';
 
 export interface SearchProps {
-  query?: string;
+  query: string;
   products?: Product[];
-  categories?: Category[];
+  filters: Filter[];
 }
 
 export default function Search(props: SearchProps): JSX.Element {
-  const { query, products, categories } = props;
-
-  if (!products?.length || !query) {
-    return (
-      <Content>
-        <ResultsNotFound />
-      </Content>
-    );
-  }
+  const { query, products, filters } = props;
 
   return (
     <Content>
       <Flex container>
         <Flex item xs={2}>
-          <SearchFilters />
+          <FilterBar filters={filters} />
         </Flex>
-        <Flex container item xs={10}>
-          <Flex item xs={12}>
-            <ResultStats numberOfResults={products.length} query={query} />
-          </Flex>
-          {products?.map((product) => (
-            <Flex item xs={6} sm={3} key={product.id}>
-              <ProductCard product={product} />
-            </Flex>
-          ))}
+        <Flex item xs={10}>
+          <SearchResults products={products} query={query} />
         </Flex>
       </Flex>
     </Content>
@@ -56,14 +40,27 @@ export async function getServerSideProps(
     };
   }
 
-  const products = await db.product.findByName(q);
+  // TODO: move this logic to a dedicated service
+  // TODO: try to fetch data in a single query to the database
+  const products = await db.product.findByName(q, {
+    availabilityId: ctx.query.availability,
+    categoryId: ctx.query.category,
+  });
   const categories = await db.category.findAll();
+  const availabilities = await db.availability.findAll();
+
+  // TODO: avoid hard-coding the "parentId"
+  const platforms = categories.filter((category) => category.parentId === 3);
+  const filters = [
+    createFilter('Availability', 'availability', availabilities),
+    createFilter('Category', 'category', platforms),
+  ];
 
   return {
     props: {
       query: q,
       products: safeSerialize(products),
-      categories: safeSerialize(categories),
+      filters,
     },
   };
 }

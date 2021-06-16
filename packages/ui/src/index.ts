@@ -39,3 +39,6 @@ export type { TypographyProps } from './components/Typography';
 
 export { default as Link } from './components/Link';
 export type { LinkProps } from './components/Link';
+
+export { default as Checkbox } from './components/Checkbox';
+export type { CheckboxProps } from './components/Checkbox';

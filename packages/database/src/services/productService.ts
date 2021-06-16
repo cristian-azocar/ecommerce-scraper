@@ -13,16 +13,31 @@ const distinctFromQuery = distinctFrom(db, product.tableName, [
   'arrival_date',
 ]);
 
+export type Condition = Partial<
+  Record<keyof Product, string | number | (string | number)[]>
+>;
+
 export default class ProductService {
   async findAll(): Promise<Product[]> {
     return db.select().from(product.tableName);
   }
 
-  async findByName(name: string): Promise<Product[]> {
-    return db
+  async findByName(name: string, condition: Condition): Promise<Product[]> {
+    const query = db
       .select()
       .from(product.tableName)
       .where('name', 'ilike', `%${name}%`);
+
+    Object.entries(condition).forEach(([key, value]) => {
+      if (value) {
+        const normalizedValue = Array.isArray(value) ? value : [value];
+        if (normalizedValue.length) {
+          query.whereIn(key, normalizedValue);
+        }
+      }
+    });
+
+    return query;
   }
 
   async create(products: Product | Product[]): Promise<void> {
