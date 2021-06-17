@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Head from 'next/head';
 import styles from './Content.module.scss';
 
@@ -6,10 +7,11 @@ export interface ContentProps extends React.ComponentPropsWithoutRef<'div'> {
 }
 
 export default function Content(props: ContentProps): JSX.Element {
-  const { children, title = 'E-Commerce Scraper', ...rest } = props;
+  const { children, className, title = 'E-Commerce Scraper', ...rest } = props;
+  const classes = clsx([styles.root], className);
 
   return (
-    <div className={styles.root} {...rest}>
+    <div className={classes} {...rest}>
       <Head>
         <title>{title}</title>
         <meta name="description" content="E-Commerce scraper" />

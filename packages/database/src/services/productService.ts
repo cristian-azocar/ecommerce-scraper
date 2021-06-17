@@ -17,12 +17,18 @@ export type Condition = Partial<
   Record<keyof Product, string | number | (string | number)[]>
 >;
 
+export type OrderBy = Partial<Record<keyof Product, 'asc' | 'desc'>>;
+
 export default class ProductService {
   async findAll(): Promise<Product[]> {
     return db.select().from(product.tableName);
   }
 
-  async findByName(name: string, condition: Condition): Promise<Product[]> {
+  async findByName(
+    name: string,
+    condition: Condition,
+    orderBy: OrderBy
+  ): Promise<Product[]> {
     const query = db
       .select()
       .from(product.tableName)
@@ -36,6 +42,12 @@ export default class ProductService {
         }
       }
     });
+
+    if (orderBy) {
+      Object.entries(orderBy).forEach(([key, value]) => {
+        query.orderBy(key, value);
+      });
+    }
 
     return query;
   }

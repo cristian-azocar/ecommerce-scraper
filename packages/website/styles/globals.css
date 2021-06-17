@@ -1,5 +1,5 @@
 /* stylelint-disable-next-line selector-max-id */
 html,
 #__next {
-  min-height: 100vh;
+  min-height: 100%;
 }
