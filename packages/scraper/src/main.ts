@@ -49,7 +49,7 @@ export default async function main(): Promise<void> {
         const products: Product[] = await scraper.scrape();
         const t1: number = performance.now();
 
-        saveProductsToDatabase(products);
+        await saveProductsToDatabase(products);
         logger.info(`Scraping finished in ${t1 - t0} milliseconds`);
       } catch (e) {
         logger.error(e);

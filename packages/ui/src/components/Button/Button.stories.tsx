@@ -18,7 +18,7 @@ export default {
       control: { type: 'select' },
     },
     size: {
-      options: [undefined, 'sm', 'md', 'lg'],
+      options: [undefined, 'xs', 'sm', 'md', 'lg', 'xl'],
       control: { type: 'select' },
     },
     variant: {
@@ -48,7 +48,7 @@ Color.args = {
 export const Size = Template.bind({});
 Size.args = {
   children: 'Medium',
-  size: 'medium',
+  size: 'md',
 };
 
 export const Variant = Template.bind({});

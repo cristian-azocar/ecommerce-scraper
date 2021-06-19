@@ -2,27 +2,27 @@
 
 $sizes: (
   'xs': (
-    'height': var(--size-xs),
+    'height': var(--size-6),
     'font-size': var(--font-size-xs),
     'padding': 0 var(--space-2)
   ),
   'sm': (
-    'height': var(--size-sm),
+    'height': var(--size-8),
     'font-size': var(--font-size-sm),
     'padding': 0 var(--space-3)
   ),
   'md': (
-    'height': var(--size-md),
+    'height': var(--size-10),
     'font-size': var(--font-size-md),
     'padding': 0 var(--space-4)
   ),
   'lg': (
-    'height': var(--size-lg),
+    'height': var(--size-12),
     'font-size': var(--font-size-lg),
     'padding': 0 var(--space-4)
   ),
   'xl': (
-    'height': var(--size-xl),
+    'height': var(--size-14),
     'font-size': var(--font-size-xl),
     'padding': 0 var(--space-5)
   ),
@@ -30,7 +30,8 @@ $sizes: (
 
 .input {
   appearance: none;
-  border: 1px solid var(--color-gray-400);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border-base);
   border-radius: var(--border-radius-md);
   color: currentColor;
   font-size: map.get($sizes, 'md', 'font-size');

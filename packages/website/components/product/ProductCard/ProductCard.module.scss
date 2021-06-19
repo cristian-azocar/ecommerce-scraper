@@ -1,0 +1,36 @@
+@use '@project/ui/src/scss/abstracts/mixins' as *;
+
+.root {
+  margin-bottom: var(--space-6);
+  margin-left: var(--space-3);
+  margin-right: var(--space-3);
+}
+
+.image-container {
+  height: 190px;
+
+  a {
+    position: relative;
+  }
+
+  img {
+    align-self: center;
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+
+.product-name-container {
+  height: var(--size-14);
+  margin-top: var(--space-2);
+
+  p {
+    @include clamp(2);
+  }
+}
+
+.out-of-stock {
+  img {
+    opacity: 0.3;
+  }
+}

@@ -1,0 +1,13 @@
+.grid {
+  height: 100%;
+  text-align: center;
+
+  > div:not(:last-child) {
+    margin-bottom: var(--space-6);
+  }
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: var(--font-weight-bold);
+}

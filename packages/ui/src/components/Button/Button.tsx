@@ -12,10 +12,9 @@ export interface ButtonProps extends React.ComponentPropsWithRef<'button'> {
   leftIcon?: React.ReactNode;
   loading?: boolean;
   rightIcon?: React.ReactNode;
-  size?: SystemProps.ButtonSize;
+  size?: SystemProps.Size;
   target?: '_self' | '_blank' | '_parent' | '_top';
-  type?: 'button' | 'reset' | 'submit';
-  variant?: SystemProps.ButtonVariant;
+  variant?: 'solid' | 'outlined' | 'text';
 }
 
 function Button(

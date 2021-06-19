@@ -1,0 +1,14 @@
+.root {
+  border-top: 1px solid var(--color-border-base);
+  padding-bottom: var(--space-8);
+  padding-top: var(--space-8);
+  text-align: center;
+
+  svg {
+    vertical-align: middle;
+  }
+}
+
+.social-links {
+  margin-top: var(--space-1);
+}

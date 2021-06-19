@@ -67,11 +67,9 @@ export default class ZmartParser extends BaseParser {
       [, dateStr] = lines[1].split(':');
     }
 
-    if (dateStr) {
-      return parseDate(dateStr, this.dateFormat);
-    }
+    const parseResult = parseDate(dateStr, this.dateFormat);
 
-    return undefined;
+    return parseResult.isValid ? parseResult.date : undefined;
   }
 
   protected extractConditionId(el: cheerio.Cheerio): number | undefined {

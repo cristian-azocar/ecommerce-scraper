@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable global-require */
 /* eslint-disable import/no-extraneous-dependencies */
-import path from 'path';
-
+/* eslint-disable @typescript-eslint/no-var-requires */
 export default function setupDotenv(): void {
-  const envPath = path.resolve(__dirname, `../../../../.env`);
-  require('dotenv').config({ path: envPath });
+  const findConfig = require('find-config');
+  const dotenv = require('dotenv');
+
+  dotenv.config({ path: findConfig('.env') ?? undefined });
 }

@@ -8,8 +8,12 @@ $typography-colors: map.merge($colors,
 ));
 
 $typography-variants: (
-  'body': (
+  'body1': (
     'font-size': var(--font-size-base),
+    'font-weight': var(--font-weight-normal)
+  ),
+  'body2': (
+    'font-size': var(--font-size-sm),
     'font-weight': var(--font-weight-normal)
   ),
   'h1': (
@@ -39,6 +43,8 @@ $typography-variants: (
 );
 
 .typography {
+  display: block;
+
   @each $name, $value in $typography-variants {
     &-#{$name} {
       font-size: map.get($value, 'font-size');

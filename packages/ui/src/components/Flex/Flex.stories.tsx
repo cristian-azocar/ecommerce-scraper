@@ -6,7 +6,7 @@ const Box = ({ children }: React.ComponentPropsWithoutRef<'div'>) => (
   <div
     style={{
       backgroundColor: '#00d1b2',
-      color: 'white',
+      color: '#fff',
       fontWeight: 600,
       textAlign: 'center',
     }}
@@ -136,3 +136,17 @@ AutoGrow.args = {
   autoGrow: true,
   spacing: 2,
 };
+
+export const SingleGrow: Story<FlexProps> = (args) => (
+  <Flex container spacing={2} {...args}>
+    <Flex item>
+      <Box>Col 1</Box>
+    </Flex>
+    <Flex item grow>
+      <Box>Col 2</Box>
+    </Flex>
+    <Flex item>
+      <Box>Col 3</Box>
+    </Flex>
+  </Flex>
+);

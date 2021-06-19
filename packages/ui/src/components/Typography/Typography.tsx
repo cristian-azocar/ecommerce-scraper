@@ -20,7 +20,8 @@ const variantMapping = {
   h4: 'h4',
   h5: 'h5',
   h6: 'h6',
-  body: 'p',
+  body1: 'p',
+  body2: 'p',
 };
 
 function Typography(
@@ -28,19 +29,19 @@ function Typography(
   ref: React.Ref<HTMLElement>
 ): JSX.Element {
   const {
-    as,
+    variant = 'body1',
+    as: Component = variantMapping[variant] || 'p',
     align,
     children,
     color,
     className,
     weight,
-    variant = 'body',
     ...rest
   } = props;
-  const Component = as || variantMapping[variant] || 'p';
   const classes: string = clsx(
+    'typography',
+    [`typography-${variant}`],
     {
-      [`typography-${variant}`]: variant,
       [`typography-color-${color}`]: color,
       [`typography-align-${align}`]: align,
       [`typography-weight-${weight}`]: weight,

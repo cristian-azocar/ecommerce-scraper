@@ -1,0 +1,36 @@
+$sizes: (
+  'xs': var(--size-2),
+  'sm': var(--size-3),
+  'md': var(--size-4),
+  'lg': var(--size-5),
+  'xl': var(--size-6),
+);
+
+.checkbox {
+  align-items: center;
+  cursor: pointer;
+  display: inline-flex;
+
+  &-input {
+    cursor: pointer;
+    font-size: var(--font-size-md);
+    height: var(--size-4);
+    width: var(--size-4);
+  }
+
+  &-label {
+    margin-left: var(--space-2);
+    user-select: none;
+  }
+}
+
+@each $name, $size in $sizes {
+  .checkbox-#{$name} {
+    font-size: var(--font-size-#{$name});
+
+    .checkbox-input {
+      height: $size;
+      width: $size;
+    }
+  }
+}
