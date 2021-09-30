@@ -3,8 +3,7 @@ import { Flex } from '@project/ui';
 import db, { Product } from '@project/database';
 import Content from '../components/layout/Content';
 import { createFilter, safeSerialize } from '../utils';
-import { FilterBar, Filter } from '../components/search';
-import SearchResults from '../components/search/SearchResults';
+import { FilterBar, Filter, SearchResults } from '../components/search';
 import { SortOption } from '../components/search/SortFilter';
 import styles from '../styles/Search.module.scss';
 
