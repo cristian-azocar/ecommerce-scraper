@@ -35,7 +35,7 @@ export default function SearchResults(props: SearchResultsProps): JSX.Element {
           <Typography>Oops, couldn&apos;t find anything :(</Typography>
         </Flex>
       ) : (
-        products?.map((product) => (
+        products.map((product) => (
           <Flex item xs={6} sm={3} key={product.id}>
             <ProductCard product={product} />
           </Flex>
