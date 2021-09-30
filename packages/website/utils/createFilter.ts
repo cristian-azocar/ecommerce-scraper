@@ -1,4 +1,4 @@
-import { Filter } from '../components/search/FilterBar';
+import { Filter } from '../pages/search/components/FilterBar';
 
 export default function createFilter(
   title: string,

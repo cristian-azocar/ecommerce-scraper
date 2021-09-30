@@ -1,6 +1,6 @@
 import { Flex, FlexProps, Typography } from '@project/ui';
 import { Product } from '@project/database';
-import ProductCard from '../../product/ProductCard';
+import ProductCard from '../ProductCard';
 import ResultStats from '../ResultStats';
 import SortFilter, { SortOption } from '../SortFilter';
 import styles from './SearchResults.module.scss';

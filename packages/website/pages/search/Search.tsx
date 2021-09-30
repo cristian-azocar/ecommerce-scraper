@@ -1,11 +1,10 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import { Flex } from '@project/ui';
 import db, { Product } from '@project/database';
-import Content from '../components/layout/Content';
-import { createFilter, safeSerialize } from '../utils';
-import { FilterBar, Filter, SearchResults } from '../components/search';
-import { SortOption } from '../components/search/SortFilter';
-import styles from '../styles/Search.module.scss';
+import Content from '../../components/layout/Content';
+import { createFilter, safeSerialize } from '../../utils';
+import { FilterBar, Filter, SearchResults, SortOption } from './components';
+import styles from './Search.module.scss';
 
 const sortOptions: SortOption[] = [
   {

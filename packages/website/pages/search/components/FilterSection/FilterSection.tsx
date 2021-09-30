@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Checkbox } from '@project/ui';
 import { Filter, FilterOption } from '../FilterBar';
-import { isBrowser } from '../../../utils';
+import { isBrowser } from '../../../../utils';
 import styles from './FilterSection.module.scss';
 
 export interface FilterSectionProps

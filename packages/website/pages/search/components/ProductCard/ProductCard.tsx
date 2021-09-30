@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { Card, CardProps, Flex, Link, Typography } from '@project/ui';
 import { Product } from '@project/database';
 import { AvailabilityEnum } from '@project/database/src/enums'; // TODO: please fix this import
-import Currency from '../Currency';
+import Currency from '../../../../components/Currency';
 import ProductBadge from '../ProductBadge';
 import styles from './ProductCard.module.scss';
 
