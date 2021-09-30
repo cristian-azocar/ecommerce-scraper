@@ -10,6 +10,7 @@
   "dependencies": {
     "@project/database": "^1.0.0",
     "@project/ui": "^1.0.0",
+    "@reduxjs/toolkit": "^1.6.1",
     "clsx": "^1.1.1",
     "next": "10.2.3",
     "next-transpile-modules": "^7.2.0",
