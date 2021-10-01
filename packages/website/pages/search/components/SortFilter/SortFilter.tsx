@@ -1,35 +1,26 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { Flex, FlexProps, Typography } from '@project/ui';
+import { Flex, Typography } from '@project/ui';
+import { SortOption } from '../../types';
 import styles from './SortFilter.module.scss';
 
-export interface SortOption {
-  label: string;
-  value: string;
-  name?: string;
-  order?: 'asc' | 'desc';
-}
-
-export interface SortFilterProps extends FlexProps {
+export interface SortFilterProps {
   options: SortOption[];
+  sortKey: string;
+  onSort: (value: string) => void;
 }
 
 export default function SortFilter(props: SortFilterProps): JSX.Element {
-  const { options } = props;
+  const { options, sortKey, onSort } = props;
   const router = useRouter();
 
   function handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>): void {
-    const select = e.target;
-    const urlParams = new URLSearchParams(window.location.search);
-
-    urlParams.set('sortBy', select.value);
-
-    window.location.search = urlParams.toString();
+    onSort(e.target.value);
   }
 
   function getDefaultValue(): string | undefined {
-    const { sortBy } = router.query;
-    const selectedOption = options.find((option) => option.value === sortBy);
+    const value = router.query[sortKey];
+    const selectedOption = options.find((option) => option.value === value);
 
     return selectedOption?.value;
   }

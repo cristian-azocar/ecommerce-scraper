@@ -1,12 +1,12 @@
 import clsx from 'clsx';
-import { Card, CardProps, Flex, Link, Typography } from '@project/ui';
+import { Card, Flex, Link, Typography } from '@project/ui';
 import { Product } from '@project/database';
 import { AvailabilityEnum } from '@project/database/src/enums'; // TODO: please fix this import
 import Currency from '../../../../components/Currency';
 import ProductBadge from '../ProductBadge';
 import styles from './ProductCard.module.scss';
 
-export interface ProductCardProps extends CardProps {
+export interface ProductCardProps {
   product: Product;
 }
 
@@ -17,16 +17,11 @@ const availabilities: Record<number, string> = {
 };
 
 export default function ProductCard(props: ProductCardProps): JSX.Element {
-  const { product, className, ...rest } = props;
+  const { product } = props;
   const outOfStock = product.availabilityId === AvailabilityEnum.OutOfStock;
-  const badge = createBadge();
-  const classes = clsx(
-    [styles.root],
-    { [styles['out-of-stock']]: outOfStock },
-    className
-  );
+  const classes = clsx([styles.root], { [styles['out-of-stock']]: outOfStock });
 
-  function createBadge(): JSX.Element | null {
+  function renderBadge(): JSX.Element | null {
     const label = availabilities[product.availabilityId || 0];
 
     if (label) {
@@ -37,7 +32,7 @@ export default function ProductCard(props: ProductCardProps): JSX.Element {
   }
 
   return (
-    <Card className={classes} {...rest}>
+    <Card className={classes}>
       <Card.Content direction="column" className="text-center">
         <Flex
           container
@@ -47,7 +42,7 @@ export default function ProductCard(props: ProductCardProps): JSX.Element {
           className={styles['image-container']}
         >
           <Link href={product.url} external>
-            {badge}
+            {renderBadge()}
             <img src={product.imageUrl} alt={product.name} />
           </Link>
         </Flex>

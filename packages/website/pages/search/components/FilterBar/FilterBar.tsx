@@ -1,34 +1,25 @@
-import clsx from 'clsx';
 import { Flex } from '@project/ui';
 import FilterSection from '../FilterSection';
+import { Filter } from '../../../../contexts/SearchContext';
 import styles from './FilterBar.module.scss';
 
-export interface FilterOption {
-  label: string;
-  value: string | number | undefined;
-  slug: string;
-}
-
-export interface Filter {
-  title: string;
-  slug: string;
-  options: FilterOption[];
-}
-
-export interface FilterBarProps
-  extends React.ComponentPropsWithoutRef<'aside'> {
+export interface FilterBarProps {
   filters: Filter[];
+  onFilter: (name: string, value: string, checked: boolean) => void;
 }
 
 export default function FilterBar(props: FilterBarProps): JSX.Element {
-  const { filters, className, ...rest } = props;
-  const classes = clsx([styles.root], className);
+  const { filters, onFilter } = props;
 
   return (
-    <aside className={classes} {...rest}>
+    <aside id="filter-bar" className={styles.root}>
       <Flex container direction="column">
-        {filters?.map((filter) => (
-          <FilterSection key={filter.title} filter={filter} />
+        {filters.map((filter) => (
+          <FilterSection
+            key={filter.slug}
+            filter={filter}
+            onFilter={onFilter}
+          />
         ))}
       </Flex>
     </aside>

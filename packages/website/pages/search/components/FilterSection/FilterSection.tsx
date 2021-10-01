@@ -1,63 +1,48 @@
 import React from 'react';
 import { Typography, Checkbox } from '@project/ui';
-import { Filter, FilterOption } from '../FilterBar';
-import { isBrowser } from '../../../../utils';
+import { useRouter } from 'next/router';
+import { Filter, FilterOption } from '../../../../contexts/SearchContext';
 import styles from './FilterSection.module.scss';
 
-export interface FilterSectionProps
-  extends React.ComponentPropsWithoutRef<'section'> {
+export interface FilterSectionProps {
   filter: Filter;
+  onFilter: (name: string, value: string, checked: boolean) => void;
 }
 
 export default function FilterSection(props: FilterSectionProps): JSX.Element {
-  const { filter, ...rest } = props;
+  const { filter, onFilter } = props;
+  const router = useRouter();
 
   function handleCheckboxClick(e: React.FormEvent<HTMLInputElement>): void {
-    const checkbox = e.target as HTMLInputElement;
-    const urlParams = new URLSearchParams(window.location.search);
-    const filterValues = urlParams.getAll(checkbox.name);
-
-    if (checkbox.checked) {
-      filterValues.push(checkbox.value);
-    } else {
-      const index = filterValues.indexOf(checkbox.value);
-      filterValues.splice(index, 1);
-    }
-
-    urlParams.delete(checkbox.name);
-    filterValues.forEach((value) => {
-      urlParams.append(checkbox.name, value);
-    });
-
-    window.location.search = urlParams.toString();
+    const { name, value, checked } = e.target as HTMLInputElement;
+    onFilter(name, value, checked);
   }
 
   function isChecked(option: FilterOption): boolean {
-    if (isBrowser()) {
-      const urlParams = new URLSearchParams(window.location.search);
-      const values = urlParams.getAll(filter.slug);
+    const values = router.query[filter.slug];
 
-      return values.some((value) => value === option.value?.toString());
+    if (Array.isArray(values)) {
+      return values.some((value) => value === option.id.toString());
     }
 
-    return false;
+    return values === option.id.toString();
   }
 
   return (
-    <section className="filter-section" {...rest}>
+    <section className="filter-section">
       <Typography className={styles.title}>{filter.title}</Typography>
       <ul>
         {filter.options.map((option) => (
-          <li key={option.value}>
+          <li key={option.id}>
             <Checkbox
-              value={option.value}
+              value={option.id}
               inputProps={{
                 name: filter.slug,
                 defaultChecked: isChecked(option),
                 onClick: handleCheckboxClick,
               }}
             >
-              {option.label}
+              {option.name}
             </Checkbox>
           </li>
         ))}
