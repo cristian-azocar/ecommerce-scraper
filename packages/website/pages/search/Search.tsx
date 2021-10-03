@@ -1,6 +1,11 @@
 import { Flex } from '@project/ui';
 import Content from '../../components/layout/Content';
-import { FilterBar, SearchResults } from './components';
+import {
+  FilterBar,
+  SearchResults,
+  SortFilter,
+  ResultStats,
+} from './components';
 import { EnhancedProduct, Filter, SortOption } from './types';
 import styles from './Search.module.scss';
 
@@ -48,14 +53,22 @@ export default function Search(props: SearchProps): JSX.Element {
         <Flex item xs={2}>
           <FilterBar filters={filters} onFilter={applyFilter} />
         </Flex>
-        <Flex item xs={10}>
-          <SearchResults
-            products={products}
-            query={query}
-            sortOptions={sortOptions}
-            sortKey={sortKey}
-            onSort={applySort}
-          />
+        <Flex container item xs={10}>
+          <Flex container item justifyContent="space-between">
+            <Flex item>
+              <ResultStats numberOfResults={products.length} query={query} />
+            </Flex>
+            <Flex item>
+              <SortFilter
+                options={sortOptions}
+                sortKey={sortKey}
+                onSort={applySort}
+              />
+            </Flex>
+          </Flex>
+          <Flex item>
+            <SearchResults products={products} query={query} />
+          </Flex>
         </Flex>
       </Flex>
     </Content>
