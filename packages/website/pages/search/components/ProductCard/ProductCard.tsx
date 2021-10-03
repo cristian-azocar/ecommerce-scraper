@@ -1,35 +1,19 @@
 import clsx from 'clsx';
 import { Card, Flex, Link, Typography } from '@project/ui';
-import { Product } from '@project/database';
-import { AvailabilityEnum } from '@project/database/src/enums'; // TODO: please fix this import
 import Currency from '../../../../components/Currency';
 import ProductBadge from '../ProductBadge';
+import { EnhancedProduct } from '../../types';
 import styles from './ProductCard.module.scss';
 
 export interface ProductCardProps {
-  product: Product;
+  product: EnhancedProduct;
 }
-
-const availabilities: Record<number, string> = {
-  [AvailabilityEnum.OutOfStock]: 'Out of stock',
-  [AvailabilityEnum.Presale]: 'Presale',
-  [AvailabilityEnum.UpcomingRelease]: 'Upcoming release',
-};
 
 export default function ProductCard(props: ProductCardProps): JSX.Element {
   const { product } = props;
-  const outOfStock = product.availabilityId === AvailabilityEnum.OutOfStock;
-  const classes = clsx([styles.root], { [styles['out-of-stock']]: outOfStock });
-
-  function renderBadge(): JSX.Element | null {
-    const label = availabilities[product.availabilityId || 0];
-
-    if (label) {
-      return <ProductBadge>{label}</ProductBadge>;
-    }
-
-    return null;
-  }
+  const classes = clsx([styles.root], {
+    [styles.unavailable]: product.isUnavailable,
+  });
 
   return (
     <Card className={classes}>
@@ -42,7 +26,9 @@ export default function ProductCard(props: ProductCardProps): JSX.Element {
           className={styles['image-container']}
         >
           <Link href={product.url} external>
-            {renderBadge()}
+            {product.isUnavailable && (
+              <ProductBadge>{product.availability?.name}</ProductBadge>
+            )}
             <img src={product.imageUrl} alt={product.name} />
           </Link>
         </Flex>

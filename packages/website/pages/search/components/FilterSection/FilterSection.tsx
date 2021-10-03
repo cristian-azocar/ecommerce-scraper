@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Checkbox } from '@project/ui';
 import { useRouter } from 'next/router';
-import { Filter, FilterOption } from '../../../../contexts/SearchContext';
+import { Filter, FilterOption } from '../../types';
 import styles from './FilterSection.module.scss';
 
 export interface FilterSectionProps {

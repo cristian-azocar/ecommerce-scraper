@@ -1,1 +1,2 @@
-export { default, getServerSideProps } from './Search';
+export { default } from './Search';
+export { default as getServerSideProps } from './getServerSideProps';

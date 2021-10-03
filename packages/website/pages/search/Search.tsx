@@ -1,42 +1,19 @@
-import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import { Flex } from '@project/ui';
-import db, { Product } from '@project/database';
 import Content from '../../components/layout/Content';
 import { FilterBar, SearchResults } from './components';
-import { safeSerialize } from '../../utils';
-import { Filter, SortOption } from './types';
+import { EnhancedProduct, Filter, SortOption } from './types';
 import styles from './Search.module.scss';
-
-const sortKey = 'sortBy';
-
-// TODO: maybe read this from the database?
-const sortOptions: SortOption[] = [
-  {
-    label: 'Best Matches',
-    value: 'best-matches',
-  },
-  {
-    label: 'Price: Low to High',
-    value: 'price-low-to-high',
-    name: 'price',
-    order: 'asc',
-  },
-  {
-    label: 'Price: High to Low',
-    value: 'price-high-to-low',
-    name: 'price',
-    order: 'desc',
-  },
-];
 
 export interface SearchProps {
   query: string;
-  products: Product[];
+  products: EnhancedProduct[];
   filters: Filter[];
+  sortKey: string;
+  sortOptions: SortOption[];
 }
 
 export default function Search(props: SearchProps): JSX.Element {
-  const { query, products, filters } = props;
+  const { query, products, filters, sortKey, sortOptions } = props;
 
   function applySort(value: string): void {
     const urlParams = new URLSearchParams(window.location.search);
@@ -83,48 +60,4 @@ export default function Search(props: SearchProps): JSX.Element {
       </Flex>
     </Content>
   );
-}
-
-export async function getServerSideProps(
-  ctx: GetServerSidePropsContext
-): Promise<GetServerSidePropsResult<SearchProps>> {
-  const { q } = ctx.query;
-
-  if (!q || typeof q !== 'string') {
-    return {
-      redirect: { permanent: false, destination: '/' },
-    };
-  }
-
-  const selectedSort = sortOptions.find(
-    (option) => option.value === ctx.query[sortKey]
-  );
-  const orderBy = selectedSort?.name
-    ? { [selectedSort.name]: selectedSort.order }
-    : {};
-  const condition = {
-    availabilityId: ctx.query.availability,
-    categoryId: ctx.query.category,
-  };
-
-  // TODO: move this logic to a dedicated service
-  // TODO: try to fetch data in a single query to the database
-  const products = await db.product.findByName(q, condition, orderBy);
-  const categories = await db.category.findAll();
-  const availabilities = await db.availability.findAll();
-
-  // TODO: avoid hard-coding the "parentId"
-  const platforms = categories.filter((category) => category.parentId === 3);
-  const filters: Filter[] = [
-    { title: 'Availability', slug: 'availability', options: availabilities },
-    { title: 'Category', slug: 'category', options: platforms },
-  ];
-
-  return {
-    props: {
-      query: q,
-      products: safeSerialize(products),
-      filters: safeSerialize(filters),
-    },
-  };
 }

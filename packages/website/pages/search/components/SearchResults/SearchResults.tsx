@@ -1,12 +1,12 @@
 import { Flex, Typography } from '@project/ui';
-import { Product } from '@project/database';
 import ProductCard from '../ProductCard';
 import ResultStats from '../ResultStats';
-import SortFilter, { SortOption } from '../SortFilter';
+import SortFilter from '../SortFilter';
+import { EnhancedProduct, SortOption } from '../../types';
 import styles from './SearchResults.module.scss';
 
 export interface SearchResultsProps {
-  products: Product[];
+  products: EnhancedProduct[];
   query: string;
   sortOptions: SortOption[];
   sortKey: string;

@@ -1,4 +1,4 @@
-import { Availability, Category } from '@project/database';
+import { Availability, Category, Product } from '@project/database';
 
 export interface SortOption {
   label: string;
@@ -13,4 +13,9 @@ export interface Filter {
   title: string;
   slug: string;
   options: FilterOption[];
+}
+
+export interface EnhancedProduct extends Product {
+  availability?: Availability;
+  isUnavailable: boolean;
 }

@@ -1,6 +1,6 @@
 import { Flex } from '@project/ui';
 import FilterSection from '../FilterSection';
-import { Filter } from '../../../../contexts/SearchContext';
+import { Filter } from '../../types';
 import styles from './FilterBar.module.scss';
 
 export interface FilterBarProps {

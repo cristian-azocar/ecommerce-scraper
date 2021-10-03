@@ -1,7 +1,7 @@
 import Availability from '../models/Availability';
 import db from '../internal/dbClient';
 import schema from '../schemaBuilder/schema';
-import { AvailabilityEnum } from '../enums';
+import { AvailabilityEnum } from '../types';
 
 const { availability } = schema;
 
