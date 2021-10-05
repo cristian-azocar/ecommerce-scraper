@@ -1,6 +1,6 @@
 import { Flex } from '@project/ui';
 import SortFilter from '../SortFilter';
-import ResultStats from '../ResultStats';
+import ResultsStats from '../ResultsStats';
 import { SortOption } from '../../types';
 
 export interface ResultsHeaderProps {
@@ -17,7 +17,7 @@ export default function ResultsHeader(props: ResultsHeaderProps): JSX.Element {
   return (
     <Flex container justifyContent="space-between">
       <Flex item>
-        <ResultStats numberOfResults={numberOfResults} query={query} />
+        <ResultsStats numberOfResults={numberOfResults} query={query} />
       </Flex>
       <Flex item>
         <SortFilter options={sortOptions} sortKey={sortKey} onSort={onSort} />
