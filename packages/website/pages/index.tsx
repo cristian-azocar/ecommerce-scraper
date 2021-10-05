@@ -22,8 +22,7 @@ export default function Index(): JSX.Element {
             Hello there! <Emoji>👋</Emoji>
           </Typography>
           <Typography variant="h5">
-            Search a video game to see the results of the scraper{' '}
-            <Emoji>👆</Emoji>
+            Search for a video game to see the scraper results <Emoji>👆</Emoji>
           </Typography>
         </Flex>
         <Flex item>
