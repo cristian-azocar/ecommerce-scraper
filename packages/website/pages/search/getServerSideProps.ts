@@ -61,13 +61,15 @@ export default async function getServerSideProps(
     { title: 'Category', slug: 'category', options: platforms },
   ];
 
-  const enhancedProducts: EnhancedProduct[] = products.map((product) => ({
-    ...product,
-    availability: availabilities.find(
-      (availability) => availability.id === product.availabilityId
-    ),
-    isUnavailable: product.availabilityId !== AvailabilityEnum.Available,
-  }));
+  const enhancedProducts = products.map(
+    (product): EnhancedProduct => ({
+      ...product,
+      availability: availabilities.find(
+        (availability) => availability.id === product.availabilityId
+      ),
+      isUnavailable: product.availabilityId !== AvailabilityEnum.Available,
+    })
+  );
 
   return {
     props: {
