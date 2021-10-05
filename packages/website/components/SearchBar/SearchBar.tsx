@@ -17,7 +17,7 @@ export default function SearchBar(props: SearchBarProps): JSX.Element {
         <Input
           placeholder="Search..."
           type="text"
-          name="q"
+          name={QUERY_KEY}
           defaultValue={router.query[QUERY_KEY]}
         />
       </InputGroup>
