@@ -1,15 +1,12 @@
 import { Flex } from '@project/ui';
-import SortFilter from '../SortFilter';
-import ResultsStats from '../ResultsStats';
+import SortFilter, { SortFilterProps } from '../SortFilter';
+import ResultsStats, { ResultsStatsProps } from '../ResultsStats';
 import { SortOption } from '../../types';
 
-export interface ResultsHeaderProps {
-  numberOfResults: number;
-  query: string;
+export type ResultsHeaderProps = {
   sortOptions: SortOption[];
-  sortKey: string;
-  onSort: (value: string) => void;
-}
+} & ResultsStatsProps &
+  Omit<SortFilterProps, 'options'>;
 
 export default function ResultsHeader(props: ResultsHeaderProps): JSX.Element {
   const { numberOfResults, query, sortOptions, sortKey, onSort } = props;
