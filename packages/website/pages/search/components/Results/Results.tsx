@@ -1,13 +1,13 @@
 import { Flex, Typography } from '@project/ui';
 import ProductCard from '../ProductCard';
 import { EnhancedProduct } from '../../types';
-import styles from './SearchResults.module.scss';
+import styles from './Results.module.scss';
 
-export interface SearchResultsProps {
+export interface ResultsProps {
   products: EnhancedProduct[];
 }
 
-export default function SearchResults(props: SearchResultsProps): JSX.Element {
+export default function Results(props: ResultsProps): JSX.Element {
   const { products } = props;
 
   return (

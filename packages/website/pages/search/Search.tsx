@@ -1,6 +1,6 @@
 import { Flex } from '@project/ui';
 import Content from '../../components/layout/Content';
-import { FilterBar, SearchResults, ResultsHeader } from './components';
+import { FilterBar, Results, ResultsHeader } from './components';
 import { EnhancedProduct, Filter, SortOption } from './types';
 import styles from './Search.module.scss';
 
@@ -59,7 +59,7 @@ export default function Search(props: SearchProps): JSX.Element {
             />
           </Flex>
           <Flex item>
-            <SearchResults products={products} />
+            <Results products={products} />
           </Flex>
         </Flex>
       </Flex>
