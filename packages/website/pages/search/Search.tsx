@@ -48,8 +48,8 @@ export default function Search(props: SearchProps): JSX.Element {
         <Flex item xs={2}>
           <FilterBar filters={filters} onFilter={applyFilter} />
         </Flex>
-        <Flex container item xs={10}>
-          <Flex item grow>
+        <Flex container item xs={10} direction="column">
+          <Flex item>
             <ResultsHeader
               numberOfResults={products.length}
               query={query}
