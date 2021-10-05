@@ -5,7 +5,6 @@ import styles from './SearchResults.module.scss';
 
 export interface SearchResultsProps {
   products: EnhancedProduct[];
-  query: string;
 }
 
 export default function SearchResults(props: SearchResultsProps): JSX.Element {
