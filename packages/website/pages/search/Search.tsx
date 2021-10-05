@@ -1,5 +1,6 @@
 import { Flex } from '@project/ui';
 import Content from '../../components/layout/Content';
+import { SORT_KEY } from '../../constants';
 import { FilterBar, Results, ResultsHeader } from './components';
 import { EnhancedProduct, Filter, SortOption } from './types';
 import styles from './Search.module.scss';
@@ -8,16 +9,15 @@ export interface SearchProps {
   query: string;
   products: EnhancedProduct[];
   filters: Filter[];
-  sortKey: string;
   sortOptions: SortOption[];
 }
 
 export default function Search(props: SearchProps): JSX.Element {
-  const { query, products, filters, sortKey, sortOptions } = props;
+  const { query, products, filters, sortOptions } = props;
 
   function applySort(value: string): void {
     const urlParams = new URLSearchParams(window.location.search);
-    urlParams.set(sortKey, value);
+    urlParams.set(SORT_KEY, value);
 
     window.location.search = urlParams.toString();
   }
@@ -54,7 +54,6 @@ export default function Search(props: SearchProps): JSX.Element {
               numberOfResults={products.length}
               query={query}
               sortOptions={sortOptions}
-              sortKey={sortKey}
               onSort={applySort}
             />
           </Flex>

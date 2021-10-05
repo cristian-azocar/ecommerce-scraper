@@ -9,7 +9,7 @@ export type ResultsHeaderProps = {
   Omit<SortFilterProps, 'options'>;
 
 export default function ResultsHeader(props: ResultsHeaderProps): JSX.Element {
-  const { numberOfResults, query, sortOptions, sortKey, onSort } = props;
+  const { numberOfResults, query, sortOptions, onSort } = props;
 
   return (
     <Flex container justifyContent="space-between">
@@ -17,7 +17,7 @@ export default function ResultsHeader(props: ResultsHeaderProps): JSX.Element {
         <ResultsStats numberOfResults={numberOfResults} query={query} />
       </Flex>
       <Flex item>
-        <SortFilter options={sortOptions} sortKey={sortKey} onSort={onSort} />
+        <SortFilter options={sortOptions} onSort={onSort} />
       </Flex>
     </Flex>
   );

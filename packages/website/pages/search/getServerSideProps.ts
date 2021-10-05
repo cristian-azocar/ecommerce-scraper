@@ -3,8 +3,7 @@ import db, { AvailabilityEnum, CategoryEnum } from '@project/database';
 import { SearchProps } from './Search';
 import { EnhancedProduct, Filter, SortOption } from './types';
 import { safeSerialize } from '../../utils';
-
-const sortKey = 'sortBy';
+import { SORT_KEY, QUERY_KEY } from '../../constants';
 
 // TODO: maybe read this from the database?
 const sortOptions: SortOption[] = [
@@ -29,16 +28,16 @@ const sortOptions: SortOption[] = [
 export default async function getServerSideProps(
   ctx: GetServerSidePropsContext
 ): Promise<GetServerSidePropsResult<SearchProps>> {
-  const { q } = ctx.query;
+  const query = ctx.query[QUERY_KEY];
 
-  if (!q || typeof q !== 'string') {
+  if (!query || typeof query !== 'string') {
     return {
       redirect: { permanent: false, destination: '/' },
     };
   }
 
   const selectedSort = sortOptions.find(
-    (option) => option.value === ctx.query[sortKey]
+    (option) => option.value === ctx.query[SORT_KEY]
   );
   const orderBy = selectedSort?.name
     ? { [selectedSort.name]: selectedSort.order }
@@ -49,7 +48,7 @@ export default async function getServerSideProps(
   };
 
   // TODO: try to fetch data in a single query to the database
-  const products = await db.product.findByName(q, condition, orderBy);
+  const products = await db.product.findByName(query, condition, orderBy);
   const categories = await db.category.findAll();
   const availabilities = await db.availability.findAll();
 
@@ -73,10 +72,9 @@ export default async function getServerSideProps(
 
   return {
     props: {
-      query: q,
+      query,
       products: safeSerialize(enhancedProducts),
       filters: safeSerialize(filters),
-      sortKey,
       sortOptions,
     },
   };
