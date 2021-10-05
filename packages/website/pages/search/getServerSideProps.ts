@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
-import db, { AvailabilityEnum } from '@project/database';
+import db, { AvailabilityEnum, CategoryEnum } from '@project/database';
 import { SearchProps } from './Search';
 import { EnhancedProduct, Filter, SortOption } from './types';
 import { safeSerialize } from '../../utils';
@@ -48,14 +48,14 @@ export default async function getServerSideProps(
     categoryId: ctx.query.category,
   };
 
-  // TODO: move this logic to a dedicated service
   // TODO: try to fetch data in a single query to the database
   const products = await db.product.findByName(q, condition, orderBy);
   const categories = await db.category.findAll();
   const availabilities = await db.availability.findAll();
 
-  // TODO: avoid hard-coding the "parentId"
-  const platforms = categories.filter((category) => category.parentId === 3);
+  const platforms = categories.filter(
+    (category) => category.parentId === CategoryEnum.Videogames
+  );
   const filters: Filter[] = [
     { title: 'Availability', slug: 'availability', options: availabilities },
     { title: 'Category', slug: 'category', options: platforms },

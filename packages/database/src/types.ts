@@ -28,3 +28,9 @@ export enum AvailabilityEnum {
   UpcomingRelease = 3,
   Presale = 4,
 }
+
+export enum CategoryEnum {
+  Root = 1,
+  Technology = 2,
+  Videogames = 3,
+}
