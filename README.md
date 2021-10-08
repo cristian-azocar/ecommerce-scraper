@@ -1,26 +1,50 @@
 # E-Commerce scraper
 
 An e-commerce scraper born from the love of software development and videogames.
-This project was initially created as whenever I wanted to buy a videogame, I had to browse on several pages to find:
+This project was initially created because every time I wanted to buy a videogame, I had to browse on several pages to find:
 
-- The retails with the best prices.
-- The retails who had stock of the game.
-- The retails who were selling the game on pre-order.
-- The retails who had a discount.
+- Stores with the best prices.
+- Stores that had stock of the game.
+- Stores that were selling the game on pre-order.
+- Stores that had a discount.
 - If a game price dropped.
 - Etc.
 
-And so I created this tool to gather the products information into a centralized database, and then with a simple search I could get all that I wanted.
+And so I created this tool to gather the products information into a centralized database, and then with a simple search I could get all what I was looking for.
 
 ## Project structure
 
 The project is divided into multiple packages:
 
-- `packages/scraper`: the most important part of the project. It's a `Node.js` script that gathers the information across multiple websites using the scraping method to populate a database.
-- `packages/database`: a `Node.js` library to serve as an abstraction layer to communicate with the database.
-- `packages/ui`: a `React` library with shared components and styles. It works as a system design across the project websites.
-- `packages/utils`: a `Node.js` library with shared utilities.
-- `packages/website`: a `Next.js` website to search for the products.
+`packages/scraper`
+
+The most important part of the project. It's a Node.js script that gathers the information across multiple websites using the scraping method to populate a database.
+
+Tech stack: Node.js, Typescript, Axios and Cheerio.
+
+`packages/database`
+
+A Node.js library to serve as an abstraction layer to communicate with the database.
+
+Tech stack: Typescript, Knex and PostgreSQL.
+
+`packages/ui`
+
+A React library with shared components and styles. It works as a system design across the project websites.
+
+Tech stack: React, Typescript, Storybook and SASS.
+
+`packages/utils`
+
+A Node.js library with shared utilities.
+
+Tech stack: React and Typescript.
+
+`packages/website`
+
+A Next.js website to search for the scraped information. It fetches, filters and sorts the products on the server (supports server-side rendering).
+
+Tech stack: Next.js, React, Typescript and SASS.
 
 ## Prerequisites
 
@@ -70,19 +94,25 @@ yarn database seed
 
 ## Run
 
-1. If not already running, start the container:
+If not already running, start the container:
 
 ```bash
-docker-compose up
+docker-compose up -d
 ```
 
-2. Execute the scraper:
+To execute the scraper:
 
 ```bash
 yarn scraper start
 ```
 
-Optionally you can start Storybook:
+To start the website:
+
+```bash
+yarn website dev
+```
+
+To start Storybook:
 
 ```bash
 yarn ui start

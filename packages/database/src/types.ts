@@ -21,3 +21,16 @@ export interface Selectors {
   condition?: string;
   nextPage: string;
 }
+
+export enum AvailabilityEnum {
+  Available = 1,
+  OutOfStock = 2,
+  UpcomingRelease = 3,
+  Presale = 4,
+}
+
+export enum CategoryEnum {
+  Root = 1,
+  Technology = 2,
+  Videogames = 3,
+}

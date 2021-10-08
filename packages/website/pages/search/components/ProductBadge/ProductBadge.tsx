@@ -7,7 +7,7 @@ export default function ProductBadge(props: ProductBadgeProps): JSX.Element {
   const { children } = props;
 
   return (
-    <div id="product-badge" className={styles.root}>
+    <div className={styles.root}>
       <Typography weight="semibold">{children}</Typography>
     </div>
   );
