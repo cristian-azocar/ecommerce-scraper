@@ -1,6 +1,7 @@
 import { Flex } from '@project/ui';
 import Content from '../../components/layout/Content';
-import { SORT_KEY } from '../../constants';
+import { useAppDispatch } from '../../store/hooks';
+import { filter, sort } from './searchSlice';
 import { FilterBar, Results, ResultsHeader } from './components';
 import { EnhancedProduct, Filter, SortOption } from './types';
 import styles from './Search.module.scss';
@@ -14,32 +15,14 @@ export interface SearchProps {
 
 export default function Search(props: SearchProps): JSX.Element {
   const { query, products, filters, sortOptions } = props;
+  const dispatch = useAppDispatch();
 
   function applySort(value: string): void {
-    const urlParams = new URLSearchParams(window.location.search);
-    urlParams.set(SORT_KEY, value);
-
-    window.location.search = urlParams.toString();
+    dispatch(sort(value));
   }
 
   function applyFilter(name: string, value: string, checked: boolean): void {
-    const urlParams = new URLSearchParams(window.location.search);
-    const filterValues = urlParams.getAll(name);
-
-    if (checked) {
-      filterValues.push(value);
-    } else {
-      const index = filterValues.indexOf(value);
-      filterValues.splice(index, 1);
-    }
-
-    urlParams.delete(name);
-
-    filterValues.forEach((filterValue) => {
-      urlParams.append(name, filterValue);
-    });
-
-    window.location.search = urlParams.toString();
+    dispatch(filter({ name, value, checked }));
   }
 
   return (

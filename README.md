@@ -44,7 +44,7 @@ Tech stack: React and Typescript.
 
 A Next.js website to search for the scraped information. It fetches, filters and sorts the products on the server (supports server-side rendering).
 
-Tech stack: Next.js, React, Typescript and SASS.
+Tech stack: Next.js, React, Typescript, Redux and SASS.
 
 ## Prerequisites
 
