@@ -1,6 +1,6 @@
 import { Flex, Typography } from '@project/ui';
 import ProductCard from '../ProductCard';
-import { EnhancedProduct } from '../../types';
+import { EnhancedProduct } from '../../../types';
 import styles from './Results.module.scss';
 
 export interface ResultsProps {

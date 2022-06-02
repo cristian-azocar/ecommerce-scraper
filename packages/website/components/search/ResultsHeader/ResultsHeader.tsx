@@ -1,7 +1,7 @@
 import { Flex } from '@project/ui';
 import SortFilter, { SortFilterProps } from '../SortFilter';
 import ResultsStats, { ResultsStatsProps } from '../ResultsStats';
-import { SortOption } from '../../types';
+import { SortOption } from '../../../types';
 
 export type ResultsHeaderProps = {
   sortOptions: SortOption[];

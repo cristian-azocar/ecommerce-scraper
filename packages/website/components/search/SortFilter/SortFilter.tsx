@@ -1,8 +1,8 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { Flex, Typography } from '@project/ui';
-import { SortOption } from '../../types';
-import { SORT_KEY } from '../../../../constants';
+import { SortOption } from '../../../types';
+import { SORT_KEY } from '../../../constants';
 import styles from './SortFilter.module.scss';
 
 export interface SortFilterProps {

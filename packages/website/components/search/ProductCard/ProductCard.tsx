@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { Card, Flex, Link, Typography } from '@project/ui';
-import Currency from '../../../../components/Currency';
+import Currency from '../../Currency';
 import ProductBadge from '../ProductBadge';
-import { EnhancedProduct } from '../../types';
+import { EnhancedProduct } from '../../../types';
 import styles from './ProductCard.module.scss';
 
 export interface ProductCardProps {

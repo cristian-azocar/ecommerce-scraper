@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SORT_KEY } from '../../constants';
-import { EnhancedProduct } from './types';
+import { EnhancedProduct } from '../../types';
 
 export interface SearchState {
   products: EnhancedProduct[];
